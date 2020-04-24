@@ -1,7 +1,7 @@
 # OctoBTT
 ![OctoBTT](https://github.com/bigtreetech/OctoBQPi/raw/master/assets/icon/BTT_Duck.svg "OctoBTT")
 
-## 介绍
+## Introduce
 * A UI that matches OctoPrint printer
 
 ## Software architecture
