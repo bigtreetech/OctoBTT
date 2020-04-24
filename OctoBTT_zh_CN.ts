@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="OctoBQPi_zh_CN"></TS>
+<TS version="2.1" language="OctoBTT_zh_CN"></TS>

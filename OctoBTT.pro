@@ -50,7 +50,7 @@ FORMS += \
     url_camera.ui
 
 TRANSLATIONS += \
-    OctoBQPi_zh_CN.ts
+    OctoBTT_zh_CN.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
