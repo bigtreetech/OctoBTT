@@ -16,6 +16,7 @@
 * sudo apt install xorg
 ### 3.  Set the Console to boot in Pi mode
 ### 4.  In rc.local, start startup for X service Settings
+* Add the shell line(“su -l pi -c startx”) before "exit 0"
 ## Steps 5 through 7 You can download install.sh to run directly as root
 * sudo bash /install.sh
 ### 5.  Install full Qt
