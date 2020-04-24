@@ -1,0 +1,72 @@
+accessControl:
+    enabled: false
+api:
+    allowCrossOrigin: true
+    key: C1B64D24AE99475EAA9385B5DBC77820
+feature:
+    pollWatched: true
+gcodeViewer:
+    mobileSizeThreshold: 104857600
+    sizeThreshold: 524288000
+plugins:
+    announcements:
+        _config_version: 1
+        channels:
+            _blog:
+                read_until: 1585659600
+            _important:
+                read_until: 1521111600
+            _octopi:
+                read_until: 1573722900
+            _plugins:
+                read_until: 1585699200
+            _releases:
+                read_until: 1583322300
+    cura:
+        cura_engine: /usr/local/bin/cura_engine
+    discovery:
+        publicPort: 80
+        upnpUuid: 880066b6-4bbe-4eba-a4dc-0e252476f811
+    errortracking:
+        unique_id: 59cde3f4-4fca-4792-824c-807665bdd97d
+    softwareupdate:
+        _config_version: 7
+    tracking:
+        enabled: true
+        unique_id: 2ba3d7d8-4ac8-40d1-8b84-864964a6613c
+printerProfiles: {}
+serial:
+    disconnectOnErrors: false
+    exclusive: false
+    logPositionOnPause: false
+    maxCommunicationTimeouts: {}
+    timeout: {}
+server:
+    commands:
+        serverRestartCommand: sudo service octoprint restart
+        systemRestartCommand: sudo shutdown -r now
+        systemShutdownCommand: sudo shutdown -h now
+    firstRun: false
+    onlineCheck:
+        enabled: false
+    pluginBlacklist:
+        enabled: true
+    secretKey: H2TkZ5zkSYSpFaZjwE8KZcSnBYJWf3Ze
+    seenWizards:
+        corewizard: 3
+temperature:
+    profiles:
+    -   bed: 100
+        chamber: null
+        extruder: 210
+        name: ABS
+    -   bed: 60
+        chamber: null
+        extruder: 180
+        name: PLA
+webcam:
+    ffmpeg: /usr/bin/ffmpeg
+    ffmpegThreads: 2
+    flipH: true
+    snapshot: http://127.0.0.1:8080/?action=snapshot
+    stream: /webcam/?action=stream
