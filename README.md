@@ -14,6 +14,7 @@
 ### 1.  Install OctoPrint(direct use of OctoPi is recommended)-- (install under directory)
 ### 2.  Install Xorg (Reference: https://wiki.debian.org/Xorg#Video_drivers)
 * sudo apt install xorg
+* add line "allowed_users = anybody" to "/etc/X11/Xwrapper.config"
 ### 3.  Set the Console to boot in Pi mode
 ### 4.  In rc.local, start startup for X service Settings
 * Add the shell line(“su -l pi -c startx”) before "exit 0"
@@ -46,6 +47,7 @@
 ## Notes
 > 1. Because the serial port delay is long, the background has blocked the serial port connection, we only use the USB automatic connection
 > 2. It is recommended to run with Marlin firmware. Currently there may be some unknown problems due to non-marlin firmware
+> 3. If you want to use octoprint online , you can use the network cable to connect to the router.
 
 ## Contribute
 
