@@ -20,7 +20,7 @@
 * ”rc.local“ is in the etc folder in the system directory
 ## Steps 5 through 7 You can download install.sh to run directly as root
 * svn export https://github.com/bigtreetech/OctoBTT.git/trunk/install.sh
-* sudo bash /install.sh
+* bash /install.sh
 ### 5.  Install full Qt
 ### 6.  Git clone project to ~/ directory
 ### 7.  Perform make [option] compilation in the project folder
