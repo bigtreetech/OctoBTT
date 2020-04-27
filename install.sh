@@ -6,9 +6,9 @@ cd /home/pi
 git clone https://github.com/bigtreetech/OctoBTT.git
 
 sudo service octoprint stop
-cp OctoBQPi/config.yaml .octoprint/config.yaml
+cp OctoBTT/config.yaml .octoprint/config.yaml
 sudo service octoprint start
-cp OctoBQPi/.xsession .xsession
+cp OctoBTT/.xsession .xsession
 
-cd OctoBQPi
+cd OctoBTT
 make clean && make && startx
