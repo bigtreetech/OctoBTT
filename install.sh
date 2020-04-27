@@ -13,5 +13,5 @@ cp OctoBTT/.xsession .xsession
 cd OctoBTT
 #make clean
 qmake
-#cp projectfile/OctoBTT.pro OctoBTT.pro
+cp projectfile/OctoBTT.pro OctoBTT.pro
 make && cd /home/pi && startx
