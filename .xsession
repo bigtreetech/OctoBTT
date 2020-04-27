@@ -1,3 +1,3 @@
 xset s off
 xset -dpms
-exec /home/pi/OctoBQPi/OctoBQPi
+exec /home/pi/OctoBTT/OctoBTT
