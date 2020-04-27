@@ -11,4 +11,5 @@ sudo service octoprint start
 cp OctoBTT/.xsession .xsession
 
 cd OctoBTT
-make clean && make && startx
+make clean
+make && cd /home/pi && startx
