@@ -14,4 +14,4 @@ cd OctoBTT
 #make clean
 qmake
 cp projectfile/OctoBTT.pro OctoBTT.pro
-make && cd /home/pi && startx
+make -j$(cat /proc/cpuinfo | grep processor | wc -l) && cd /home/pi && startx
