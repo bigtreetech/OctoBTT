@@ -11,8 +11,10 @@ sudo service octoprint start
 cp OctoBTT/.xsession .xsession
 
 cd OctoBTT
+mkdir projectfile
 cp OctoBTT.pro projectfile/OctoBTT.pro
 #make clean
 qmake
 cp projectfile/OctoBTT.pro OctoBTT.pro
+rm -r -f projectfile
 make -j$(cat /proc/cpuinfo | grep processor | wc -l) && cd /home/pi && startx
