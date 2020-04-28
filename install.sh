@@ -11,6 +11,7 @@ sudo service octoprint start
 cp OctoBTT/.xsession .xsession
 
 cd OctoBTT
+cp OctoBTT.pro projectfile/OctoBTT.pro
 #make clean
 qmake
 cp projectfile/OctoBTT.pro OctoBTT.pro
