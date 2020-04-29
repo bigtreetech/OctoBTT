@@ -52,7 +52,7 @@ void MainWindow::TimerTimeOut()
     ui->Btn_CP->setText((materialctrlpanel->Hotend < 0 ? "-" : QString::number(materialctrlpanel->Hotend))+materialctrlpanel->Symb_Temp);
     ui->Btn_CP_1->setText((materialctrlpanel->Hotend < 0 ? "-" : QString::number(materialctrlpanel->Hotend))+materialctrlpanel->Symb_Temp);
     ui->Btn_CP_2->setText((materialctrlpanel->Heatbed < 0 ? "-" : QString::number(materialctrlpanel->Heatbed))+materialctrlpanel->Symb_Temp);
-    if(octonetwork.ConnectState != "Printing")
+    if(octonetwork.ConnectState != "Printing" && octonetwork.ConnectState != "Printing from SD")
     {
         ui->Btn_CP_3->setIcon(QIcon(":/assets/fan.svg"));
         ui->Btn_CP_3->setText(QString::number(materialctrlpanel->FanSpeed/materialctrlpanel->FanSpeed_Max)+materialctrlpanel->Symb_Per);
@@ -63,7 +63,7 @@ void MainWindow::TimerTimeOut()
     if(QSysInfo::productType() != "raspbian"){qDebug()<<"\t"<<octonetwork.ConnectState<<":"<<ui->Btn_ConnectState->text();}
     if(!octonetwork.ConnectFlat)
     {
-        if(octonetwork.ConnectState == "Operational" || octonetwork.ConnectState == "Pausing" || octonetwork.ConnectState == "Starting" /*|| octonetwork.ConnectState == "Printing"*/ || octonetwork.ConnectState == "Cancelling")
+        if(octonetwork.ConnectState == "Operational" || octonetwork.ConnectState == "Pausing" || octonetwork.ConnectState == "Starting" /*|| octonetwork.ConnectState == "Printing"*/ || octonetwork.ConnectState == "Cancelling" || octonetwork.ConnectState == "Starting print from SD")
         {
             octonetwork.ConnectFlat = true;
             QObject::connect(octonetwork.networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ConnectReply(QNetworkReply*)),Qt::UniqueConnection);
@@ -75,7 +75,7 @@ void MainWindow::TimerTimeOut()
             QObject::connect(octonetwork.networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ConnectReply(QNetworkReply*)),Qt::UniqueConnection);
             octonetwork.networkAccessManager->get(octonetwork.GetConnectRequest);
         }
-        else if(!USB_Port.isEmpty() && octonetwork.ConnectState != "Printing")//Close Offline Error
+        else if(!USB_Port.isEmpty() && octonetwork.ConnectState != "Printing" && octonetwork.ConnectState != "Printing from SD")//Close Offline Error
         {
             //Post
             materialctrlpanel->ReplyFlag = false;
@@ -98,7 +98,7 @@ void MainWindow::TimerTimeOut()
 
             octonetwork.networkAccessManager->post(octonetwork.SetConnectRequest,ConnectJson.toJson());
         }
-        else if(octonetwork.ConnectState != "Printing")
+        else if(octonetwork.ConnectState != "Printing" && octonetwork.ConnectState != "Printing from SD")
         {
             octonetwork.ConnectFlat = true;
             QObject::connect(octonetwork.networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ConnectReply(QNetworkReply*)),Qt::UniqueConnection);
@@ -106,7 +106,7 @@ void MainWindow::TimerTimeOut()
         }
 
         //Button State
-        if(octonetwork.ConnectState == "Printing")
+        if(octonetwork.ConnectState == "Printing" && octonetwork.ConnectState != "Printing from SD")
         {
             octonetwork.ConnectFlat = true;
             QObject::connect(octonetwork.networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(StateReply(QNetworkReply*)),Qt::UniqueConnection);
@@ -116,7 +116,7 @@ void MainWindow::TimerTimeOut()
             ui->Btn_Filament_B->setText(octonetwork.ConnectState);
 //            ui->Btn_Filament->setEnabled(true);
         }
-        else if(octonetwork.ConnectState == "Cancelling" || octonetwork.ConnectState == "Connecting" || octonetwork.ConnectState =="Detecting baudrate" || octonetwork.ConnectState =="Detecting serial port" || octonetwork.ConnectState =="Closed" || octonetwork.ConnectState =="Offline" || octonetwork.ConnectState =="Error")
+        else if(octonetwork.ConnectState == "Cancelling" || octonetwork.ConnectState == "Connecting" || octonetwork.ConnectState =="Detecting baudrate" || octonetwork.ConnectState =="Detecting serial port" || octonetwork.ConnectState =="Closed" || octonetwork.ConnectState =="Offline" || octonetwork.ConnectState =="Error" || octonetwork.ConnectState == "Starting print from SD" || octonetwork.ConnectState == "Starting")
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
             ui->Btn_Filament_B->setText("Ban");
@@ -207,7 +207,10 @@ void MainWindow::StateReply(QNetworkReply *reply)
 //Debug Btn
 void MainWindow::on_Btn_setting_clicked()
 {
-
+    terminaldialog->resize(this->width(),this->height());
+    terminaldialog->setFixedSize(this->width(),this->height());
+    terminaldialog->setWindowState(this->windowState());
+    terminaldialog->show();
 }
 
 void MainWindow::on_Btn_Ctrl_clicked()
@@ -220,10 +223,10 @@ void MainWindow::on_Btn_Ctrl_clicked()
 
 void MainWindow::on_UILogo_clicked()
 {
-//    if(QMessageBox::information(NULL, "Warning", "Do you want to quit desktop ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
-//    {
-//        qApp->exit(Base_OnlyExitApp);
-//    }
+    if(QMessageBox::information(NULL, "Warning", "Do you want to quit desktop ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+    {
+        qApp->exit(Base_OnlyExitApp);
+    }
 }
 
 void MainWindow::on_Btn_FS_clicked()
