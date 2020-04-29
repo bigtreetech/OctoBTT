@@ -207,10 +207,7 @@ void MainWindow::StateReply(QNetworkReply *reply)
 //Debug Btn
 void MainWindow::on_Btn_setting_clicked()
 {
-    terminaldialog->resize(this->width(),this->height());
-    terminaldialog->setFixedSize(this->width(),this->height());
-    terminaldialog->setWindowState(this->windowState());
-    terminaldialog->show();
+
 }
 
 void MainWindow::on_Btn_Ctrl_clicked()
