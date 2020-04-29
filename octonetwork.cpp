@@ -151,7 +151,7 @@ QList<QJsonValue> OctoNetwork::SearchJsonValue(QList<QList<QString>> Find_List_N
 
 void OctoNetwork::SendGCode(QList<QString> _GCode_)
 {
-    if(_GCode_.count() > 0 && (ConnectState == "Operational" || ConnectState == "Printing"))
+    if(_GCode_.count() > 0 && (ConnectState == "Printing from SD" || ConnectState == "Operational" || ConnectState == "Printing"))
     {
         QJsonObject TemperatureJsonObj;
         QJsonArray _Commands;
@@ -173,7 +173,7 @@ void OctoNetwork::SendGCode(QList<QString> _GCode_)
 }
 void OctoNetwork::SendGCode(QString _GCode_)
 {
-    if(_GCode_.length() > 0 && (ConnectState == "Operational" || ConnectState == "Printing"))
+    if(_GCode_.length() > 0 && (ConnectState == "Operational" || ConnectState == "Printing" || ConnectState == "Printing from SD"))
     {
         QJsonObject TemperatureJsonObj;
         QJsonArray _Commands;
@@ -191,7 +191,7 @@ void OctoNetwork::SendGCode(QString _GCode_)
 }
 void OctoNetwork::SD_ReLoad()
 {
-    if(ConnectState != "Printing" && ConnectState != "Pausing")
+    if(ConnectState != "Printing from SD" && ConnectState != "Printing" && ConnectState != "Pausing")
     {
         SD_CMD("release");
 
@@ -221,7 +221,7 @@ void OctoNetwork::JobSwitch(QString FilePath)
         if(QMessageBox::information(NULL, "Warning", "Do you want to Start Print ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
         {JobSwitch(QUrl(MainUrl + "files/" +FilePath));}
     }
-    else if(ConnectState == "Printing" || ConnectState == "Pausing")
+    else if(ConnectState == "Printing from SD" || ConnectState == "Printing" || ConnectState == "Pausing")
     {
         JobSwitch();//Stop
     }
@@ -256,7 +256,7 @@ void OctoNetwork::JobSwitch(QUrl FileUrl)
             MCPnetworkAccessManager->post(_Request,_SenderJson.toJson());
         }
     }
-    else if(ConnectState == "Printing" || ConnectState == "Pausing")
+    else if(ConnectState == "Printing from SD" || ConnectState == "Printing" || ConnectState == "Pausing")
     {
         JobSwitch();//Stop
     }
@@ -265,7 +265,7 @@ void OctoNetwork::JobSwitch(QUrl FileUrl)
 void OctoNetwork::JobSwitch()
 {
     //up z-axis 5cm
-    if(ConnectState == "Printing" || ConnectState == "Pausing")
+    if(ConnectState == "Printing from SD" || ConnectState == "Printing" || ConnectState == "Pausing")
     {
         if(QMessageBox::information(NULL, "Warning", "Do you want to Stop Print ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
         {

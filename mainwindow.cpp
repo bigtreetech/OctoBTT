@@ -106,7 +106,7 @@ void MainWindow::TimerTimeOut()
         }
 
         //Button State
-        if(octonetwork.ConnectState == "Printing" && octonetwork.ConnectState != "Printing from SD")
+        if(octonetwork.ConnectState == "Printing" || octonetwork.ConnectState == "Printing from SD")
         {
             octonetwork.ConnectFlat = true;
             QObject::connect(octonetwork.networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(StateReply(QNetworkReply*)),Qt::UniqueConnection);
