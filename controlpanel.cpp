@@ -347,10 +347,13 @@ void ControlPanel::on_Btn_Level_clicked()
 //        if(((MainWindow*)FUI)->materialctrlpanel->Hotend < 50 && ((MainWindow*)FUI)->materialctrlpanel->Heatbed < 50)
 //        {
             QList<QString> _GCode_;
+            _GCode_.append("M502");
+            _GCode_.append("M500");
             _GCode_.append("G91");
             _GCode_.append("G28");
             _GCode_.append("G29");
             _GCode_.append("G90");
+            _GCode_.append("M500");
             ((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_);
 //        }
 //        else
