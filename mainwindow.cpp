@@ -220,10 +220,10 @@ void MainWindow::on_Btn_Ctrl_clicked()
 
 void MainWindow::on_UILogo_clicked()
 {
-    if(QMessageBox::information(NULL, "Warning", "Do you want to quit desktop ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
-    {
-        qApp->exit(Base_OnlyExitApp);
-    }
+//     if(QMessageBox::information(NULL, "Warning", "Do you want to quit desktop ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+//     {
+//         qApp->exit(Base_OnlyExitApp);
+//     }
 }
 
 void MainWindow::on_Btn_FS_clicked()
