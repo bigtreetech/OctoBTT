@@ -72,6 +72,8 @@ private:
     void CreateNetwork();
     void GetNetworkInfo();
     void GetNetworkInfo(QStringList &Responses);
+    void RemoveNetwork();
+    void RemoveNetwork(QStringList &Responses);
 
 
 private:

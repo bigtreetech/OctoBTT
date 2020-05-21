@@ -284,8 +284,7 @@ void Wlanconfig::SetSSID(QStringList &Responses)
     }
     else
     {
-        ui->WPA_List->setEnabled(true);
-        return;
+        RemoveNetwork();
     }
 }
 
@@ -314,12 +313,21 @@ void Wlanconfig::SetPassword()
         }
         else
         {
-            ui->WPA_List->setEnabled(true);
+            if(value.trimmed() == "")
+            {
+                if(QMessageBox::warning(FUI,"",QString("Do you want to forget \"%1\" ?").arg(ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString()),QMessageBox::Yes|QMessageBox::No,QMessageBox::No) == QMessageBox::Yes)
+                {
+                    RemoveNetwork();
+                }
+                else
+                    ui->WPA_List->setEnabled(true);
+            }
+            else
+                ui->WPA_List->setEnabled(true);
         }
         delete sender();
     });
     inputdialog->setvalue("Please Input "+ Current_SSID +" Password","");
-
 }
 
 void Wlanconfig::SetPassword(QStringList &Responses)
@@ -336,7 +344,39 @@ void Wlanconfig::SetPassword(QStringList &Responses)
     else
     {
         ui->WPA_List->setEnabled(true);
-        return;
+    }
+}
+
+void Wlanconfig::RemoveNetwork()
+{
+    QString Current_SSID = ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString();
+    QString Dev = ui->DevList->currentText();
+
+    QString cmd = QString("sudo wpa_cli -i %1 remove_network %2").arg(Dev).arg(QString::number(WPA_Scan_SSID_List[Current_SSID].id));
+
+    disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
+    QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
+                     {
+                         disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
+                         RemoveNetwork(CommandLine);
+                     });
+    ((MainWindow*)FUI)->terminaldialog->SendCMD(cmd,TeminalState);
+}
+
+void Wlanconfig::RemoveNetwork(QStringList &Responses)
+{
+    QString Current_SSID = ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString();
+    if(Responses[0].toLower().trimmed() == "ok")
+    {
+        WPA_Scan_SSID_List[Current_SSID].id = -1;
+        WPA_Scan_SSID_List[Current_SSID].pwdError = false;
+        WPA_Scan_SSID_List[Current_SSID].connectflags = false;
+        ui->WPA_List->setEnabled(true);
+    }
+    else
+    {
+        QMessageBox::warning(FUI,"",QString("SSID[%1] Delete failed !"));
+        ui->WPA_List->setEnabled(true);
     }
 }
 
