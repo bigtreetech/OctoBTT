@@ -2,7 +2,10 @@
 #define CAMERADIALOG_H
 
 #include <QDialog>
+#include <QSizeF>
 
+extern int DebugFlat ;
+extern QSizeF SizePercent;
 //#include <QCamera>
 //#include <QCameraImageCapture>
 //#include <QMediaRecorder>
@@ -23,7 +26,7 @@ class CameraDialog : public QDialog
         ~CameraDialog();
 
     private slots:
-        void on_Btn_Back_clicked();
+        virtual void on_Btn_Back_clicked();
 
 //        void on_Box_CameraId_currentIndexChanged(int index);
 

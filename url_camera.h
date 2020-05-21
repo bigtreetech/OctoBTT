@@ -2,6 +2,10 @@
 #define URL_CAMERA_H
 
 #include <QDialog>
+#include <QSizeF>
+
+extern int DebugFlat ;
+extern QSizeF SizePercent;
 
 namespace Ui {
     class URL_Camera;
@@ -16,7 +20,7 @@ class URL_Camera : public QDialog
         ~URL_Camera();
 
     private slots:
-        void on_Btn_Back_clicked();
+        virtual void on_Btn_Back_clicked();
 
     private:
         Ui::URL_Camera *ui;

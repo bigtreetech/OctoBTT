@@ -3,6 +3,7 @@
 
 #include <QTimer>
 #include <QTime>
+//#include <QSizeF>
 
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -37,6 +38,10 @@ MainWindow::MainWindow(QWidget *parent)
     m_timer->start(1000);
     //定时器触发信号槽
     connect(m_timer, SIGNAL(timeout()), this, SLOT(TimerTimeOut()));
+
+    this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
 }
 
 MainWindow::~MainWindow()
@@ -207,39 +212,54 @@ void MainWindow::StateReply(QNetworkReply *reply)
 //Debug Btn
 void MainWindow::on_Btn_setting_clicked()
 {
+//    terminaldialog->resize(this->width(),this->height());
+//    terminaldialog->setFixedSize(this->width(),this->height());
+//    terminaldialog->setWindowState(this->windowState());
+//    terminaldialog->show();
+    configuration->show();
+//    if(DebugFlat == 1)
+//    {
+//        connect(terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine){
+//            QMessageBox::information(NULL, "System", CommandLine.join(","));
+//            disconnect(terminaldialog,&TerminalDialog::CMD_Reply,0,0);
+//        });
+//    }
 
 }
 
 void MainWindow::on_Btn_Ctrl_clicked()
 {
-    controlpanel->resize(this->width(),this->height());
-    controlpanel->setFixedSize(this->width(),this->height());
-    controlpanel->setWindowState(this->windowState());
+//    controlpanel->resize(this->width(),this->height());
+//    controlpanel->setFixedSize(this->width(),this->height());
+//    controlpanel->setWindowState(this->windowState());
     controlpanel->show();
 }
 
 void MainWindow::on_UILogo_clicked()
 {
-//     if(QMessageBox::information(NULL, "Warning", "Do you want to quit desktop ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
-//     {
-//         qApp->exit(Base_OnlyExitApp);
-//     }
+    if(DebugFlat > 0)
+    {
+        if(QMessageBox::information(NULL, "Warning", "Do you want to quit desktop ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+        {
+            qApp->exit(Base_OnlyExitApp);
+        }
+    }
 }
 
 void MainWindow::on_Btn_FS_clicked()
 {
-    filedialog->resize(this->width(),this->height());
-    filedialog->setFixedSize(this->width(),this->height());
-    filedialog->setWindowState(this->windowState());
-    filedialog->RefreshFileList();
+//    filedialog->resize(this->width(),this->height());
+//    filedialog->setFixedSize(this->width(),this->height());
+//    filedialog->setWindowState(this->windowState());
+//    filedialog->RefreshFileList();
     filedialog->show();
 }
 
 void MainWindow::on_Btn_CP_clicked()
 {
-    materialctrlpanel->resize(this->width(),this->height());
-    materialctrlpanel->setFixedSize(this->width(),this->height());
-    materialctrlpanel->setWindowState(this->windowState());
+//    materialctrlpanel->resize(this->width(),this->height());
+//    materialctrlpanel->setFixedSize(this->width(),this->height());
+//    materialctrlpanel->setWindowState(this->windowState());
     materialctrlpanel->show();
 }
 
@@ -249,9 +269,9 @@ void MainWindow::on_Btn_Camera_clicked()
 //    cameradialog->setWindowState(this->windowState());
 //    cameradialog->show();
 
-    url_camera->resize(this->width(),this->height());
-    url_camera->setFixedSize(this->width(),this->height());
-    url_camera->setWindowState(this->windowState());
+//    url_camera->resize(this->width(),this->height());
+//    url_camera->setFixedSize(this->width(),this->height());
+//    url_camera->setWindowState(this->windowState());
     url_camera->show();
 }
 //Detail For Print

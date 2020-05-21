@@ -114,5 +114,12 @@
         <file>assets/tingzhi.svg</file>
         <file>assets/hold__easyico.svg</file>
         <file>assets/jiesuo.svg</file>
+        <file>assets/terminal.svg</file>
+        <file>assets/usb.svg</file>
+        <file>assets/queren.svg</file>
+        <file>assets/wangluo.svg</file>
+        <file>assets/wangluolianjiechaoshi.svg</file>
+        <file>assets/Wifi_Lock.svg</file>
+        <file>assets/Wifi_Unlock.svg</file>
     </qresource>
 </RCC>

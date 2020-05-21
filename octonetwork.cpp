@@ -194,9 +194,9 @@ void OctoNetwork::SD_ReLoad()
     if(ConnectState != "Printing from SD" && ConnectState != "Printing" && ConnectState != "Pausing")
     {
         SD_CMD("release");
+        SD_CMD("init");
 
     }
-    SD_CMD("init");
     SD_CMD("refresh");
 }
 void OctoNetwork::SD_CMD(QString CMD)

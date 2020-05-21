@@ -10,12 +10,22 @@
 #include <QTimer>
 #include <QTime>
 #include <QFile>
+#include <QTextCodec>
+#include <QSizeF>
 
 QSharedMemory mem("BingoTouch");
 QByteArray Global_X_API_Key = "C1B64D24AE99475EAA9385B5DBC77820";//Test Key
+int DebugFlat = 0;
+QSizeF SizePercent = QSizeF(1.0,1.0);
+//QSize SizePercent(1,1);
+
 
 int main(int argc, char *argv[])
 {
+    //Application Encoding
+    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+    QTextCodec::setCodecForLocale(codec);
+
 //Single Program//Need a life cycle as the program was accidenta
 //    if (!mem.create(1))
 //    {
@@ -24,7 +34,9 @@ int main(int argc, char *argv[])
 //    qDebug()<<mem.key();
 
 //Program Statement Code
+//    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
     QApplication a(argc, argv);
+
     //Find Api Key
     if(QSysInfo::productType() == "raspbian")
     {
@@ -50,6 +62,13 @@ int main(int argc, char *argv[])
                 }
             }
         }
+
+        QScreen *screen=QGuiApplication::primaryScreen();
+        QRect mm=screen->availableGeometry();
+        SizePercent.setWidth((float)mm.width()/(float)800);
+        SizePercent.setHeight((float)mm.height()/(float)480);
+//        SizePercent = QSize(mm.width()/800,mm.height()/480);
+//        QMessageBox::warning(NULL,"",QString::number(SizePercent.width()) + "*" + QString::number(SizePercent.height()));
     }
     MainWindow w;
 
@@ -57,18 +76,16 @@ int main(int argc, char *argv[])
     if(QSysInfo::productType() == "raspbian")
     {
         //Single Program//Need a life cycle as the program was accidenta
-        if (!mem.create(1))
+        if (DebugFlat != 1 && !mem.create(1))
         {
             QApplication::exit();
             QApplication::quit();
             return 0;
         }
 
-        QScreen *screen=QGuiApplication::primaryScreen ();
-        QRect mm=screen->availableGeometry();
-        w.resize(mm.width(),mm.height());
-        w.setMaximumSize(mm.width(),mm.height());
-        w.setFixedSize(mm.width(),mm.height());
+//        w.resize(SizePercent.width()*800,SizePercent.height()*480);
+//        w.setMaximumSize(SizePercent.width()*800,SizePercent.height()*480);
+//        w.setFixedSize(SizePercent.width()*800,SizePercent.height()*480);
         w.setWindowState(Qt::WindowFullScreen);
 //        w.octonetwork.MainUrl = "http://octopi.local/api/";//undefine aboard
 

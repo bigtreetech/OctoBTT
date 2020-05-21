@@ -1,6 +1,5 @@
 # OctoBTT
-
-![OctoBTT](https://github.com/bigtreetech/OctoBTT/raw/Wiki/assets/icon/BTT_Duck.svg "OctoBTT")
+![OctoBTT](https://github.com/bigtreetech/OctoBQPi/raw/master/assets/icon/BTT_Duck.svg "OctoBTT")
 
 ## Introduce
 * A UI that matches OctoPrint printer
@@ -13,68 +12,16 @@
 
 > (The update and upgrade operations are not redundant)
 ### 1.  Install OctoPrint(direct use of OctoPi is recommended)-- (install under directory)
-
-![Flash](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Ready/Flash.png "Flash")
-* You can create a WPA profile in the boot directory to add wi-fi connections
-
-![ConfigWPA](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Ready/ConfigWPA.png "ConfigWPA")
-* SSH your PI on your computer for further action
-> After Pi boot you can get the IP address of Pi from the screen
-
-![RaspiShowIP](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/RaspiShowIP.jpeg "RaspiShowIP")
-> If you connect with console
-
-![ConfigConsole](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/ConfigConsole.png "ConfigConsole")
-
-![ConsoleShow](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/ConsoleShow.png "ConsoleShow")
-> If you connect with terminal
-
-![ConfigTermius](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/ConfigTermius.jpeg "ConfigTermius")
-
-![TermiusShow](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/TermiusShow.jpeg "TermiusShow")
-> update and upgrade
-
-![Update](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/1_Update.jpeg "Update")
-
-![Upgrade](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/2_1_Upgrade.jpeg "Upgrade")
-
-![Upgrade](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/2_2_Upgrade.jpeg "Upgrade")
 ### 2.  Install Xorg (Reference: https://wiki.debian.org/Xorg#Video_drivers)
 * sudo apt install xorg
-
-![Xorg](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/3_1_xorg.jpeg "Xorg")
 * add line "allowed_users = anybody" to "/etc/X11/Xwrapper.config"
-
-![Xorg](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/3_2_xorg.jpeg "Xorg")
-
-![Xorg](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/3_3_xorg.jpeg "Xorg")
-
-![Xorg](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/3_4_xorg.jpeg "Xorg")
-### 3.  Set the Console to boot in Pi mode (Negligible step)
-
-![raspiconfig](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/raspiconfig/Command.jpeg "raspiconfig")
-
-![raspiconfig](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/raspiconfig/1.jpeg "raspiconfig")
-
-![raspiconfig](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/raspiconfig/2.jpeg "raspiconfig")
-
-![raspiconfig](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/raspiconfig/3.jpeg "raspiconfig")
+### 3.  Set the Console to boot in Pi mode
 ### 4.  In rc.local, start startup for X service Settings
-* Add the shell line(“su -l pi -c startx”) before "exit 0"
+* Add the shell line(“su -l pi -c "startx -- -nocursor"”) before "exit 0"
 * ”rc.local“ is in the etc folder in the system directory
-
-![Startup](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/4_1_startup.jpeg "Startup")
-
-![Startup](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/4_2_startup.jpeg "Startup")
-
-![Startup](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/4_3_startup.jpeg "Startup")
-## Steps 5 through 8 You can download install.sh to run directly as root
+## Steps 5 through 7 You can download install.sh to run directly as root
 * svn export https://github.com/bigtreetech/OctoBTT.git/trunk/install.sh
-
-![SVN](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/5_SVN.jpeg "SVN")
 * . install.sh
-
-![Install](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/6_install.jpeg "Install")
 ### 5.  Install full Qt
 ### 6.  Git clone project to ~/ directory
 ### 7.  Perform make [option] compilation in the project folder
@@ -92,8 +39,6 @@
 * xset s off
 * exec OctoBQPi
 > enables the program to start itself after the X service runs
-
-![Show](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Show.jpeg "Show")
 
 ## Instructions for use
 

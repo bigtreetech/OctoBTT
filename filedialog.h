@@ -2,10 +2,14 @@
 #define FILEDIALOG_H
 
 #include <QDialog>
+#include <QSizeF>
 //MY Dialog
-#include "selectfile.h"
 #include <QNetworkReply>
 #include <QTreeWidgetItem>
+#include <QTimer>
+
+extern int DebugFlat ;
+extern QSizeF SizePercent;
 
 namespace Ui {
     class FileDialog;
@@ -20,33 +24,52 @@ class FileDialog : public QDialog
         ~FileDialog();
 
     private slots:
-        void on_Btn_back_clicked();
+        virtual void on_Btn_back_clicked();
 
-        void on_Btn_Refresh_pressed();
+        virtual void on_Btn_Refresh_pressed();
 
-        void on_Btn_Refresh_released();
+        virtual void on_Btn_Refresh_released();
 
-        void on_Btn_Refresh_clicked();
+        virtual void on_Btn_Refresh_clicked();
 
-        void FSReply(QNetworkReply *reply);
+        virtual void FSReply(QNetworkReply *reply);
 
-        void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
+        virtual void ReFreshJson();
 
-        void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
+        virtual void GetDirlistTimeout();
+
+        virtual void GetDevlistTimeout();
+
+        virtual void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
+
+        virtual void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
     private:
         Ui::FileDialog *ui;
 
     public:
         QUrl SelectURL;
-        void RefreshFileList();
+
     private:
-        void FilesPraser(QTreeWidgetItem *MotherItem , QJsonArray Data);
+        virtual void FilesPraser(QTreeWidgetItem *MotherItem , QJsonArray Data);
+        virtual void RefreshFileList();
+        virtual void GetDirlist(QStringList CommandLine);
+        virtual void GetDevlist(QStringList CommandLine);
+
     private:
-        SelectFile *selectfile = new SelectFile(this);
         QString StyleSheet_Temp;
         QWidget *FUI;
         QTreeWidgetItem *SDcardItem;
+        QStringList DirList;
+        QStringList DevList;
+        QStringList RmList;
+        QStringList NewList;
+        QTimer *terminal_timer;
+
+        QString TeminalState = "-q-e";
+
+    protected:
+        void showEvent(QShowEvent *event);
 };
 
 #endif // FILEDIALOG_H

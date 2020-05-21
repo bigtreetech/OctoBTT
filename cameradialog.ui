@@ -73,7 +73,7 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_6">
+      <widget class="QPushButton" name="Btn_Logo">
        <property name="styleSheet">
         <string notr="true">border:none;
 font: 75 30pt &quot;Gill Sans MT&quot;;

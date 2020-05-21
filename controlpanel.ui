@@ -73,7 +73,7 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_6">
+      <widget class="QPushButton" name="Btn_Logo">
        <property name="styleSheet">
         <string notr="true">border:none;
 font: 75 30pt &quot;Gill Sans MT&quot;;
@@ -108,7 +108,7 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_7">
+      <widget class="QPushButton" name="Btn_Help">
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
        </property>
@@ -1160,7 +1160,7 @@ border-color: rgb(230, 230, 230);</string>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QPushButton" name="Btn_BackButton">
+         <widget class="QPushButton" name="Btn_Unlock">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1237,7 +1237,7 @@ border-color: rgb(216, 30, 6);</string>
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="Btn_Rate"/>
   <buttongroup name="Btn_Axle"/>
+  <buttongroup name="Btn_Rate"/>
  </buttongroups>
 </ui>

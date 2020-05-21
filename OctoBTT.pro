@@ -1,12 +1,14 @@
-QT       += core gui svg
+QT += core gui svg
 #QT += multimedia
 #QT += multimediawidgets
 QT += network
+QT += multimedia
 #QT += script
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
+CONFIG += lang-zh_CN
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -21,33 +23,44 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     cameradialog.cpp \
+    configuration.cpp \
     controlpanel.cpp \
     filedialog.cpp \
+    inputdialog.cpp \
     main.cpp \
     mainwindow.cpp \
     materialctrlpanel.cpp \
+    mylineedit.cpp \
     octonetwork.cpp \
-    selectfile.cpp \
-    url_camera.cpp
+    terminaldialog.cpp \
+    url_camera.cpp \
+    wlanconfig.cpp
 
 HEADERS += \
     cameradialog.h \
+    configuration.h \
     controlpanel.h \
     filedialog.h \
+    inputdialog.h \
     mainwindow.h \
     materialctrlpanel.h \
+    mylineedit.h \
     octonetwork.h \
-    selectfile.h \
-    url_camera.h
+    terminaldialog.h \
+    url_camera.h \
+    wlanconfig.h
 
 FORMS += \
     cameradialog.ui \
+    configuration.ui \
     controlpanel.ui \
     filedialog.ui \
+    inputdialog.ui \
     mainwindow.ui \
     materialctrlpanel.ui \
-    selectfile.ui \
-    url_camera.ui
+    terminaldialog.ui \
+    url_camera.ui \
+    wlanconfig.ui
 
 TRANSLATIONS += \
     OctoBTT_zh_CN.ts
@@ -61,6 +74,5 @@ RESOURCES += \
     assets.qrc
 
 DISTFILES += \
-    Makefile \
-    README_zh.md \
-    start.sh
+    start.sh \
+    wav/KBClick.wav

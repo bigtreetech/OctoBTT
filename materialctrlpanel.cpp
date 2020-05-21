@@ -5,6 +5,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
+//#include <QSizeF>
 #include <QNetworkReply>
 #include <mainwindow.h>
 //#include <QMap>
@@ -28,6 +29,10 @@ MaterialCtrlPanel::MaterialCtrlPanel(QWidget *parent) :
     m_timer->start(500);
     //定时器触发信号槽
     connect(m_timer, SIGNAL(timeout()), this, SLOT(TimerTimeOut()));
+
+    this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
 }
 void MaterialCtrlPanel::TimerTimeOut()
 {

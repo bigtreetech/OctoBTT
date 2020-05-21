@@ -3,6 +3,7 @@
 #include <QProcess>
 #include <mainwindow.h>
 #include <QMessageBox>
+//#include <QSizeF>
 
 ControlPanel::ControlPanel(QWidget *parent) :
     QDialog(parent),
@@ -10,6 +11,10 @@ ControlPanel::ControlPanel(QWidget *parent) :
 {
     ui->setupUi(this);
     FUI = (MainWindow*)parent;//((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_Setting);
+
+    this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
 }
 
 ControlPanel::~ControlPanel()
@@ -75,6 +80,15 @@ void ControlPanel::on_Btn_R_100_clicked()
 void ControlPanel::on_Btn_Heat_toggled(bool checked)
 {
     ui->Btn_Heat->setStyleSheet(checked?ui->Btn_Heat->styleSheet()+"background-color:rgb(108, 15, 3);":"padding: 10px;\nborder-style: solid;\nborder-width: 5px;\nborder-radius: 20px;\nborder-color: rgb(216, 30, 6);");
+    if(checked)
+    {
+        if(ui->Btn_Cool->isChecked())
+            ui->Btn_Cool->setChecked(false);
+        QList<QString> _GCode_Setting;
+        _GCode_Setting.append("M140 S60");
+        _GCode_Setting.append("M104 S200");
+        ((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_Setting);
+    }
 }
 
 void ControlPanel::on_Btn_Cool_toggled(bool checked)
@@ -84,6 +98,8 @@ void ControlPanel::on_Btn_Cool_toggled(bool checked)
     QList<QString> _GCode_;
     if(checked)
     {
+        if(ui->Btn_Heat->isChecked())
+            ui->Btn_Heat->setChecked(false);
         _GCode_.append("M106 S255");
         _GCode_.append("M104 S0");
         _GCode_.append("M140 S0");
@@ -113,19 +129,19 @@ void ControlPanel::on_Btn_Axle_Home_released()
     ui->Btn_Axle_Home->setStyleSheet(StyleSheet_Temp);
 }
 //Unlock Motors
-void ControlPanel::on_Btn_BackButton_pressed()
+void ControlPanel::on_Btn_Unlock_pressed()
 {
-    StyleSheet_Temp = ui->Btn_BackButton->styleSheet();
-    ui->Btn_BackButton->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
+    StyleSheet_Temp = ui->Btn_Unlock->styleSheet();
+    ui->Btn_Unlock->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
 
     QList<QString> _GCode_;
     _GCode_.append("M18");
     ((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_);
 }
 
-void ControlPanel::on_Btn_BackButton_released()
+void ControlPanel::on_Btn_Unlock_released()
 {
-    ui->Btn_BackButton->setStyleSheet(StyleSheet_Temp);
+    ui->Btn_Unlock->setStyleSheet(StyleSheet_Temp);
 }
 
 void ControlPanel::on_Btn_Restore_pressed()

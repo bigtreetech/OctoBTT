@@ -1,5 +1,6 @@
 #include "cameradialog.h"
 #include "ui_cameradialog.h"
+//#include <QSizeF>
 
 //#include "QList"
 //#include "QCamera"
@@ -18,6 +19,10 @@ CameraDialog::CameraDialog(QWidget *parent) :
 //    {
 //        ui->Box_CameraId->addItem(list.at(i).description());
 //    }
+    this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+
 }
 
 CameraDialog::~CameraDialog()

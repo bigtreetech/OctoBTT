@@ -73,7 +73,7 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="Btn_Logo">
        <property name="styleSheet">
         <string notr="true">border:none;
 font: 75 30pt &quot;Gill Sans MT&quot;;
@@ -149,7 +149,7 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
        </property>
        <property name="font">
         <font>
-         <pointsize>20</pointsize>
+         <pointsize>30</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -160,8 +160,8 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
        </property>
        <property name="iconSize">
         <size>
-         <width>32</width>
-         <height>32</height>
+         <width>64</width>
+         <height>64</height>
         </size>
        </property>
        <property name="animated">

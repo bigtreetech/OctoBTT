@@ -2,6 +2,10 @@
 #define CONTROLPANEL_H
 
 #include <QDialog>
+#include <QSizeF>
+
+extern int DebugFlat ;
+extern QSizeF SizePercent;
 
 const static int Base_Restart = 773;
 const static int Base_Shutdown = 772;
@@ -20,75 +24,75 @@ class ControlPanel : public QDialog
         ~ControlPanel();
 
     private slots:
-        void on_Btn_Back_clicked();
+        virtual void on_Btn_Back_clicked();
 
-        void on_Btn_R_1_clicked();
+        virtual void on_Btn_R_1_clicked();
 
-        void on_Btn_R_5_clicked();
+        virtual void on_Btn_R_5_clicked();
 
-        void on_Btn_R_10_clicked();
+        virtual void on_Btn_R_10_clicked();
 
-        void on_Btn_R_50_clicked();
+        virtual void on_Btn_R_50_clicked();
 
-        void on_Btn_R_100_clicked();
+        virtual void on_Btn_R_100_clicked();
 
-        void on_Btn_Heat_toggled(bool checked);
+        virtual void on_Btn_Heat_toggled(bool checked);
 
-        void on_Btn_Cool_toggled(bool checked);
+        virtual void on_Btn_Cool_toggled(bool checked);
 
-        void on_Btn_Axle_Home_pressed();
+        virtual void on_Btn_Axle_Home_pressed();
 
-        void on_Btn_Axle_Home_released();
+        virtual void on_Btn_Axle_Home_released();
 
-        void on_Btn_BackButton_pressed();
+        virtual void on_Btn_Unlock_pressed();
 
-        void on_Btn_BackButton_released();
+        virtual void on_Btn_Unlock_released();
 
-        void on_Btn_Restore_released();
+        virtual void on_Btn_Restore_released();
 
-        void on_Btn_Restore_pressed();
+        virtual void on_Btn_Restore_pressed();
 
-        void on_Btn_Shutdown_pressed();
+        virtual void on_Btn_Shutdown_pressed();
 
-        void on_Btn_Shutdown_released();
+        virtual void on_Btn_Shutdown_released();
 
-        void on_Btn_Axle_X_clicked();
+        virtual void on_Btn_Axle_X_clicked();
 
-        void on_Btn_Axle_Y_clicked();
+        virtual void on_Btn_Axle_Y_clicked();
 
-        void on_Btn_Axle_Z_clicked();
+        virtual void on_Btn_Axle_Z_clicked();
 
-        void on_Btn_XY_Res_clicked();
+        virtual void on_Btn_XY_Res_clicked();
 
-        void on_Btn_Y_Add_clicked();
+        virtual void on_Btn_Y_Add_clicked();
 
-        void on_Btn_Y_Dec_clicked();
+        virtual void on_Btn_Y_Dec_clicked();
 
-        void on_Btn_X_Dec_clicked();
+        virtual void on_Btn_X_Dec_clicked();
 
-        void on_Btn_X_Add_clicked();
+        virtual void on_Btn_X_Add_clicked();
 
-        void on_Btn_Z_Add_clicked();
+        virtual void on_Btn_Z_Add_clicked();
 
-        void on_Btn_Z_Dec_clicked();
+        virtual void on_Btn_Z_Dec_clicked();
 
-        void on_Btn_Extruder_R_clicked();
+        virtual void on_Btn_Extruder_R_clicked();
 
-        void on_Btn_Extruder_E_clicked();
+        virtual void on_Btn_Extruder_E_clicked();
 
-        void on_Btn_Extruder_R_released();
+        virtual void on_Btn_Extruder_R_released();
 
-        void on_Btn_Extruder_E_pressed();
+        virtual void on_Btn_Extruder_E_pressed();
 
-        void on_Btn_Extruder_E_released();
+        virtual void on_Btn_Extruder_E_released();
 
-        void on_Btn_Extruder_R_pressed();
+        virtual void on_Btn_Extruder_R_pressed();
 
-        void on_Btn_Z_BS_Add_clicked();
+        virtual void on_Btn_Z_BS_Add_clicked();
 
-        void on_Btn_Z_BS_Dec_clicked();
+        virtual void on_Btn_Z_BS_Dec_clicked();
 
-        void on_Btn_Level_clicked();
+        virtual void on_Btn_Level_clicked();
 
     private:
         Ui::ControlPanel *ui;

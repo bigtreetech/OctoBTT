@@ -3,6 +3,10 @@
 
 #include <QDialog>
 #include <QNetworkReply>
+#include <QSizeF>
+
+extern int DebugFlat ;
+extern QSizeF SizePercent;
 
 namespace Ui {
     class MaterialCtrlPanel;
@@ -34,49 +38,49 @@ class MaterialCtrlPanel : public QDialog
         bool ReplyFlag = false;
 
     private slots:
-        void on_Btn_back_clicked();
+        virtual void on_Btn_back_clicked();
 
-        void on_Btn_Save_pressed();
+        virtual void on_Btn_Save_pressed();
 
-        void on_Btn_Save_released();
+        virtual void on_Btn_Save_released();
 
-        void on_Btn_Hotend_A_pressed();
+        virtual void on_Btn_Hotend_A_pressed();
 
-        void on_Btn_Hotend_D_released();
+        virtual void on_Btn_Hotend_D_released();
 
-        void on_Btn_Hotend_A_released();
+        virtual void on_Btn_Hotend_A_released();
 
-        void on_Btn_Hotend_D_pressed();
+        virtual void on_Btn_Hotend_D_pressed();
 
-        void on_Btn_Heatbed_A_pressed();
+        virtual void on_Btn_Heatbed_A_pressed();
 
-        void on_Btn_Heatbed_A_released();
+        virtual void on_Btn_Heatbed_A_released();
 
-        void on_Btn_Heatbed_D_pressed();
+        virtual void on_Btn_Heatbed_D_pressed();
 
-        void on_Btn_Heatbed_D_released();
+        virtual void on_Btn_Heatbed_D_released();
 
-        void on_Btn_Feedrate_A_pressed();
+        virtual void on_Btn_Feedrate_A_pressed();
 
-        void on_Btn_Feedrate_A_released();
+        virtual void on_Btn_Feedrate_A_released();
 
-        void on_Btn_Feedrate_D_pressed();
+        virtual void on_Btn_Feedrate_D_pressed();
 
-        void on_Btn_Feedrate_D_released();
+        virtual void on_Btn_Feedrate_D_released();
 
-        void on_Btn_Flowrate_A_pressed();
+        virtual void on_Btn_Flowrate_A_pressed();
 
-        void on_Btn_Flowrate_A_released();
+        virtual void on_Btn_Flowrate_A_released();
 
-        void on_Btn_Flowrate_D_pressed();
+        virtual void on_Btn_Flowrate_D_pressed();
 
-        void on_Btn_Flowrate_D_released();
+        virtual void on_Btn_Flowrate_D_released();
 
-        void TimerTimeOut();
+        virtual void TimerTimeOut();
 
-        void Reply(QNetworkReply *reply);
+        virtual void Reply(QNetworkReply *reply);
 
-        void on_Box_SettingStep_valueChanged(int arg1);
+        virtual void on_Box_SettingStep_valueChanged(int arg1);
 
     private:
         double Hotend_Target = 0;

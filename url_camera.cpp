@@ -1,5 +1,6 @@
 #include "url_camera.h"
 #include "ui_url_camera.h"
+//#include <QSizeF>
 //#include <QMediaPlayer>
 //#include <QVideoWidget>
 
@@ -24,6 +25,10 @@ URL_Camera::URL_Camera(QWidget *parent) :
 //        QMediaContent c(req);
 //        player->setMedia(c);
 //        player->play();
+
+    this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
 }
 
 URL_Camera::~URL_Camera()

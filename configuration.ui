@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>URL_Camera</class>
- <widget class="QDialog" name="URL_Camera">
+ <class>Configuration</class>
+ <widget class="QDialog" name="Configuration">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -84,7 +84,7 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
        </property>
        <property name="icon">
         <iconset resource="assets.qrc">
-         <normaloff>:/assets/camera.svg</normaloff>:/assets/camera.svg</iconset>
+         <normaloff>:/assets/xitongpeizhi.svg</normaloff>:/assets/xitongpeizhi.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -135,7 +135,29 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
     </layout>
    </item>
    <item>
-    <widget class="QWidget" name="wi" native="true"/>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QListView" name="Frm_ListView">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>50</pointsize>
+        </font>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="resizeMode">
+        <enum>QListView::Adjust</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSizeF>
 
 
 //#include <QJsonDocument>
@@ -16,6 +17,12 @@
 #include "materialctrlpanel.h"
 #include "url_camera.h"
 #include "octonetwork.h"
+#include "terminaldialog.h"
+#include "configuration.h"
+#include "wlanconfig.h"
+
+extern int DebugFlat ;
+extern QSizeF SizePercent;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,36 +41,41 @@ class MainWindow : public QMainWindow
 //        OctoNetwork octonetwork;
 
     private slots:
-        void on_Btn_setting_clicked();
+        virtual void on_Btn_setting_clicked();
 
-        void on_Btn_Ctrl_clicked();
+        virtual void on_Btn_Ctrl_clicked();
 
-        void on_UILogo_clicked();
+        virtual void on_UILogo_clicked();
 
-        void on_Btn_FS_clicked();
+        virtual void on_Btn_FS_clicked();
 
-        void on_Btn_CP_clicked();
+        virtual void on_Btn_CP_clicked();
 
-        void on_Btn_Camera_clicked();
+        virtual void on_Btn_Camera_clicked();
 
-        void TimerTimeOut();
+        virtual void TimerTimeOut();
 
-        void ConnectReply(QNetworkReply *reply);
-        void StateReply(QNetworkReply *reply);
+        virtual void ConnectReply(QNetworkReply *reply);
 
-        void on_Btn_Filament_clicked();
+        virtual void StateReply(QNetworkReply *reply);
+
+        virtual void on_Btn_Filament_clicked();
 
     private:
         Ui::MainWindow *ui;
 //        QString SearchJsonValue(QList<QString> Find_List_Name , QJsonObject _QObj);
 
-    private:
+    public://Frm
         ControlPanel *controlpanel = new ControlPanel(this);
         FileDialog *filedialog = new FileDialog(this);
         MaterialCtrlPanel *materialctrlpanel = new MaterialCtrlPanel(this);
         CameraDialog *cameradialog = new CameraDialog(this);
         URL_Camera *url_camera = new URL_Camera(this);
+        TerminalDialog *terminaldialog = new TerminalDialog(this);
+        Configuration *configuration = new Configuration(this);
+        Wlanconfig *wlanconfig = new Wlanconfig(this);
 
+    private:
         QList<QString> USB_Port;
 
 //        QTimer *m_timer;

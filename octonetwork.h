@@ -8,6 +8,9 @@
 
 extern QByteArray Global_X_API_Key ;//Test Key
 
+extern int DebugFlat ;
+//extern QSize SizePercent;
+
 class OctoNetwork
 {
     public:
@@ -25,7 +28,7 @@ class OctoNetwork
         void SD_ReLoad();
 
     private:
-        void SD_CMD(QString CMD);
+        virtual void SD_CMD(QString CMD);
 
     public:
         QByteArray X_API_Key = Global_X_API_Key;//Test Key
