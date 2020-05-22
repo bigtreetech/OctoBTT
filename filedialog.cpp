@@ -294,7 +294,7 @@ void FileDialog::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
         qDebug()<<item->data(1,0).toString();
     }
     QString ext = item->data(1,0).toString().split('.').back();
-    if(ext.toLower() == "gcode" || ext.toLower() == "gco")
+    if(ext.toLower() == "gcode" || ext.toLower() == "gco" || ext.toLower() == "g")
         SelectURL = QUrl(item->data(1,0).toString());
 }
 
@@ -303,7 +303,7 @@ void FileDialog::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
 {
     Q_UNUSED(column);
     QString ext = item->data(1,0).toString().split('.').back();
-    if(ext.toLower() == "gcode"  || ext.toLower() == "gco")
+    if(ext.toLower() == "gcode"  || ext.toLower() == "gco" || ext.toLower() == "g")
     {
         ((MainWindow*)FUI)->octonetwork.JobSwitch(SelectURL);
     }
