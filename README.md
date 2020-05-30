@@ -60,7 +60,7 @@
 
 ![raspiconfig](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/raspiconfig/3.jpeg "raspiconfig")
 ### 4.  In rc.local, start startup for X service Settings
-* Add the shell line(“su -l pi -c "startx -- -nocursor") before "exit 0"
+* Add the shell line(su -l pi -c "startx -- -nocursor") before "exit 0"
 * ”rc.local“ is in the etc folder in the system directory
 
 ![Startup](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/4_1_startup.jpeg "Startup")
