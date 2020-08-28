@@ -51,6 +51,9 @@ compile_commands.json
 # QtCreator local machine specific files for imported projects
 *creator.user*
 
+# OS-specific files
+.DS_Store
+
 # Custom
 .DS_Store
 assets/.DS_Store
