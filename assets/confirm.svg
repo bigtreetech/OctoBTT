@@ -1,1 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><switch><g fill="#44bd32"><path d="M50 2.5a47.5 47.5 0 100 95 47.5 47.5 0 000-95zm21.3 42.1L50.2 65.8A7.4 7.4 0 0145 68a7 7 0 01-5.2-2.2L28.7 54.7a7.4 7.4 0 1110.5-10.5L45 50l15.9-16c2.9-2.9 7.6-2.9 10.5 0s2.8 7.8-.1 10.6z"/></g></switch></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<svg x="0pt" y="0pt" width="1024pt" height="1024pt" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="1">
+    <title>Layer 1</title>
+    <clipPath id="3">
+      <use xlink:href="#2"/>
+      <path id="2" d="M0,0 C0,0,1024,0,1024,0 C1024,0,1024,1024,1024,1024 C1024,1024,0,1024,0,1024 C0,1024,0,0,0,0 z"/>
+    </clipPath>
+    <g id="4" style="clip-path:url(#3);">
+      <title>ClipGroup</title>
+      <defs>
+        <title>Shape 6</title>
+        <g id="5">
+          <defs>
+            <path id="6" d="M512,0 C229.683,0,0,229.786,0,512 C0,794.368,229.683,1024,512,1024 C794.317,1024,1024,794.368,1024,512 C1024,229.734,794.317,0,512,0"/>
+          </defs>
+          <use xlink:href="#6" style="fill:#2fce5c;fill-opacity:1;fill-rule:evenodd;opacity:1;stroke:none;"/>
+        </g>
+      </defs>
+      <use xlink:href="#5"/>
+      <defs>
+        <title>Shape 7</title>
+        <g id="7">
+          <defs>
+            <path id="8" d="M454.246,587.674 C454.246,587.674,343.398,476.826,343.398,476.826 C319.266,500.958,295.134,525.09,271.002,549.222 C336.418,614.673,401.835,680.124,467.251,745.574 C564.309,609.724,661.367,473.873,758.426,338.022 C730.658,318.157,702.891,298.291,675.123,278.426 z"/>
+          </defs>
+          <use xlink:href="#8" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;opacity:1;stroke:none;"/>
+        </g>
+      </defs>
+      <use xlink:href="#7"/>
+    </g>
+    <clipPath id="10">
+      <use xlink:href="#9"/>
+      <path id="9" d="M0,0 C0,0,1024,0,1024,0 C1024,0,1024,1024,1024,1024 C1024,1024,0,1024,0,1024 C0,1024,0,0,0,0 z"/>
+    </clipPath>
+    <g id="11" style="clip-path:url(#10);"/>
+  </g>
+</svg>
