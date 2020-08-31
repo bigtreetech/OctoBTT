@@ -24,13 +24,6 @@
         <file>assets/sort.svg</file>
         <file>assets/thermometer.svg</file>
         <file>assets/upload.svg</file>
-        <file>assets/icon/icon-alt.svg</file>
-        <file>assets/icon/icon-alt-dark.svg</file>
-        <file>assets/icon/icon-alt-dark-title.svg</file>
-        <file>assets/icon/icon-alt-title.svg</file>
-        <file>assets/icon/icon-main.svg</file>
-        <file>assets/icon/icon-main-dark.svg</file>
-        <file>assets/icon/icon-main-dark-title.svg</file>
         <file>assets/sync-alt.svg</file>
         <file>assets/arrow_down.svg</file>
         <file>assets/arrow_up.svg</file>
@@ -62,7 +55,6 @@
         <file>assets/heat-gas.svg</file>
         <file>assets/nib.svg</file>
         <file>assets/icon/icon-main-btt.svg</file>
-        <file>assets/icon/icon-main-title.svg</file>
         <file>assets/icon/icon-main-btt-blue.svg</file>
         <file>assets/3ddayin.svg</file>
         <file>assets/Ddayin.svg</file>
