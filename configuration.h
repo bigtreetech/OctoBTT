@@ -23,7 +23,9 @@ public:
 private slots:
     virtual void on_Btn_Back_clicked();
 
-    void on_Frm_ListView_doubleClicked(const QModelIndex &index);
+    void on_Frm_ListView_clicked(const QModelIndex &index);
+
+    void on_Btn_Help_clicked();
 
 private:
     Ui::Configuration *ui;

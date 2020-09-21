@@ -472,7 +472,7 @@ QString Wlanconfig::ReverseStr(QString args)
 }
 
 void Wlanconfig::ScanWPA()
-{    
+{
     disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
     QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
                      {
@@ -620,6 +620,13 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
     }
 
     this->setEnabled(true);
+    for (int i=0;i<WPAModel->rowCount();i++)
+    {
+        if(i & 1)
+            WPAModel->item(i)->setBackground(QBrush(Qt::darkYellow));
+        else
+            WPAModel->item(i)->setBackground(QBrush(Qt::blue));
+    }
     ui->WPA_List->setModel(WPAModel);
 
     if(WPA_SSID[ui->DevList->currentText()].trimmed() == "")

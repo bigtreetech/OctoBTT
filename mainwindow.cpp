@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    ui->Btn_Camera->setVisible(false);
 }
 
 MainWindow::~MainWindow()

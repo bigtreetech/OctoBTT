@@ -148,7 +148,11 @@ void ControlPanel::on_Btn_Restore_pressed()
 {
     StyleSheet_Temp = ui->Btn_Restore->styleSheet();
     ui->Btn_Restore->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
-    if(QMessageBox::information(NULL, "Warning", "Do you want to Restart OctoPrint ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+    if(QMessageBox::information(NULL, "Warning", "Do you want to just Restart OctoBTT ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+    {
+        qApp->exit(Base_Restart);
+    }
+    else if(QMessageBox::information(NULL, "Warning", "Do you want to Restart OctoPrint ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
     {
         //Release Version
         QProcess P(0);
@@ -156,10 +160,6 @@ void ControlPanel::on_Btn_Restore_pressed()
         P.waitForStarted();
         P.waitForFinished();
 
-        qApp->exit(Base_Restart);
-    }
-    else if(QMessageBox::information(NULL, "Warning", "Do you want to just Restart OctoBTT ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
-    {
         qApp->exit(Base_Restart);
     }
     ui->Btn_Restore->setStyleSheet(StyleSheet_Temp);
@@ -175,20 +175,20 @@ void ControlPanel::on_Btn_Shutdown_pressed()
     StyleSheet_Temp = ui->Btn_Shutdown->styleSheet();
     ui->Btn_Shutdown->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
 
-    if(QMessageBox::information(NULL, "Warning", "Do you want to Shutdown?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+    if(QMessageBox::information(NULL, "Warning", "Do you want to Emergency Stop?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+    {
+        QList<QString> _GCode_;
+        //        _GCode_.append("M110 N0");
+        _GCode_.append("M112");
+        ((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_);
+    }
+    else if(QMessageBox::information(NULL, "Warning", "Do you want to Shutdown?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
     {
         QProcess P(0);
         P.start("xset dpms force off");
         P.waitForStarted();
         P.waitForFinished();
         qApp->exit(Base_Shutdown);
-    }
-    else if(QMessageBox::information(NULL, "Warning", "Do you want to Emergency Stop?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
-    {
-        QList<QString> _GCode_;
-//        _GCode_.append("M110 N0");
-        _GCode_.append("M112");
-        ((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_);
     }
 
     ui->Btn_Shutdown->setStyleSheet(StyleSheet_Temp);

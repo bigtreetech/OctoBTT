@@ -1,28 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg x="0pt" y="0pt" width="1024pt" height="1024pt" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <g id="1">
-    <title>Layer 1</title>
-    <clipPath id="3">
-      <use xlink:href="#2"/>
-      <path id="2" d="M0,0 C0,0,1024,0,1024,0 C1024,0,1024,1024,1024,1024 C1024,1024,0,1024,0,1024 C0,1024,0,0,0,0 z"/>
-    </clipPath>
-    <g id="4" style="clip-path:url(#3);">
-      <title>ClipGroup</title>
-      <defs>
-        <title>Shape 4</title>
-        <g id="5">
-          <defs>
-            <path id="6" d="M200.832,396.501 C180.722,416.612,160.612,436.722,140.501,456.832 C140.501,456.832,426.667,828.331,426.667,828.331 C426.667,828.331,968.832,200.832,968.832,200.832 C948.722,180.722,928.612,160.612,908.501,140.501 C908.501,140.501,426.667,622.336,426.667,622.336 z"/>
-          </defs>
-          <use xlink:href="#6" style="fill:#8bc34a;fill-opacity:1;fill-rule:evenodd;opacity:1;stroke:none;"/>
-        </g>
-      </defs>
-      <use xlink:href="#5"/>
-    </g>
-    <clipPath id="8">
-      <use xlink:href="#7"/>
-      <path id="7" d="M0,0 C0,0,1024,0,1024,0 C1024,0,1024,1024,1024,1024 C1024,1024,0,1024,0,1024 C0,1024,0,0,0,0 z"/>
-    </clipPath>
-    <g id="9" style="clip-path:url(#8);"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Created with Vectornator for iOS (http://vectornator.io/) --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" viewBox="0 0 1024 1024">
+<metadata>
+<vectornator:setting key="DynamicGuides" value="1"/>
+<vectornator:setting key="Units" value="Points"/>
+<vectornator:setting key="GuidesVisible" value="1"/>
+<vectornator:setting key="RulersVisible" value="1"/>
+<vectornator:setting key="SnapToGuides" value="1"/>
+<vectornator:setting key="GridSpacing" value="36"/>
+</metadata>
+<defs>
+<path d="M0+0L1024+0L1024+1024L0+1024L0+0Z" id="Mask"/>
+</defs>
+<g id="Untitled" vectornator:layerName="Untitled">
+<g opacity="1" vectornator:mask="#Mask">
+<clipPath id="ClipPath">
+<use xlink:href="#Mask" fill="none" overflow="visible"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<path d="M200.832+396.501C180.722+416.612+160.612+436.722+140.501+456.832L426.667+828.331L968.832+200.832C948.722+180.722+928.612+160.612+908.501+140.501L426.667+622.336L200.832+396.501Z" opacity="1" fill="#8bc34a"/>
+</g>
+</g>
+</g>
 </svg>

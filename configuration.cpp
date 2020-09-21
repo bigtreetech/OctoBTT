@@ -22,10 +22,12 @@ Configuration::Configuration(QWidget *parent) :
         if(item == "Wifi")
         {
             menulist->setIcon(QIcon(":/assets/Wifi.svg"));
+            menulist->setBackground(QBrush(Qt::darkYellow));
         }
         else if(item == "Terminal")
         {
             menulist->setIcon(QIcon(":/assets/terminal.svg"));
+            menulist->setBackground(QBrush(Qt::blue));
         }
 
         ItemModel->appendRow(menulist);
@@ -57,11 +59,16 @@ void Configuration::showEvent(QShowEvent *event)
     Q_UNUSED(event);
 }
 
-void Configuration::on_Frm_ListView_doubleClicked(const QModelIndex &index)
+void Configuration::on_Frm_ListView_clicked(const QModelIndex &index)
 {
     //ui->Btn_Help->setText(index.data().toString());
     if(index.data().toString() == "Wifi")
         ((MainWindow*)FUI)->wlanconfig->show();
     if(index.data().toString() == "Terminal")
         ((MainWindow*)FUI)->terminaldialog->show();
+}
+
+void Configuration::on_Btn_Help_clicked()
+{
+    ((MainWindow*)FUI)->wlanconfig->GetNetworkInfo();
 }

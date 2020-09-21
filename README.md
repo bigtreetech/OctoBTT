@@ -1,6 +1,6 @@
 # OctoBTT
 
-![OctoBTT](https://github.com/bigtreetech/OctoBTT/raw/Wiki/assets/icon/BTT_Duck.svg "OctoBTT")
+![OctoBTT](assets/icon/BTT_Duck.svg "OctoBTT")
 
 ## Introduce
 * A UI that matches OctoPrint printer
@@ -14,67 +14,67 @@
 > (The update and upgrade operations are not redundant)
 ### 1.  Install OctoPrint(direct use of OctoPi is recommended)-- (install under directory)
 
-![Flash](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Ready/Flash.png "Flash")
-* You can create a WPA profile in the boot directory to add wi-fi connections
+![Flash](IMG/Ready/Flash.png "Flash")
+* You can create a WPA profile in the boot directory to add WiFi connections
 
-![ConfigWPA](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Ready/ConfigWPA.png "ConfigWPA")
+![ConfigWPA](IMG/Ready/ConfigWPA.png "ConfigWPA")
 * SSH your PI on your computer for further action
 > After Pi boot you can get the IP address of Pi from the screen
 
-![RaspiShowIP](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/RaspiShowIP.jpeg "RaspiShowIP")
+![RaspiShowIP](IMG/Login/RaspiShowIP.jpeg "RaspiShowIP")
 > If you connect with console
 
-![ConfigConsole](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/ConfigConsole.png "ConfigConsole")
+![ConfigConsole](IMG/Login/ConfigConsole.png "ConfigConsole")
 
-![ConsoleShow](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/ConsoleShow.png "ConsoleShow")
+![ConsoleShow](IMG/Login/ConsoleShow.png "ConsoleShow")
 > If you connect with terminal
 
-![ConfigTermius](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/ConfigTermius.jpeg "ConfigTermius")
+![ConfigTermius](IMG/Login/ConfigTermius.jpeg "ConfigTermius")
 
-![TermiusShow](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Login/TermiusShow.jpeg "TermiusShow")
+![TermiusShow](IMG/Login/TermiusShow.jpeg "TermiusShow")
 > update and upgrade
 
-![Update](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/1_Update.jpeg "Update")
+![Update](IMG/1_Update.jpeg "Update")
 
-![Upgrade](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/2_1_Upgrade.jpeg "Upgrade")
+![Upgrade](IMG/2_1_Upgrade.jpeg "Upgrade")
 
-![Upgrade](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/2_2_Upgrade.jpeg "Upgrade")
+![Upgrade](IMG/2_2_Upgrade.jpeg "Upgrade")
 ### 2.  Install Xorg (Reference: https://wiki.debian.org/Xorg#Video_drivers)
 * sudo apt install xorg
 
-![Xorg](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/3_1_xorg.jpeg "Xorg")
+![Xorg](IMG/3_1_xorg.jpeg "Xorg")
 * add line "allowed_users = anybody" to "/etc/X11/Xwrapper.config"
 
-![Xorg](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/3_2_xorg.jpeg "Xorg")
+![Xorg](IMG/3_2_xorg.jpeg "Xorg")
 
-![Xorg](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/3_3_xorg.jpeg "Xorg")
+![Xorg](IMG/3_3_xorg.jpeg "Xorg")
 
-![Xorg](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/3_4_xorg.jpeg "Xorg")
+![Xorg](IMG/3_4_xorg.jpeg "Xorg")
 ### 3.  Set the Console to boot in Pi mode (Negligible step)
 
-![raspiconfig](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/raspiconfig/Command.jpeg "raspiconfig")
+![raspiconfig](IMG/raspiconfig/Command.jpeg "raspiconfig")
 
-![raspiconfig](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/raspiconfig/1.jpeg "raspiconfig")
+![raspiconfig](IMG/raspiconfig/1.jpeg "raspiconfig")
 
-![raspiconfig](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/raspiconfig/2.jpeg "raspiconfig")
+![raspiconfig](IMG/raspiconfig/2.jpeg "raspiconfig")
 
-![raspiconfig](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/raspiconfig/3.jpeg "raspiconfig")
+![raspiconfig](IMG/raspiconfig/3.jpeg "raspiconfig")
 ### 4.  In rc.local, start startup for X service Settings
 * Add the shell line(su -l pi -c "startx -- -nocursor") before "exit 0"
 * ”rc.local“ is in the etc folder in the system directory
 
-![Startup](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/4_1_startup.jpeg "Startup")
+![Startup](IMG/4_1_startup.jpeg "Startup")
 
-![Startup](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/4_2_startup.jpeg "Startup")
+![Startup](IMG/4_2_startup.jpeg "Startup")
 
-![Startup](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/4_3_startup.jpeg "Startup")
+![Startup](IMG/4_3_startup.jpeg "Startup")
 ## Steps 5 through 8 You can download install.sh to run directly as root
 * svn export https://github.com/bigtreetech/OctoBTT.git/trunk/install.sh
 
-![SVN](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/5_SVN.jpeg "SVN")
+![SVN](IMG/5_SVN.jpeg "SVN")
 * . install.sh
 
-![Install](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/6_install.jpeg "Install")
+![Install](IMG/6_install.jpeg "Install")
 ### 5.  Install full Qt
 ### 6.  Git clone project to ~/ directory
 ### 7.  Perform make [option] compilation in the project folder
@@ -90,19 +90,30 @@
 >  is added in ~/.xsession
 * xset -dmps
 * xset s off
-* exec OctoBQPi
+* exec ~/OctoBTT/OctoBTT
 > enables the program to start itself after the X service runs
 
-![Show](https://github.com/bigtreetech/OctoBTT/raw/Wiki/Resource/Show.jpeg "Show")
+![Show](IMG/Show.png "Show")
 
 ## Instructions for use
 
 > 1.  Used with OctoPrint
 
+![Show](IMG/All.png "Show")
+
 ## Notes
 > 1. Because the serial port delay is long, the background has blocked the serial port connection, we only use the USB automatic connection
+
 > 2. It is recommended to run with Marlin firmware. Currently there may be some unknown problems due to non-marlin firmware
+
 > 3. If you want to use octoprint online , you can use the network cable to connect to the router.
+
+> 4. If you are a BX machine model user, you will need to add the following fragment lines to the RaspberryPi config.txt file to display them correctly on screen:
+> * max_usb_current=1
+> * hdmi_group=2
+> * hdmi_mode=87
+> * hdmi_cvt 1024 600 60 6 0 0 0
+> * hdmi_drive=1
 
 ## Contribute
 

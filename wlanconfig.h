@@ -37,6 +37,8 @@ public:
     explicit Wlanconfig(QWidget *parent = nullptr);
     ~Wlanconfig();
 
+    void GetNetworkInfo();
+
 private slots:
     virtual void on_Btn_Back_clicked();
 
@@ -70,7 +72,7 @@ private:
     void SetSSID();
     void SetSSID(QStringList &Responses);
     void CreateNetwork();
-    void GetNetworkInfo();
+//    void GetNetworkInfo();
     void GetNetworkInfo(QStringList &Responses);
     void RemoveNetwork();
     void RemoveNetwork(QStringList &Responses);
