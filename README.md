@@ -61,13 +61,13 @@
 ![raspiconfig](IMG/raspiconfig/3.jpeg "raspiconfig")
 ### 4.  In rc.local, start startup for X service Settings
 * Add the shell line(su -l pi -c "startx -- -nocursor") before "exit 0"
-* ”rc.local“ is in the etc folder in the system directory
+* ”rc.local“ is in the etc folder in the system directory (command:**sudo nano /etc/rc.local**)
 
 ![Startup](IMG/4_1_startup.jpeg "Startup")
 
 ![Startup](IMG/4_2_startup.jpeg "Startup")
 
-![Startup](IMG/4_3_startup.jpeg "Startup")
+![Startup](IMG/4_3_startup.png "Startup")
 ## Steps 5 through 8 You can download install.sh to run directly as root
 * svn export https://github.com/bigtreetech/OctoBTT.git/trunk/install.sh
 
