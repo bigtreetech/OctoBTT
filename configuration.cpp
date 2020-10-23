@@ -13,7 +13,8 @@ Configuration::Configuration(QWidget *parent) :
     QStringList strList;
     strList.append("Wifi");
 //    strList.append("GConde");
-    strList.append("Terminal");
+    strList.append("RPI Terminal");
+    strList.append("Gcode Terminal");
 
     foreach(QString item,strList)
     {
@@ -24,10 +25,15 @@ Configuration::Configuration(QWidget *parent) :
             menulist->setIcon(QIcon(":/assets/Wifi.svg"));
             menulist->setBackground(QBrush(Qt::darkYellow));
         }
-        else if(item == "Terminal")
+        else if(item == "RPI Terminal")
         {
             menulist->setIcon(QIcon(":/assets/terminal.svg"));
             menulist->setBackground(QBrush(Qt::blue));
+        }
+        else if(item == "Gcode Terminal")
+        {
+            menulist->setIcon(QIcon(":/assets/yuanchengkongzhi.svg"));
+            menulist->setBackground(QBrush(Qt::darkYellow));
         }
 
         ItemModel->appendRow(menulist);
@@ -64,8 +70,10 @@ void Configuration::on_Frm_ListView_clicked(const QModelIndex &index)
     //ui->Btn_Help->setText(index.data().toString());
     if(index.data().toString() == "Wifi")
         ((MainWindow*)FUI)->wlanconfig->show();
-    if(index.data().toString() == "Terminal")
+    if(index.data().toString() == "RPI Terminal")
         ((MainWindow*)FUI)->terminaldialog->show();
+    if(index.data().toString() == "Gcode Terminal")//GCode 控制台
+        ((MainWindow*)FUI)->gcodedialog->show();
 }
 
 void Configuration::on_Btn_Help_clicked()

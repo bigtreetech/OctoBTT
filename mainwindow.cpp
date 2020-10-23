@@ -42,11 +42,14 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
-    ui->Btn_Camera->setVisible(false);
+//    ui->Btn_Camera->setVisible(false);
+    filedialog->InitializeUSBDrive();
 }
 
 MainWindow::~MainWindow()
 {
+    if(!(gcodedialog->_pdataRecvWS->state() == QAbstractSocket::UnconnectedState))
+        gcodedialog->_pdataRecvWS->abort();//Close WS
     delete ui;
 }
 
@@ -54,7 +57,7 @@ void MainWindow::TimerTimeOut()
 {
     if(QSysInfo::productType() != "raspbian"){qDebug()<<seq<<":"<<"In"<<":"<<QDateTime::currentDateTime().time().toString("hh:mm::ss.zzz");}
     //uodate UI
-    ui->Btn_ConnectState->setText(octonetwork.ConnectState);
+    ui->Btn_ConnectState->setText(octonetwork.ConnectState.contains("Printing") ? "Printing : " + filedialog->DisplayName :octonetwork.ConnectState);
     ui->Btn_CP->setText((materialctrlpanel->Hotend < 0 ? "-" : QString::number(materialctrlpanel->Hotend))+materialctrlpanel->Symb_Temp);
     ui->Btn_CP_1->setText((materialctrlpanel->Hotend < 0 ? "-" : QString::number(materialctrlpanel->Hotend))+materialctrlpanel->Symb_Temp);
     ui->Btn_CP_2->setText((materialctrlpanel->Heatbed < 0 ? "-" : QString::number(materialctrlpanel->Heatbed))+materialctrlpanel->Symb_Temp);
@@ -81,7 +84,7 @@ void MainWindow::TimerTimeOut()
             QObject::connect(octonetwork.networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ConnectReply(QNetworkReply*)),Qt::UniqueConnection);
             octonetwork.networkAccessManager->get(octonetwork.GetConnectRequest);
         }
-        else if(!USB_Port.isEmpty() && octonetwork.ConnectState != "Printing" && octonetwork.ConnectState != "Printing from SD")//Close Offline Error
+        else if(!USB_Port.isEmpty() && !octonetwork.ConnectState.contains("Printing"))//Close Offline Error
         {
             //Post
             materialctrlpanel->ReplyFlag = false;
@@ -104,7 +107,7 @@ void MainWindow::TimerTimeOut()
 
             octonetwork.networkAccessManager->post(octonetwork.SetConnectRequest,ConnectJson.toJson());
         }
-        else if(octonetwork.ConnectState != "Printing" && octonetwork.ConnectState != "Printing from SD")
+        else if(!octonetwork.ConnectState.contains("Printing"))
         {
             octonetwork.ConnectFlat = true;
             QObject::connect(octonetwork.networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ConnectReply(QNetworkReply*)),Qt::UniqueConnection);
@@ -112,7 +115,7 @@ void MainWindow::TimerTimeOut()
         }
 
         //Button State
-        if(octonetwork.ConnectState == "Printing" || octonetwork.ConnectState == "Printing from SD")
+        if(octonetwork.ConnectState.contains("Printing"))
         {
             octonetwork.ConnectFlat = true;
             QObject::connect(octonetwork.networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(StateReply(QNetworkReply*)),Qt::UniqueConnection);
@@ -125,13 +128,13 @@ void MainWindow::TimerTimeOut()
         else if(octonetwork.ConnectState == "Cancelling" || octonetwork.ConnectState == "Connecting" || octonetwork.ConnectState =="Detecting baudrate" || octonetwork.ConnectState =="Detecting serial port" || octonetwork.ConnectState =="Closed" || octonetwork.ConnectState =="Offline" || octonetwork.ConnectState =="Error" || octonetwork.ConnectState == "Starting print from SD" || octonetwork.ConnectState == "Starting")
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
-            ui->Btn_Filament_B->setText("Ban");
+            ui->Btn_Filament_B->setText("Busy");
 //            ui->Btn_Filament->setEnabled(false);
         }
         else
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/haocaiguanli.svg"));
-            ui->Btn_Filament_B->setText("Print");
+            ui->Btn_Filament_B->setText("Print " + (filedialog->SelectURL.url() == "" ? "" : filedialog->DisplayName));
 //            ui->Btn_Filament->setEnabled(true);
         }
     }
@@ -273,10 +276,13 @@ void MainWindow::on_Btn_Camera_clicked()
 //    url_camera->resize(this->width(),this->height());
 //    url_camera->setFixedSize(this->width(),this->height());
 //    url_camera->setWindowState(this->windowState());
-    url_camera->show();
+    cameradialog->show();
 }
 //Detail For Print
 void MainWindow::on_Btn_Filament_clicked()
 {
-    octonetwork.JobSwitch(filedialog->SelectURL);
+    if(filedialog->SelectURL.url().trimmed() == "")
+        filedialog->show();
+    else
+        octonetwork.JobSwitch(filedialog->SelectURL);
 }

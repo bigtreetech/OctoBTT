@@ -5,9 +5,12 @@
 #include <QDebug>
 #include <QJsonArray>
 #include <QMessageBox>
+#include <filedialog.h>
+#include <mainwindow.h>
 
-OctoNetwork::OctoNetwork()
+OctoNetwork::OctoNetwork(QWidget *parent)
 {
+    FUI = (MainWindow*)parent;
 //    QMessageBox::information(NULL, "Warning", X_API_Key, QMessageBox::Yes  | QMessageBox::No , QMessageBox::No);
 
     GetConnectRequest.setUrl(QUrl(MainUrl + "connection"));
@@ -151,7 +154,7 @@ QList<QJsonValue> OctoNetwork::SearchJsonValue(QList<QList<QString>> Find_List_N
 
 void OctoNetwork::SendGCode(QList<QString> _GCode_)
 {
-    if(_GCode_.count() > 0 && (ConnectState == "Printing from SD" || ConnectState == "Operational" || ConnectState == "Printing"))
+    if(_GCode_.count() > 0 && (ConnectState.contains("Printing") || ConnectState == "Operational"))
     {
         QJsonObject TemperatureJsonObj;
         QJsonArray _Commands;
@@ -173,7 +176,7 @@ void OctoNetwork::SendGCode(QList<QString> _GCode_)
 }
 void OctoNetwork::SendGCode(QString _GCode_)
 {
-    if(_GCode_.length() > 0 && (ConnectState == "Operational" || ConnectState == "Printing" || ConnectState == "Printing from SD"))
+    if(_GCode_.length() > 0 && (ConnectState == "Operational" || ConnectState.contains("Printing")))
     {
         QJsonObject TemperatureJsonObj;
         QJsonArray _Commands;
@@ -191,11 +194,10 @@ void OctoNetwork::SendGCode(QString _GCode_)
 }
 void OctoNetwork::SD_ReLoad()
 {
-    if(ConnectState != "Printing from SD" && ConnectState != "Printing" && ConnectState != "Pausing")
+    if(!ConnectState.contains("Printing")  && ConnectState != "Pausing")
     {
         SD_CMD("release");
         SD_CMD("init");
-
     }
     SD_CMD("refresh");
 }
@@ -221,7 +223,7 @@ void OctoNetwork::JobSwitch(QString FilePath)
         if(QMessageBox::information(NULL, "Warning", "Do you want to Start Print ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
         {JobSwitch(QUrl(MainUrl + "files/" +FilePath));}
     }
-    else if(ConnectState == "Printing from SD" || ConnectState == "Printing" || ConnectState == "Pausing")
+    else if(ConnectState.contains("Printing") || ConnectState == "Pausing")
     {
         JobSwitch();//Stop
     }
@@ -230,8 +232,10 @@ void OctoNetwork::JobSwitch(QUrl FileUrl)
 {
     if(ConnectState == "Operational")
     {
-        if(QMessageBox::information(NULL, "Warning", "Do you want to Start Print "+FileUrl.path().split('/').last()+"?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+        QString FileName = FileDialog::Hex2QString(FileUrl.url(),false);
+        if(QMessageBox::information(NULL, "Warning", "Do you want to Start Print "+FileName+"?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
         {
+            FileUrl = ((MainWindow*)FUI)->filedialog->GetRealURL(FileUrl);
             //Auto Level
 //            QList<QString> _GCode_;
 //            _GCode_.append("G91");
@@ -256,7 +260,7 @@ void OctoNetwork::JobSwitch(QUrl FileUrl)
             MCPnetworkAccessManager->post(_Request,_SenderJson.toJson());
         }
     }
-    else if(ConnectState == "Printing from SD" || ConnectState == "Printing" || ConnectState == "Pausing")
+    else if(ConnectState.contains("Printing")  || ConnectState == "Pausing")
     {
         JobSwitch();//Stop
     }
@@ -265,7 +269,7 @@ void OctoNetwork::JobSwitch(QUrl FileUrl)
 void OctoNetwork::JobSwitch()
 {
     //up z-axis 5cm
-    if(ConnectState == "Printing from SD" || ConnectState == "Printing" || ConnectState == "Pausing")
+    if(ConnectState.contains("Printing")  || ConnectState == "Pausing")
     {
         if(QMessageBox::information(NULL, "Warning", "Do you want to Stop Print ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
         {

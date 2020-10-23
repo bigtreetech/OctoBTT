@@ -76,6 +76,8 @@ private slots:
 
     virtual void on_Beep_clicked();
 
+    virtual void released_clicked();
+
 private:
     Ui::InputDialog *ui;
 //    QWidget *FUI;

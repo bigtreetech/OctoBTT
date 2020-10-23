@@ -1,6 +1,6 @@
 sudo apt update 
 sudo apt upgrade
-sudo apt install qt5-default qtcreator python3-pyqt5-dbg libqt5svg5 libqt5svg5-dev python3-pyqt5.qtsvg qtsvg5-doc qtvirtualkeyboard-plugin qtvirtualkeyboard5-doc qtvirtualkeyboard5-doc-html qtmultimedia5-dev libqt5multimedia5
+sudo apt install qt5-default qtcreator python3-pyqt5-dbg libqt5svg5 libqt5svg5-dev python3-pyqt5.qtsvg qtsvg5-doc libqt5websockets5 libqt5websockets5-dev
 
 cd /home/pi
 rm -rf OctoBTT
@@ -8,6 +8,8 @@ git clone https://github.com/bigtreetech/OctoBTT.git
 #git clone https://gitee.com/Shine6Z/OctoBTT.git
 
 sudo service octoprint stop
+#backup config
+cp .octoprint/config.yaml .octoprint/config.yaml.OctoBTTbackup
 cp OctoBTT/config.yaml .octoprint/config.yaml
 sudo service octoprint start
 cp OctoBTT/.xsession .xsession

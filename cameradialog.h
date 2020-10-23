@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSizeF>
+#include <QNetworkReply>
 
 extern int DebugFlat ;
 extern QSizeF SizePercent;
@@ -28,14 +29,17 @@ class CameraDialog : public QDialog
     private slots:
         virtual void on_Btn_Back_clicked();
 
-//        void on_Box_CameraId_currentIndexChanged(int index);
+        void mjpeg_streamer_reply(QNetworkReply *reply);
+
+        void on_Btn_Sensor_toggled(bool checked);
 
     private:
         Ui::CameraDialog *ui;
-
-//        QCamera *camera;
-//        QCameraViewfinder *viewfinder;
-//        QCameraImageCapture *imageCapture;
+        QNetworkAccessManager *manager = new QNetworkAccessManager();
+        QNetworkRequest *request;
+        QWidget *FUI;
+    protected:
+        void showEvent(QShowEvent *event);
 };
 
 #endif // CAMERADIALOG_H

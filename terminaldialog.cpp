@@ -242,7 +242,9 @@ void TerminalDialog::SendCMD(QString CommandLine , QString argu)
     {
         return;
     }
-    if(cmd->waitForStarted())
+    if(command.toLower() == "exit app")
+        qApp->exit(Base_OnlyExitApp);
+    else if(cmd->waitForStarted())
     {
         if(!SendCMD_argu.contains("-q")) ui->Receiver->append(">>Sender:");
         if(!SendCMD_argu.contains("-q")) ui->Receiver->append(command);

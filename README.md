@@ -15,15 +15,24 @@
 ### 1.  Install OctoPrint(direct use of OctoPi is recommended)-- (install under directory)
 
 ![Flash](IMG/Ready/Flash.png "Flash")
-* You can create a WPA profile in the boot directory to add WiFi connections
 
+* You can create a WPA profile in the boot directory **boot/wpa_supplicant.txt** to add WiFi connections
 ![ConfigWPA](IMG/Ready/ConfigWPA.png "ConfigWPA")
+
+* If you are a BX machine model user, you will need to add the following fragment lines to the RaspberryPi **boot/config.txt** file to display them correctly on screen:
+> * max_usb_current=1
+> * hdmi_group=2
+> * hdmi_mode=87
+> * hdmi_cvt 1024 600 60
+> * hdmi_drive=1
+
+![ConfigDisplayMode](IMG/Ready/ConfigDisplayMode.jpg "ConfigDisplayMode")
+
 * SSH your PI on your computer for further action
 > After Pi boot you can get the IP address of Pi from the screen
-
 ![RaspiShowIP](IMG/Login/RaspiShowIP.jpeg "RaspiShowIP")
-> If you connect with console
 
+> If you connect with console
 ![ConfigConsole](IMG/Login/ConfigConsole.png "ConfigConsole")
 
 ![ConsoleShow](IMG/Login/ConsoleShow.png "ConsoleShow")
@@ -60,8 +69,8 @@
 
 ![raspiconfig](IMG/raspiconfig/3.jpeg "raspiconfig")
 ### 4.  In rc.local, start startup for X service Settings
-* Add the shell line(su -l pi -c "startx -- -nocursor") before "exit 0"
-* ”rc.local“ is in the etc folder in the system directory (command:**sudo nano /etc/rc.local**)
+* Add the shell line(**su -l pi -c "startx -- -nocursor"**) before "exit 0"
+* ”rc.local“ is in the etc folder in the system directory
 
 ![Startup](IMG/4_1_startup.jpeg "Startup")
 
@@ -107,13 +116,6 @@
 > 2. It is recommended to run with Marlin firmware. Currently there may be some unknown problems due to non-marlin firmware
 
 > 3. If you want to use octoprint online , you can use the network cable to connect to the router.
-
-> 4. If you are a BX machine model user, you will need to add the following fragment lines to the RaspberryPi config.txt file to display them correctly on screen:
-> * max_usb_current=1
-> * hdmi_group=2
-> * hdmi_mode=87
-> * hdmi_cvt 1024 600 60 6 0 0 0
-> * hdmi_drive=1
 
 ## Contribute
 

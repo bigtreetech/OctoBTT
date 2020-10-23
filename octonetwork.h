@@ -14,7 +14,7 @@ extern int DebugFlat ;
 class OctoNetwork
 {
     public:
-        OctoNetwork();
+        OctoNetwork(QWidget *parent = nullptr);
 //        void Initialize(QByteArray New_X_API_Key = "");
         QJsonValue SearchJsonValue(QList<QString> Find_List_Name , QJsonObject _QObj);
         QJsonValue SearchJsonValue(QList<QString> Find_List_Name ,QNetworkReply *reply);
@@ -29,11 +29,14 @@ class OctoNetwork
 
     private:
         virtual void SD_CMD(QString CMD);
+        QWidget *FUI;
 
     public:
         QByteArray X_API_Key = Global_X_API_Key;//Test Key
-        QString MainUrl = "http://127.0.0.1/api/";
-//        QString MainUrl = "http://192.168.3.111/api/";
+        QString MainIP = "127.0.0.1";
+//        QString MainIP = "192.168.100.111";
+        QString MainAddress = "http://"+MainIP+"/";
+        QString MainUrl = MainAddress + "/api/";
         QString ConnectState = "Close";
         bool ConnectFlat = false;
 

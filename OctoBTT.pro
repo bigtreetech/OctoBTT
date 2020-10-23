@@ -1,8 +1,8 @@
 QT += core gui svg
 #QT += multimedia
 #QT += multimediawidgets
-QT += network
-QT += multimedia
+QT += network websockets
+#QT += multimedia
 #QT += script
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -26,6 +26,7 @@ SOURCES += \
     configuration.cpp \
     controlpanel.cpp \
     filedialog.cpp \
+    gcodedialog.cpp \
     inputdialog.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     configuration.h \
     controlpanel.h \
     filedialog.h \
+    gcodedialog.h \
     inputdialog.h \
     mainwindow.h \
     materialctrlpanel.h \
@@ -55,6 +57,7 @@ FORMS += \
     configuration.ui \
     controlpanel.ui \
     filedialog.ui \
+    gcodedialog.ui \
     inputdialog.ui \
     mainwindow.ui \
     materialctrlpanel.ui \

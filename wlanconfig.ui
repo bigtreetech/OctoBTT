@@ -192,6 +192,9 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
            <pointsize>21</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>Wlan Device :</string>
          </property>
@@ -212,6 +215,9 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
           <font>
            <pointsize>30</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
         </widget>
        </item>

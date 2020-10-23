@@ -34,6 +34,8 @@ InputDialog::InputDialog(QWidget *parent) :
     {
         if(item->objectName()!=ui->Btn_Undo->objectName()&&item->objectName()!=ui->Btn_Confirm->objectName())
             connect(item,SIGNAL(clicked()),this,SLOT(on_Beep_clicked()));
+
+        connect(item,SIGNAL(released()),this,SLOT(released_clicked()));
     }
 
     QFont font;
@@ -136,6 +138,8 @@ void InputDialog::on_CharKey_click()
     QKeyEvent keyPress(QEvent::KeyPress, Key[0], Key_Modifier, QString(optBtn->text()[0]));
 //    QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_A, Qt::NoModifier, optBtn->text());
     QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+    ui->TextBlock->setFocus();
 }
 
 void InputDialog::on_NumKey_click()
@@ -156,6 +160,8 @@ void InputDialog::on_NumKey_click()
 
     QKeyEvent keyPress(QEvent::KeyPress, KeyData, Key_Modifier, QString(optBtn->text()[0]));
     QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+    ui->TextBlock->setFocus();
 }
 
 void InputDialog::on_SymbKey_click()
@@ -166,6 +172,13 @@ void InputDialog::on_SymbKey_click()
 
     QKeyEvent keyPress(QEvent::KeyPress, Qt::Key(), Key_Modifier, QString(optBtn->text()[0]));
     QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+    ui->TextBlock->setFocus();
+}
+
+void InputDialog::released_clicked()
+{
+    ui->TextBlock->setFocus();
 }
 
 void InputDialog::on_Beep_clicked()
@@ -287,6 +300,8 @@ void InputDialog::on_Func_UL_clicked(bool checked)
         ui->Symb_Semi->setText(Func_Ang_State ? "；":";");
         ui->Symb_Quo->setText(Func_Ang_State ? "'":"\"");
     }
+
+    ui->TextBlock->setFocus();
 //    QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_CapsLock, Qt::NoModifier, QString());
 //    QCoreApplication::sendEvent(this, &keyPress);
 }
@@ -360,6 +375,8 @@ void InputDialog::on_Func_Ang_clicked(bool checked)
         ui->Symb_Semi->setText(Func_Ang_State ? "；":";");
         ui->Symb_Quo->setText(Func_Ang_State ? "'":"\"");
     }
+
+    ui->TextBlock->setFocus();
 }
 
 void InputDialog::on_Func_BS_clicked()
@@ -368,22 +385,30 @@ void InputDialog::on_Func_BS_clicked()
 //    ui->TextBlock->keyPressEvent(key);
     QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Backspace, Key_Modifier, QString());
     QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+    ui->TextBlock->setFocus();
 }
 
 void InputDialog::on_Key_Left_clicked()
 {
     QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Left, Key_Modifier, QString());
     QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+    ui->TextBlock->setFocus();
 }
 
 void InputDialog::on_Key_Right_clicked()
 {
     QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Right, Key_Modifier, QString());
     QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+    ui->TextBlock->setFocus();
 }
 
 void InputDialog::on_Space_clicked()
 {
     QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Space, Key_Modifier, " ");
     QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+    ui->TextBlock->setFocus();
 }

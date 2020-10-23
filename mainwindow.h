@@ -20,6 +20,7 @@
 #include "terminaldialog.h"
 #include "configuration.h"
 #include "wlanconfig.h"
+#include "gcodedialog.h"
 
 extern int DebugFlat ;
 extern QSizeF SizePercent;
@@ -37,7 +38,7 @@ class MainWindow : public QMainWindow
         ~MainWindow();
 
     public:
-        OctoNetwork octonetwork = OctoNetwork();
+        OctoNetwork octonetwork = OctoNetwork(this);
 //        OctoNetwork octonetwork;
 
     private slots:
@@ -72,6 +73,7 @@ class MainWindow : public QMainWindow
         CameraDialog *cameradialog = new CameraDialog(this);
         URL_Camera *url_camera = new URL_Camera(this);
         TerminalDialog *terminaldialog = new TerminalDialog(this);
+        GcodeDialog *gcodedialog = new GcodeDialog(this);
         Configuration *configuration = new Configuration(this);
         Wlanconfig *wlanconfig = new Wlanconfig(this);
 

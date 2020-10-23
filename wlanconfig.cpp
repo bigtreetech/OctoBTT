@@ -238,7 +238,7 @@ void Wlanconfig::GetNetworkInfo(QStringList &Responses)
 //        bool read = false;
 //        data.append(replaceitem).split(" ",QString::SkipEmptyParts));
     }
-    QMessageBox::information(this,"",sending.join("\n"));
+    QMessageBox::information(NULL,"",sending.join("\n"));
 }
 
 void Wlanconfig::CreateNetwork()
@@ -315,7 +315,7 @@ void Wlanconfig::SetPassword()
         {
             if(value.trimmed() == "")
             {
-                if(QMessageBox::warning(FUI,"",QString("Do you want to forget \"%1\" ?").arg(ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString()),QMessageBox::Yes|QMessageBox::No,QMessageBox::No) == QMessageBox::Yes)
+                if(QMessageBox::warning(NULL,"",QString("Do you want to forget \"%1\" ?").arg(ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString()),QMessageBox::Yes|QMessageBox::No,QMessageBox::No) == QMessageBox::Yes)
                 {
                     RemoveNetwork();
                 }
@@ -375,7 +375,7 @@ void Wlanconfig::RemoveNetwork(QStringList &Responses)
     }
     else
     {
-        QMessageBox::warning(FUI,"",QString("SSID[%1] Delete failed !"));
+        QMessageBox::warning(NULL,"",QString("SSID[%1] Delete failed !"));
         ui->WPA_List->setEnabled(true);
     }
 }
