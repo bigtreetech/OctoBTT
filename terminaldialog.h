@@ -36,6 +36,8 @@ private slots:
 
     virtual void on_Btn_Logo_clicked();
 
+    void on_Btn_Kill_clicked();
+
 private:
     Ui::TerminalDialog *ui;
     QProcess *cmd;

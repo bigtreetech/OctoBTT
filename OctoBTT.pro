@@ -9,12 +9,20 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 CONFIG += lang-zh_CN
+CONFIG += console
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+
+VERSION = 2.0.0
+QMAKE_TARGET_COMPANY = BigtreeTech
+QMAKE_TARGET_PRODUCT = OctoBTT
+QMAKE_TARGET_COPYRIGHT = Copyright(C) 2020 By BigtreeTech
+QMAKE_TARGET_DESCRIPTION = First suggested for OctoPi
+
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

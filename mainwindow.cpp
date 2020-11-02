@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     //SysTimer
     QTimer *m_timer= new QTimer(this);
     //启动或重启定时器, 并设置定时器时间：毫秒
+    ///系统状态扫描触发计时器
     m_timer->start(1000);
     //定时器触发信号槽
     connect(m_timer, SIGNAL(timeout()), this, SLOT(TimerTimeOut()));
@@ -125,11 +126,22 @@ void MainWindow::TimerTimeOut()
             ui->Btn_Filament_B->setText(octonetwork.ConnectState);
 //            ui->Btn_Filament->setEnabled(true);
         }
-        else if(octonetwork.ConnectState == "Cancelling" || octonetwork.ConnectState == "Connecting" || octonetwork.ConnectState =="Detecting baudrate" || octonetwork.ConnectState =="Detecting serial port" || octonetwork.ConnectState =="Closed" || octonetwork.ConnectState =="Offline" || octonetwork.ConnectState =="Error" || octonetwork.ConnectState == "Starting print from SD" || octonetwork.ConnectState == "Starting")
+        else if(octonetwork.ConnectState == "Connecting" || octonetwork.ConnectState =="Detecting baudrate" || octonetwork.ConnectState =="Detecting serial port")
+        {
+            ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
+            ui->Btn_Filament_B->setText("Connecting");
+            //            ui->Btn_Filament->setEnabled(false);
+        }
+        else if(octonetwork.ConnectState == "Cancelling" || octonetwork.ConnectState =="Error" || octonetwork.ConnectState == "Starting print from SD" || octonetwork.ConnectState == "Starting")
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
             ui->Btn_Filament_B->setText("Busy");
 //            ui->Btn_Filament->setEnabled(false);
+        }
+        else if(octonetwork.ConnectState =="Closed" || octonetwork.ConnectState =="Offline")
+        {
+            ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
+            ui->Btn_Filament_B->setText("Lost connection");
         }
         else
         {

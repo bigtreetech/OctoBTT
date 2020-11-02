@@ -242,9 +242,13 @@ void TerminalDialog::SendCMD(QString CommandLine , QString argu)
     {
         return;
     }
-    if(command.toLower() == "exit app")
+    if(!cmd->isOpen())
+    {
+        cmd->open();
+    }
+    if(command.toLower() == "exit app" || command.toLower() == "exitapp")
         qApp->exit(Base_OnlyExitApp);
-    else if(cmd->waitForStarted())
+    else if(cmd->isOpen() && cmd->waitForStarted())
     {
         if(!SendCMD_argu.contains("-q")) ui->Receiver->append(">>Sender:");
         if(!SendCMD_argu.contains("-q")) ui->Receiver->append(command);
@@ -255,6 +259,10 @@ void TerminalDialog::SendCMD(QString CommandLine , QString argu)
         }
         cmd->write(command.toLocal8Bit()+ "\n");
         if(!SendCMD_argu.contains("-q")) ui->Receiver->horizontalScrollBar()->setValue(ui->Receiver->horizontalScrollBar()->maximum());
+    }
+    else if(!cmd->isOpen())
+    {
+        ui->Receiver->append("->System Busy->->->");
     }
 }
 
@@ -297,4 +305,9 @@ void TerminalDialog::on_Btn_Logo_clicked()
         delete sender();
     });
     inputdialog->setvalue("Please Input Password","",CMD_Password);
+}
+
+void TerminalDialog::on_Btn_Kill_clicked()
+{
+    cmd->terminate();
 }

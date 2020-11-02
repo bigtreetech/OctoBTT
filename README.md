@@ -41,67 +41,14 @@
 ![ConfigTermius](IMG/Login/ConfigTermius.jpeg "ConfigTermius")
 
 ![TermiusShow](IMG/Login/TermiusShow.jpeg "TermiusShow")
-> update and upgrade
 
-![Update](IMG/1_Update.jpeg "Update")
+### 2. Install OctoBTT : 
+> Run Command:
+* svn export https://github.com/bigtreetech/OctoBTT.git/trunk/install.sh && sudo /bin/sh install.sh
 
-![Upgrade](IMG/2_1_Upgrade.jpeg "Upgrade")
+![InstallOctoBTT.png](IMG/2_InstallOctoBTT.png "InstallOctoBTT")
 
-![Upgrade](IMG/2_2_Upgrade.jpeg "Upgrade")
-### 2.  Install Xorg (Reference: https://wiki.debian.org/Xorg#Video_drivers)
-* sudo apt install xorg
-
-![Xorg](IMG/3_1_xorg.jpeg "Xorg")
-* add line "allowed_users = anybody" to "/etc/X11/Xwrapper.config"
-
-![Xorg](IMG/3_2_xorg.jpeg "Xorg")
-
-![Xorg](IMG/3_3_xorg.jpeg "Xorg")
-
-![Xorg](IMG/3_4_xorg.jpeg "Xorg")
-### 3.  Set the Console to boot in Pi mode (Negligible step)
-
-![raspiconfig](IMG/raspiconfig/Command.jpeg "raspiconfig")
-
-![raspiconfig](IMG/raspiconfig/1.jpeg "raspiconfig")
-
-![raspiconfig](IMG/raspiconfig/2.jpeg "raspiconfig")
-
-![raspiconfig](IMG/raspiconfig/3.jpeg "raspiconfig")
-### 4.  In rc.local, start startup for X service Settings
-* Add the shell line(**su -l pi -c "startx -- -nocursor"**) before "exit 0"
-* ”rc.local“ is in the etc folder in the system directory
-
-![Startup](IMG/4_1_startup.jpeg "Startup")
-
-![Startup](IMG/4_2_startup.jpeg "Startup")
-
-![Startup](IMG/4_3_startup.png "Startup")
-## Steps 5 through 8 You can download install.sh to run directly as root
-* svn export https://github.com/bigtreetech/OctoBTT.git/trunk/install.sh
-
-![SVN](IMG/5_SVN.jpeg "SVN")
-* . install.sh
-
-![Install](IMG/6_install.jpeg "Install")
-### 5.  Install full Qt
-### 6.  Git clone project to ~/ directory
-### 7.  Perform make [option] compilation in the project folder
-* -j* Thread parameters, set the compilation thread, improve the compilation speed, need to set the appropriate number of compilation, too many threads will cause the compilation exception failure, such as: make -j4; Compile for four threads
-* clean Environment cleaning parameter. Recompiling requires doing environment cleaning first, for example: make clean
-* -----Note: the compilation process may fail due to missing libraries, requiring manual installation of missing development libraries for clean recompilation-----
-* *****Do not execute qmake. It will destroy the project files*****
-### 8.  Boot mode [install. Sh script will automatically copy. Xsession to directory]
-#### method[1]
-> manually executes the "startx" launcher
-
-#### method[2]
->  is added in ~/.xsession
-* xset -dmps
-* xset s off
-* exec ~/OctoBTT/OctoBTT
-> enables the program to start itself after the X service runs
-
+### 3. OctoBTT is entered automatically after you wait for the auto setup to complete and then restart
 ![Show](IMG/Show.png "Show")
 
 ## Instructions for use
