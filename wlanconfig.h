@@ -15,10 +15,14 @@ struct WPAInfo{
     double level;
     bool connectflags;
     bool pwdError;
+    int Quality_value;
+    int Quality_max;
     WPAInfo()
     {
         id = -1;
-        level = -99;
+        level = -100;
+        Quality_value = 0;
+        Quality_max = 100;
         connectflags = false;
         pwdError = false;
     }

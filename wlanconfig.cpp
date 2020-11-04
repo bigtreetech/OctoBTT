@@ -537,6 +537,7 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
 //            QMessageBox::information(FUI,"",LastStr);
             QString SSID = LastStr.remove(0,ModuleStr[3].count()).trimmed();//remove SecurityFlags
 //            QMessageBox::information(FUI,"",SSID);
+//            if((ModuleStr[2].toInt()) > ) continue;
             if(SSID.trimmed() == "")
                 continue;
             effectiveSSID.append(SSID);
@@ -545,6 +546,27 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
                 WPA_Scan_SSID_List.insert(SSID,WPAInfo());
             }
             WPA_Scan_SSID_List[SSID].level = WPA_Level;
+//            WPA_Scan_SSID_List[SSID].Quality_value ;
+            if(WPA_Scan_SSID_List[SSID].level <= -100)
+                WPA_Scan_SSID_List[SSID].Quality_value = 0;
+            else if(WPA_Scan_SSID_List[SSID].level >= -50)
+                WPA_Scan_SSID_List[SSID].Quality_value = 100;
+            else
+                WPA_Scan_SSID_List[SSID].Quality_value = 2 * (WPA_Scan_SSID_List[SSID].level + 100);
+//            // dBm to Quality:
+//            if(dBm <= -100)
+//                quality = 0;
+//            else if(dBm >= -50)
+//                quality = 100;
+//            else
+//                quality = 2 * (dBm + 100);
+//            // Quality to dBm:
+//            if(quality <= 0)
+//                dBm = -100;
+//            else if(quality >= 100)
+//                dBm = -50;
+//            else
+//                dBm = (quality / 2) - 100;
         }
         else if(item.toLower().startsWith("bssid"))
         {
@@ -574,7 +596,12 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
 //                continue;
             QStandardItem *wpsitem = new QStandardItem(static_cast<QString>(WPAReader.key()));
 //            QMessageBox::warning(this,"",WPAReader.key()+":"+QString::number(WPAReader.value().id)+QString::number(WPAReader.value().connectflags)+QString::number(WPAReader.value().level));
-            if(WPAReader.value().connectflags)
+            if(WPAReader.value().Quality_value < 95)
+            {
+                wpsitem->setIcon(QIcon(":/assets/jinggao.svg"));
+                WPAModel->appendRow(wpsitem);
+            }
+            else if(WPAReader.value().connectflags)
             {
                 wpsitem->setIcon(QIcon(":/assets/Network.svg"));
                 if(WPAModel->rowCount() > 0)
