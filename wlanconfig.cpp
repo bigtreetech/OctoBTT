@@ -1,4 +1,4 @@
-#include "wlanconfig.h"
+include "wlanconfig.h"
 #include "ui_wlanconfig.h"
 #include <mainwindow.h>
 //#include <QSizeF>
@@ -199,7 +199,7 @@ void Wlanconfig::on_Btn_Help_clicked()
 
 void Wlanconfig::GetNetworkInfo()
 {
-    QString cmd = "sudo ifconfig | grep -E \"flags|inet|ether\"";
+    QString cmd = "ifconfig | grep -E \"flags|inet|ether\"";
     disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
     QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
                      {
