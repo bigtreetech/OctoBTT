@@ -256,7 +256,7 @@ color: rgb(255, 255, 10);</string>
 color: rgb(0, 255, 0);</string>
      </property>
      <property name="text">
-      <string>sudo iwlist wlan0 scan | grep -E &quot;ESSID|Quality&quot;</string>
+      <string>iwlist wlan0 scan | grep -E &quot;ESSID|Quality&quot;</string>
      </property>
     </widget>
    </item>
