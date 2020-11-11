@@ -27,9 +27,9 @@ sudo sed -i 's/allowed_users[ ]*=[ ]*console/allowed_users=anybody/g' /etc/X11/X
 echo "Done."
 
 #Add sudo access for wireless configurations
-echo "Setting up Sudo ..."
-#sudo touch /etc/sudoders.d/OctoBTT
-#sudo echo "pi ALL=(ALL) NOPASSWD: /sbin/iwlist, /sbin/wpa_cli, /sbin/iwconfig, /sbins/ifconfig" > /etc/sudoders.d/OctoBTT
+echo "Setting up Sudo for wifi configuration..."
+#sudo touch /etc/sudoers.d/OctoBTT
+#sudo echo "pi ALL=(ALL) NOPASSWD: /sbin/iwlist, /sbin/wpa_cli, /sbin/iwconfig, /sbins/ifconfig" > /etc/sudoers.d/OctoBTT
 sudo cp OctoBTT/OctoBTT.sudoers.d /etc/sudoders.d/OctoBTT
 echo "Done."
 
