@@ -1,4 +1,4 @@
-include "wlanconfig.h"
+#include "wlanconfig.h"
 #include "ui_wlanconfig.h"
 #include <mainwindow.h>
 //#include <QSizeF>
