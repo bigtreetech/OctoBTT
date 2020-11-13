@@ -59,8 +59,8 @@ echo "Done."
 echo "Preconfigured OctoBTT ..."
 sudo service octoprint stop
 #backup config
-cp .octoprint/config.yaml .octoprint/config.yaml.OctoBTTbackup
-cp OctoBTT/config.yaml .octoprint/config.yaml
+#cp .octoprint/config.yaml .octoprint/config.yaml.OctoBTTbackup
+#cp OctoBTT/config.yaml .octoprint/config.yaml
 sudo service octoprint start
 #cp .xsession .xsession.backup
 cp OctoBTT/.xsession .xsession
