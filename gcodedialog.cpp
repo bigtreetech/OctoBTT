@@ -1,13 +1,11 @@
-#include "gcodedialog.h"
+﻿#include "gcodedialog.h"
 #include "ui_gcodedialog.h"
 #include <QTreeWidgetItem>
 #include <QScrollBar>
-#include <QDebug>
 //#include <QSizeF>
 #include <QTimer>
 #include <QStringList>
 #include <mainwindow.h>
-#include <QMessageBox>
 #include <QTextCodec>
 #include "inputdialog.h"
 
@@ -24,66 +22,8 @@ GcodeDialog::GcodeDialog(QWidget *parent) :
 
     FUI = (MainWindow*)parent;//((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_Setting);
 
-    ui->Receiver->verticalScrollBar()->setStyleSheet("QScrollBar:vertical"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,0%);"
-                                                       "margin:0px,0px,0px,0px;"
-                                                       "padding-top:40px;"
-                                                       "padding-bottom:40px;"
-                                                       "}"
-                                                       "QScrollBar::handle:vertical"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,25%);"
-                                                       " border-radius:10px;"
-                                                       "min-height:40;"
-                                                       "}"
-                                                       "QScrollBar::handle:vertical:hover"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,50%);"
-                                                       " border-radius:10px;"
-                                                       "min-height:40;"
-                                                       "}"
-                                                       "QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical"
-                                                       "{"
-                                                       "background:rgba(0,128,255,10%);"
-                                                       "border-radius:0px;"
-                                                       "}");
-    ui->Receiver->horizontalScrollBar()->setStyleSheet("QScrollBar:horizontal"
-                                                         "{"
-                                                         "height:40px;"
-                                                         "background:rgba(0,128,255,0%);"
-                                                         "margin:0px,0px,0px,0px;"
-                                                         "padding-left:40px;"
-                                                         "padding-right:40px;"
-                                                         "}"
-                                                         "QScrollBar::handle:horizontal"
-                                                         "{"
-                                                         "height:40x;"
-                                                         "background:rgba(0,128,255,25%);"
-                                                         " border-radius:10px;"
-                                                         "min-width:40;"
-                                                         "}"
-                                                         "QScrollBar::handle:horizontal:hover"
-                                                         "{"
-                                                         "height:40px;"
-                                                         "background:rgba(0,128,255,50%);"
-                                                         " border-radius:10px;"
-                                                         "min-width:40;"
-                                                         "}"
-                                                         "QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal"
-                                                         "{"
-                                                         "background:rgba(0,128,255,10%);"
-                                                         "border-radius:0px;"
-                                                         "}");
-
     ui->Sender->setFocus();
 
-    this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
-    this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
-    this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
 
     _ptimer = new QTimer();
     connect(_pdataRecvWS,SIGNAL(disconnected()),this,SLOT(onWSDisconnected()),Qt::AutoConnection);
@@ -92,6 +32,10 @@ GcodeDialog::GcodeDialog(QWidget *parent) :
     connect(_ptimer,SIGNAL(timeout()),this,SLOT(onWSReconnect()),Qt::AutoConnection);
     _pdataRecvWS->open(QUrl("ws://"+((MainWindow*)FUI)->octonetwork.MainIP+"/sockjs/websocket"));
 //    _pdataRecvWS->open(QUrl("ws://192.168.100.111/sockjs/websocket"));
+
+    this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+    this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
 }
 
 GcodeDialog::~GcodeDialog()
@@ -133,7 +77,6 @@ void GcodeDialog::on_Btn_Logo_clicked()
 {
 
 }
-
 
 //断开连接会触发这个槽函数
 void GcodeDialog::onWSDisconnected()

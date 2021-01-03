@@ -5,6 +5,7 @@
 #include <QSizeF>
 #include <QNetworkReply>
 
+
 extern int DebugFlat ;
 extern QSizeF SizePercent;
 //#include <QCamera>

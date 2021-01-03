@@ -1,4 +1,4 @@
-#ifndef FILEDIALOG_H
+﻿#ifndef FILEDIALOG_H
 #define FILEDIALOG_H
 
 #include <QDialog>
@@ -8,6 +8,12 @@
 #include <QTreeWidgetItem>
 #include <QTimer>
 #include <QNetworkReply>
+#include "liblog.h"
+
+#define BTSTYLE6 "QPushButton        {padding: 10px;border-style: solid;border-width: 1px;border-radius: 20px;border-color: rgb(245,246,255); color: rgb(245, 246, 255);}"\
+                "QPushButton:hover  {padding: 10px;border-style: solid;border-width: 1px;border-radius: 20px;border-color: rgb(245,246,255); background-color:rgb(128,128,128,128);color: rgb(245, 246, 255);}"\
+                "QPushButton:pressed{padding: 10px;border-style: solid;border-width: 1px;border-radius: 20px;border-color: rgb(245,246,255); background-color:rgb(128,128,128,128);color: rgb(245, 246, 255);padding-right:4px;padding-bottom:4px;}"
+
 
 extern int DebugFlat ;
 extern QSizeF SizePercent;

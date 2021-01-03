@@ -17,7 +17,11 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Materialctrl</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="assets.qrc">
+    <normaloff>:/assets/kongzhimianban2.svg</normaloff>:/assets/kongzhimianban2.svg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -27,25 +31,23 @@
     <number>3</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QPushButton" name="Btn_back">
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+       <property name="whatsThis">
+        <string>BTStyleSheet2</string>
        </property>
        <property name="text">
         <string/>
@@ -111,27 +113,15 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="Btn_Help">
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+      <widget class="QLabel" name="label">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>78</height>
+        </size>
        </property>
        <property name="text">
         <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="assets.qrc">
-         <normaloff>:/assets/help.svg</normaloff>:/assets/help.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>72</width>
-         <height>72</height>
-        </size>
        </property>
       </widget>
      </item>
@@ -231,6 +221,9 @@ border-radius: 20px;</string>
              <height>48</height>
             </size>
            </property>
+           <property name="autoExclusive">
+            <bool>false</bool>
+           </property>
            <attribute name="buttonGroup">
             <string notr="true">buttonGroup</string>
            </attribute>
@@ -303,6 +296,9 @@ border-radius: 20px;</string>
              <width>48</width>
              <height>48</height>
             </size>
+           </property>
+           <property name="autoRepeatInterval">
+            <number>500</number>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">buttonGroup</string>
@@ -692,13 +688,8 @@ border-radius: 20px;</string>
           <bold>false</bold>
          </font>
         </property>
-        <property name="styleSheet">
-         <string notr="true">padding: 10px;
-border-style: solid;
-border-width: 5px;
-border-radius: 20px;
-border-color:rgb(85, 255, 0);
-color: rgb(245, 246, 250);</string>
+        <property name="whatsThis">
+         <string>BTStyleSheet1</string>
         </property>
         <property name="text">
          <string>SAVE</string>
@@ -910,41 +901,6 @@ border-radius: 20px;</string>
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-      <item row="5" column="1" colspan="2">
-       <widget class="QSpinBox" name="Box_SettingStep">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <family>Gill Sans MT</family>
-          <pointsize>30</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">padding: 10px;
-border-style: solid;
-border-width: 1px;
-border-color:rgb(255, 255, 255);
-color: rgb(255, 255, 250);</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::PlusMinus</enum>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>50</number>
-        </property>
        </widget>
       </item>
      </layout>

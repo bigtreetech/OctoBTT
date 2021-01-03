@@ -1,4 +1,4 @@
-#include "cameradialog.h"
+﻿#include "cameradialog.h"
 #include "ui_cameradialog.h"
 #include <mainwindow.h>
 //#include <QSizeF>
@@ -7,11 +7,14 @@
 //#include "QCamera"
 //#include "QCameraInfo"
 
+
+
 CameraDialog::CameraDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CameraDialog)
 {
     ui->setupUi(this);
+
     FUI = (MainWindow*)parent;
 
 //    QList<QCameraInfo> list;
@@ -97,7 +100,7 @@ void CameraDialog::on_Btn_Sensor_toggled(bool checked)
     if(checked)
     {
         ui->Btn_Sensor->setText("Stop");
-
+        ui->Btn_Sensor->setIcon(QIcon(":/assets/stop.svg"));
         request->setUrl(QUrl(((MainWindow*)FUI)->octonetwork.MainAddress +"/webcam/?action=snapshot"));
 
         /* 设置"请求完成"与mjpeg_streamer_reply()这个槽关联 */
@@ -109,6 +112,8 @@ void CameraDialog::on_Btn_Sensor_toggled(bool checked)
     else
     {
         ui->Btn_Sensor->setText("Start");
+
+        ui->Btn_Sensor->setIcon(QIcon(":/assets/start.svg"));
         ui->Windows->clear();
 
         /* 解除关联，这样就不显示了 */

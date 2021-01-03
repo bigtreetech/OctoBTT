@@ -1,8 +1,11 @@
-#ifndef CONTROLPANEL_H
+﻿#ifndef CONTROLPANEL_H
 #define CONTROLPANEL_H
 
 #include <QDialog>
 #include <QSizeF>
+#include <QResizeEvent>
+#include "customdialog.h"
+
 
 extern int DebugFlat ;
 extern QSizeF SizePercent;
@@ -40,21 +43,13 @@ class ControlPanel : public QDialog
 
         virtual void on_Btn_Cool_toggled(bool checked);
 
-        virtual void on_Btn_Axle_Home_pressed();
+        virtual void on_Btn_Axle_Home_clicked();
 
-        virtual void on_Btn_Axle_Home_released();
+        virtual void on_Btn_Unlock_clicked();
 
-        virtual void on_Btn_Unlock_pressed();
+        virtual void on_Btn_Restore_clicked();
 
-        virtual void on_Btn_Unlock_released();
-
-        virtual void on_Btn_Restore_released();
-
-        virtual void on_Btn_Restore_pressed();
-
-        virtual void on_Btn_Shutdown_pressed();
-
-        virtual void on_Btn_Shutdown_released();
+        virtual void on_Btn_Shutdown_clicked();
 
         virtual void on_Btn_Axle_X_clicked();
 
@@ -80,14 +75,6 @@ class ControlPanel : public QDialog
 
         virtual void on_Btn_Extruder_E_clicked();
 
-        virtual void on_Btn_Extruder_R_released();
-
-        virtual void on_Btn_Extruder_E_pressed();
-
-        virtual void on_Btn_Extruder_E_released();
-
-        virtual void on_Btn_Extruder_R_pressed();
-
         virtual void on_Btn_Z_BS_Add_clicked();
 
         virtual void on_Btn_Z_BS_Dec_clicked();
@@ -96,11 +83,16 @@ class ControlPanel : public QDialog
 
     private:
         Ui::ControlPanel *ui;
-        QString UnSelectKey = "\ncolor: rgb(245, 246, 250);";
+        QString UnSelectKey = "QPushButton{color: rgb(245, 246, 250); border-color:rgb(245, 246, 250); border-style: solid; border-width: 5px; border-radius: 20px;}"\
+                              "QPushButton:hover{border:none;background-color:rgb(128,128,128,128); border-color:rgb(245, 246, 250); border-style: solid; border-width: 5px; border-radius: 20px;}"\
+                              "QPushButton:pressed{border:none; padding-right:4px; padding-bottom:4px; border-color:rgb(245, 246, 250); border-style: solid; border-width: 5px; border-radius: 20px;}";
         QString SelectKey = "background-color: rgb(128,128,128);\ncolor: rgb(245, 246, 250);\nborder-color:rgb(0, 255, 0)";
         QString StyleSheet_Temp;
         int MoveSpeed = 10;
         QWidget *FUI;
+        int RestoreFlag = 0;
 };
+
+
 
 #endif // CONTROLPANEL_H

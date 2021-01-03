@@ -17,9 +17,25 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Gcode</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="assets.qrc">
+    <normaloff>:/assets/yuanchengkongzhi2.svg</normaloff>:/assets/yuanchengkongzhi2.svg</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
+    <number>5</number>
+   </property>
    <item row="1" column="1">
     <widget class="QPushButton" name="Btn_Send">
      <property name="sizePolicy">
@@ -41,12 +57,11 @@
        <bold>true</bold>
       </font>
      </property>
+     <property name="whatsThis">
+      <string>BTStyleSheet7</string>
+     </property>
      <property name="autoFillBackground">
       <bool>false</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(0, 0, 0);
-color: rgb(255, 255, 10);</string>
      </property>
      <property name="text">
       <string>Send gcode</string>
@@ -89,12 +104,22 @@ color: rgb(0, 255, 0);</string>
    </item>
    <item row="0" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="leftMargin">
+      <number>5</number>
+     </property>
+     <property name="topMargin">
+      <number>5</number>
+     </property>
+     <property name="rightMargin">
+      <number>5</number>
+     </property>
+     <property name="bottomMargin">
+      <number>5</number>
+     </property>
      <item>
       <widget class="QPushButton" name="Btn_Back">
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+       <property name="whatsThis">
+        <string>BTStyleSheet2</string>
        </property>
        <property name="text">
         <string/>
@@ -160,27 +185,15 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="Btn_Help">
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+      <widget class="QLabel" name="label">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>78</height>
+        </size>
        </property>
        <property name="text">
         <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="assets.qrc">
-         <normaloff>:/assets/help.svg</normaloff>:/assets/help.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>72</width>
-         <height>72</height>
-        </size>
        </property>
       </widget>
      </item>
@@ -215,9 +228,8 @@ color: rgb(0, 255, 0);</string>
        <pointsize>20</pointsize>
       </font>
      </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(0, 0, 0);
-color: rgb(255, 255, 10);</string>
+     <property name="whatsThis">
+      <string>BTStyleSheet7</string>
      </property>
      <property name="text">
       <string>Clean Window</string>

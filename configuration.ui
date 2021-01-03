@@ -17,32 +17,46 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Configuration</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="assets.qrc">
+    <normaloff>:/assets/xitongpeizhi.svg</normaloff>:/assets/xitongpeizhi.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,7">
    <property name="spacing">
     <number>3</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="leftMargin">
+      <number>5</number>
+     </property>
+     <property name="topMargin">
+      <number>5</number>
+     </property>
+     <property name="rightMargin">
+      <number>5</number>
+     </property>
+     <property name="bottomMargin">
+      <number>5</number>
+     </property>
      <item>
       <widget class="QPushButton" name="Btn_Back">
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+       <property name="whatsThis">
+        <string>BTStyleSheet2</string>
        </property>
        <property name="text">
         <string/>
@@ -109,13 +123,11 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
      </item>
      <item>
       <widget class="QPushButton" name="Btn_Help">
+       <property name="whatsThis">
+        <string>BTStyleSheet2</string>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
        </property>
        <property name="text">
         <string/>

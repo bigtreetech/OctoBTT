@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <QTimer>
@@ -10,21 +10,24 @@
 #include <QJsonArray>
 
 #include <QNetworkReply>
-
-#include <QMessageBox>
-
 //MY Dialog
 #include "controlpanel.h"
 #include "filedialog.h"
 #include "materialctrlpanel.h"
-#include "url_camera.h"
 
-#include <QDebug>
+#include <QMovie>
+#include <QPoint>
+#include <QCursor>
+#include <QDir>
+#include <QFile>
+#include <QTextBrowser>
+#include <QDesktopWidget>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
 
     //network wake up
@@ -35,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     //SysTimer
     QTimer *m_timer= new QTimer(this);
     //启动或重启定时器, 并设置定时器时间：毫秒
-    ///系统状态扫描触发计时器
+    //系统状态扫描触发计时器
     m_timer->start(1000);
     //定时器触发信号槽
     connect(m_timer, SIGNAL(timeout()), this, SLOT(TimerTimeOut()));
@@ -45,6 +48,16 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
 //    ui->Btn_Camera->setVisible(false);
     filedialog->InitializeUSBDrive();
+
+    //移动光标位置
+    QPoint pt(0,0);
+    QPoint center = this->mapToGlobal(pt);
+    QCursor::setPos(center);
+
+    //设置各个按键的样式表
+    ui->Btn_CP->setStyleSheet("QPushButton{border:none;font: 20pt Gill Sans MT; MT;color: rgb(245, 246, 250);}"
+                              "QPushButton:pressed{border:none;background-color: rgb(128, 128, 128, 30%); padding-left:4px; padding-top:4px;}"
+                              "QPushButton:hover  {border:none;background-color: rgb(128, 128, 128, 30%);}");
 }
 
 MainWindow::~MainWindow()
@@ -56,7 +69,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::TimerTimeOut()
 {
-    if(QSysInfo::productType() != "raspbian"){qDebug()<<seq<<":"<<"In"<<":"<<QDateTime::currentDateTime().time().toString("hh:mm::ss.zzz");}
+    if(QSysInfo::productType() != "raspbian")
+    {
+        LibLog::LogRec(QString("%1 : In :___%2___%3").arg(seq).arg(__FILE__).arg(__LINE__), "connect");
+    }
     //uodate UI
     ui->Btn_ConnectState->setText(octonetwork.ConnectState.contains("Printing") ? "Printing : " + filedialog->DisplayName :octonetwork.ConnectState);
     ui->Btn_CP->setText((materialctrlpanel->Hotend < 0 ? "-" : QString::number(materialctrlpanel->Hotend))+materialctrlpanel->Symb_Temp);
@@ -68,9 +84,12 @@ void MainWindow::TimerTimeOut()
         ui->Btn_CP_3->setText(QString::number(materialctrlpanel->FanSpeed/materialctrlpanel->FanSpeed_Max)+materialctrlpanel->Symb_Per);
     }
 
-//    qDebug()<<QString::number(materialctrlpanel->FanSpeed/materialctrlpanel->FanSpeed_Max)+materialctrlpanel->Symb_Per;
     //ui->Btn_ConnectState->repaint();
-    if(QSysInfo::productType() != "raspbian"){qDebug()<<"\t"<<octonetwork.ConnectState<<":"<<ui->Btn_ConnectState->text();}
+    if(QSysInfo::productType() != "raspbian")
+    {
+        LibLog::LogRec(QString("%1 : %2___%3___%4").arg(octonetwork.ConnectState).arg(ui->Btn_ConnectState->text()).arg(__FILE__).arg(__LINE__), "connect");
+
+    }
     if(!octonetwork.ConnectFlat)
     {
         if(octonetwork.ConnectState == "Operational" || octonetwork.ConnectState == "Pausing" || octonetwork.ConnectState == "Starting" /*|| octonetwork.ConnectState == "Printing"*/ || octonetwork.ConnectState == "Cancelling" || octonetwork.ConnectState == "Starting print from SD")
@@ -103,7 +122,7 @@ void MainWindow::TimerTimeOut()
 
             if(QSysInfo::productType() != "raspbian")
             {
-                qDebug()<<"Connect"<<":"<<_ConnectJson.constFind("port").value().toString();
+                LibLog::LogRec(QString("Connect : %1 : In :___%2___%3").arg(_ConnectJson.constFind("port").value().toString()).arg(__FILE__).arg(__LINE__), "connect");
             }
 
             octonetwork.networkAccessManager->post(octonetwork.SetConnectRequest,ConnectJson.toJson());
@@ -123,37 +142,37 @@ void MainWindow::TimerTimeOut()
             octonetwork.networkAccessManager->get(octonetwork.GetStateRequest);
 
             ui->Btn_Filament->setIcon(QIcon(":/assets/cancel.svg"));
-            ui->Btn_Filament_B->setText(octonetwork.ConnectState);
+//            ui->Btn_Filament_B->setText(octonetwork.ConnectState);
 //            ui->Btn_Filament->setEnabled(true);
         }
         else if(octonetwork.ConnectState == "Connecting" || octonetwork.ConnectState =="Detecting baudrate" || octonetwork.ConnectState =="Detecting serial port")
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
-            ui->Btn_Filament_B->setText("Connecting");
+//            ui->Btn_Filament_B->setText("Connecting");
             //            ui->Btn_Filament->setEnabled(false);
         }
         else if(octonetwork.ConnectState == "Cancelling" || octonetwork.ConnectState =="Error" || octonetwork.ConnectState == "Starting print from SD" || octonetwork.ConnectState == "Starting")
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
-            ui->Btn_Filament_B->setText("Busy");
+//            ui->Btn_Filament_B->setText("Busy");
 //            ui->Btn_Filament->setEnabled(false);
         }
         else if(octonetwork.ConnectState =="Closed" || octonetwork.ConnectState =="Offline")
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
-            ui->Btn_Filament_B->setText("Lost connection");
+//            ui->Btn_Filament_B->setText("Lost connection");
         }
         else
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/haocaiguanli.svg"));
-            ui->Btn_Filament_B->setText("Print " + (filedialog->SelectURL.url() == "" ? "" : filedialog->DisplayName));
+//            ui->Btn_Filament_B->setText("Print " + (filedialog->SelectURL.url() == "" ? "" : filedialog->DisplayName));
 //            ui->Btn_Filament->setEnabled(true);
         }
     }
     if(QSysInfo::productType() != "raspbian")
     {
-        qDebug()<<seq++<<":"<<"Out"<<":"<<QDateTime::currentDateTime().time().toString("hh:mm::ss.zzz");
-        qDebug()<<"***************************************";
+        LibLog::LogRec(QString("%1 : Out :___%2___%3").arg(seq++).arg(__FILE__).arg(__LINE__), "connect");
+        LibLog::LogRec("***************************************", "connect");
     }
 }
 
@@ -176,17 +195,19 @@ void MainWindow::ConnectReply(QNetworkReply *reply)
             USB_Port.append(item.toString());
         }
 
-        if(QSysInfo::productType() != "raspbian"){qDebug()<<replyArray;}
+        if(QSysInfo::productType() != "raspbian")
+        {
+            LibLog::LogRec(QString("%1___%2___%3").arg(QString(replyArray)).arg(__FILE__).arg(__LINE__), "connect");
+        }
     }
     else
     {
         octonetwork.ConnectState = "Error";
-            //qDebug() << "=========";
     }
     if(QSysInfo::productType() != "raspbian")
     {
-        qDebug() << "statusCode:" << statusCode;
-        qDebug() << "***************************************";
+        LibLog::LogRec(QString("statusCode : %1___%2___%3").arg(statusCode).arg(__FILE__).arg(__LINE__), "connect");
+        LibLog::LogRec("***************************************", "connect");
     }
     reply->deleteLater();
     octonetwork.ConnectFlat = !octonetwork.ConnectFlat;
@@ -208,17 +229,19 @@ void MainWindow::StateReply(QNetworkReply *reply)
         ui->Btn_CP_3->setIcon(QIcon(":/assets/filament.svg"));
         ui->Btn_CP_3->setText(QString::number(ReplyResult[1].toDouble(),'f',2) + "%");
 
-        if(QSysInfo::productType() != "raspbian"){qDebug()<<replyArray;}
+        if(QSysInfo::productType() != "raspbian")
+        {
+            LibLog::LogRec(QString("%1___%2___%3").arg(QString(replyArray)).arg(__FILE__).arg(__LINE__), "connect");
+        }
     }
     else
     {
         octonetwork.ConnectState = "Error";
-        //qDebug() << "=========";
     }
     if(QSysInfo::productType() != "raspbian")
     {
-        qDebug() << "statusCode:" << statusCode;
-        qDebug() << "***************************************";
+        LibLog::LogRec(QString("statusCode : %1___%2___%3").arg(statusCode).arg(__FILE__).arg(__LINE__), "connect");
+        LibLog::LogRec("***************************************", "connect");
     }
     reply->deleteLater();
     octonetwork.ConnectFlat = !octonetwork.ConnectFlat;
@@ -236,7 +259,6 @@ void MainWindow::on_Btn_setting_clicked()
 //    if(DebugFlat == 1)
 //    {
 //        connect(terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine){
-//            QMessageBox::information(NULL, "System", CommandLine.join(","));
 //            disconnect(terminaldialog,&TerminalDialog::CMD_Reply,0,0);
 //        });
 //    }
@@ -255,10 +277,16 @@ void MainWindow::on_UILogo_clicked()
 {
     if(DebugFlat > 0)
     {
-        if(QMessageBox::information(NULL, "Warning", "Do you want to quit desktop ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+        QStringList btnName = {"Yes", "No",} ;
+        CustomDialog *newDialog = new CustomDialog();
+        QObject::connect(newDialog, &CustomDialog::OutputEvent, newDialog,[=](QString instruct)
         {
-            qApp->exit(Base_OnlyExitApp);
-        }
+            if(instruct == "Yes")
+            {
+                qApp->exit(Base_OnlyExitApp);
+            }
+        });
+        newDialog->showCustomDialog("Quit desktop",":/assets/info.svg",btnName,"Do you want to quit desktop ?",this);
     }
 }
 

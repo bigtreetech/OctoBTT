@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -15,12 +15,12 @@
 #include "controlpanel.h"
 #include "filedialog.h"
 #include "materialctrlpanel.h"
-#include "url_camera.h"
 #include "octonetwork.h"
 #include "terminaldialog.h"
 #include "configuration.h"
 #include "wlanconfig.h"
 #include "gcodedialog.h"
+//#include "webdialog.h"
 
 extern int DebugFlat ;
 extern QSizeF SizePercent;
@@ -71,11 +71,12 @@ class MainWindow : public QMainWindow
         FileDialog *filedialog = new FileDialog(this);
         MaterialCtrlPanel *materialctrlpanel = new MaterialCtrlPanel(this);
         CameraDialog *cameradialog = new CameraDialog(this);
-        URL_Camera *url_camera = new URL_Camera(this);
+//        URL_Camera *url_camera = new URL_Camera(this);
         TerminalDialog *terminaldialog = new TerminalDialog(this);
         GcodeDialog *gcodedialog = new GcodeDialog(this);
         Configuration *configuration = new Configuration(this);
         Wlanconfig *wlanconfig = new Wlanconfig(this);
+//        WebDialog *webdialog = new WebDialog(this);
 
     private:
         QList<QString> USB_Port;

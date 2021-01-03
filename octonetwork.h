@@ -1,4 +1,4 @@
-#ifndef OCTONETWORK_H
+﻿#ifndef OCTONETWORK_H
 #define OCTONETWORK_H
 
 #include <QJsonDocument>
@@ -31,12 +31,14 @@ class OctoNetwork
         virtual void SD_CMD(QString CMD);
         QWidget *FUI;
 
+        QUrl _FileUrl;
+
     public:
         QByteArray X_API_Key = Global_X_API_Key;//Test Key
         QString MainIP = "127.0.0.1";
-//        QString MainIP = "192.168.100.111";
+//        QString MainIP = "192.168.100.94";
         QString MainAddress = "http://"+MainIP+"/";
-        QString MainUrl = MainAddress + "/api/";
+        QString MainUrl = MainAddress + "api/";
         QString ConnectState = "Close";
         bool ConnectFlat = false;
 

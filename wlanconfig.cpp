@@ -2,72 +2,19 @@
 #include "ui_wlanconfig.h"
 #include <mainwindow.h>
 //#include <QSizeF>
-#include <QMessageBox>
 #include <QScrollBar>
 #include "inputdialog.h"
+#include <QTextBrowser>
+#include <QDesktopWidget>
+#include <QDialog>
 
 Wlanconfig::Wlanconfig(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Wlanconfig)
 {
     ui->setupUi(this);
+
     FUI = (MainWindow*)parent;//((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_Setting);
-
-    ui->WPA_List->verticalScrollBar()->setStyleSheet("QScrollBar:vertical"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,0%);"
-                                                       "margin:0px,0px,0px,0px;"
-                                                       "padding-top:40px;"
-                                                       "padding-bottom:40px;"
-                                                       "}"
-                                                       "QScrollBar::handle:vertical"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,25%);"
-                                                       " border-radius:10px;"
-                                                       "min-height:40;"
-                                                       "}"
-                                                       "QScrollBar::handle:vertical:hover"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,50%);"
-                                                       " border-radius:10px;"
-                                                       "min-height:40;"
-                                                       "}"
-                                                       "QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical"
-                                                       "{"
-                                                       "background:rgba(0,128,255,10%);"
-                                                       "border-radius:0px;"
-                                                       "}");
-    ui->WPA_List->horizontalScrollBar()->setStyleSheet("QScrollBar:horizontal"
-                                                         "{"
-                                                         "height:40px;"
-                                                         "background:rgba(0,128,255,0%);"
-                                                         "margin:0px,0px,0px,0px;"
-                                                         "padding-left:40px;"
-                                                         "padding-right:40px;"
-                                                         "}"
-                                                         "QScrollBar::handle:horizontal"
-                                                         "{"
-                                                         "height:40x;"
-                                                         "background:rgba(0,128,255,25%);"
-                                                         " border-radius:10px;"
-                                                         "min-width:40;"
-                                                         "}"
-                                                         "QScrollBar::handle:horizontal:hover"
-                                                         "{"
-                                                         "height:40px;"
-                                                         "background:rgba(0,128,255,50%);"
-                                                         " border-radius:10px;"
-                                                         "min-width:40;"
-                                                         "}"
-                                                         "QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal"
-                                                         "{"
-                                                         "background:rgba(0,128,255,10%);"
-                                                         "border-radius:0px;"
-                                                         "}");
-
 
     QFont font;
     font.setPointSize((int)(ui->DevList->font().pointSize()*(SizePercent.width() < SizePercent.height() ? SizePercent.width():SizePercent.height())));
@@ -95,10 +42,10 @@ Wlanconfig::Wlanconfig(QWidget *parent) :
 //    ui->DevList->addItem("HappyGirl2");
 //    ui->DevList->setCurrentIndex(0);
 //    QStyle *DL = ui->DevList->style();
-//    QMessageBox::information(NULL, "System", DL);
 //    ui->Btn_Help->setText(DL->property("on").toString());
 //    DL->setProperty("on",50);
 //    ui->DevList->setStyle(DL);
+
 }
 
 Wlanconfig::~Wlanconfig()
@@ -128,7 +75,7 @@ void Wlanconfig::on_Btn_DevSwitch_clicked()
 {
     if(!WPA_Switch.contains(ui->DevList->currentText()))
         return;
-    ((MainWindow*)FUI)->terminaldialog->SendCMD("sudo ifconfig " + ui->DevList->currentText() + (WPA_Switch[ui->DevList->currentText()] ? " down" : " up"),TeminalState);
+    ((MainWindow*)FUI)->terminaldialog->SendCMD("ifconfig " + ui->DevList->currentText() + (WPA_Switch[ui->DevList->currentText()] ? " down" : " up"),TeminalState);
     WPA_Switch[ui->DevList->currentText()] = !WPA_Switch[ui->DevList->currentText()];
 
     ui->Btn_DevSwitch->setIcon(QIcon(WPA_Switch[ui->DevList->currentText()] ? ":/assets/Network.svg":":/assets/shebeiweilianjie-copy.svg"));
@@ -211,6 +158,7 @@ void Wlanconfig::GetNetworkInfo()
 
 void Wlanconfig::GetNetworkInfo(QStringList &Responses)
 {
+    //=======================================================================12.23
 //    QStringList data;
     QStringList sending;
     foreach(QString item ,Responses)
@@ -238,12 +186,59 @@ void Wlanconfig::GetNetworkInfo(QStringList &Responses)
 //        bool read = false;
 //        data.append(replaceitem).split(" ",QString::SkipEmptyParts));
     }
-    QMessageBox::information(NULL,"",sending.join("\n"));
+
+    //创建QDialog
+    QDialog dialog(this);
+    //设置倒角?和透明度
+    dialog.setWindowOpacity(0.9);
+    dialog.setStyleSheet("background-color: rgba(128, 128, 128, 25%)");
+
+    //设置窗口的标题和标识
+    dialog.setWindowTitle(tr("Wlan Information"));
+    dialog.setWindowIcon(QIcon(":/assets/WiFi2.svg"));
+    //适应屏幕大小
+    dialog.resize(SizePercent.width()*800*0.9,SizePercent.height()*480*0.9);
+    dialog.setFixedSize(SizePercent.width()*800*0.9,SizePercent.height()*480*0.8);
+
+    //使弹窗居中显示
+    dialog.move(this->pos().x() + (this->width() - dialog.width()) / 2,this->pos().y() + (this->height() - dialog.height()) / 2);
+
+    //设置文本显示
+    QTextBrowser textBrowser(&dialog);
+    textBrowser.setStyleSheet("border: none; color: rgb(245, 246, 255);");
+    textBrowser.setText(sending.join("\n"));
+    textBrowser.setFixedSize(SizePercent.width()*800*0.877,SizePercent.height()*480*0.5);
+    textBrowser.setGeometry(50,50,SizePercent.width()*800*0.8,SizePercent.height()*480*0.5);
+
+    //设置按键ok
+    QPushButton OKBT("OK",&dialog);
+
+    OKBT.setWhatsThis("BTStyleSheet");
+
+    //按键连接信号
+    QObject::connect(&OKBT, &QPushButton::clicked, &dialog, &QDialog::reject);
+
+    //字体适应屏幕大小
+    QFont _font = OKBT.font();
+    _font.setPointSize(this->maximumWidth() > this->maximumHeight() ? (int)this->maximumHeight()/30 : (int)this->maximumWidth()/30);
+    OKBT.setFont(_font);
+    textBrowser.setFont(_font);
+
+    //调整文本和按键的位置
+    QVBoxLayout VLayout(&dialog);
+    VLayout.addWidget(&textBrowser);
+    VLayout.addWidget(&OKBT);
+
+    int ret = dialog.exec();
+    if(ret == QDialog::Rejected)
+    {
+        dialog.close();
+    }
 }
 
 void Wlanconfig::CreateNetwork()
 {
-    QString cmd = QString("sudo wpa_cli -i %1 add_network").arg(ui->DevList->currentText());
+    QString cmd = QString("wpa_cli -i %1 add_network").arg(ui->DevList->currentText());
     disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
     QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
                      {
@@ -265,7 +260,7 @@ void Wlanconfig::CreateNetwork()
 void Wlanconfig::SetSSID()
 {
     QString Current_SSID = ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString();
-    QString cmd = QString("sudo wpa_cli -i %1 set_network %2 ssid '\"%3\"'").arg(ui->DevList->currentText()).arg(QString::number(WPA_Scan_SSID_List[Current_SSID].id)).arg(Current_SSID);
+    QString cmd = QString("wpa_cli -i %1 set_network %2 ssid '\"%3\"'").arg(ui->DevList->currentText()).arg(QString::number(WPA_Scan_SSID_List[Current_SSID].id)).arg(Current_SSID);
     disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
     QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
                      {
@@ -301,7 +296,7 @@ void Wlanconfig::SetPassword()
             QString Current_SSID = ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString();
             QString Dev = ui->DevList->currentText();
 
-            QString cmd = QString("sudo wpa_cli -i %1 set_network %3 psk '\"%2\"'").arg(Dev).arg(value).arg(QString::number(WPA_Scan_SSID_List[Current_SSID].id));
+            QString cmd = QString("wpa_cli -i %1 set_network %3 psk '\"%2\"'").arg(Dev).arg(value).arg(QString::number(WPA_Scan_SSID_List[Current_SSID].id));
             disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
             QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
                              {
@@ -315,13 +310,23 @@ void Wlanconfig::SetPassword()
         {
             if(value.trimmed() == "")
             {
-                if(QMessageBox::warning(NULL,"",QString("Do you want to forget \"%1\" ?").arg(ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString()),QMessageBox::Yes|QMessageBox::No,QMessageBox::No) == QMessageBox::Yes)
+                QStringList btnName = {"Yes", "No"} ;
+                CustomDialog *newDialog = new CustomDialog();
+                QObject::connect(newDialog, &CustomDialog::OutputEvent, newDialog,[=](QString instruct)
                 {
-                    RemoveNetwork();
-                }
-                else
-                    ui->WPA_List->setEnabled(true);
-            }
+                    if(instruct == "Yes")
+                    {
+                        RemoveNetwork();
+                    }
+                    else if(instruct == "No")
+                    {
+                        ui->WPA_List->setEnabled(true);
+
+                    }
+
+                });
+                newDialog->showCustomDialog("Warning",":/assets/info.svg",btnName,QString("Do you want to forget \"%1\" ?").arg(ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString()),this);
+             }
             else
                 ui->WPA_List->setEnabled(true);
         }
@@ -352,7 +357,7 @@ void Wlanconfig::RemoveNetwork()
     QString Current_SSID = ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString();
     QString Dev = ui->DevList->currentText();
 
-    QString cmd = QString("sudo wpa_cli -i %1 remove_network %2").arg(Dev).arg(QString::number(WPA_Scan_SSID_List[Current_SSID].id));
+    QString cmd = QString("wpa_cli -i %1 remove_network %2").arg(Dev).arg(QString::number(WPA_Scan_SSID_List[Current_SSID].id));
 
     disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
     QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
@@ -375,7 +380,8 @@ void Wlanconfig::RemoveNetwork(QStringList &Responses)
     }
     else
     {
-        QMessageBox::warning(NULL,"",QString("SSID[%1] Delete failed !"));
+        CustomDialog *newDialog = new CustomDialog();
+        newDialog->showCustomDialog("Warning",":/assets/WiFi2.svg",QString("SSID[%1] Delete failed !"),this);
         ui->WPA_List->setEnabled(true);
     }
 }
@@ -385,8 +391,7 @@ void Wlanconfig::ConnectNetwork()
     QString Current_SSID = ui->WPA_List->model()->data(ui->WPA_List->currentIndex()).toString();
     QString Dev = ui->DevList->currentText();
 
-    QString cmd = QString("sudo wpa_cli -i %1 enable_network %2 &&  wpa_cli -i %1 select_network %2 && wpa_cli -i %1 save_config").arg(Dev).arg(QString::number(WPA_Scan_SSID_List[Current_SSID].id));
-//    QMessageBox::information(NULL,"",cmd);
+    QString cmd = QString("wpa_cli -i %1 enable_network %2 &&  wpa_cli -i %1 select_network %2 && wpa_cli -i %1 save_config").arg(Dev).arg(QString::number(WPA_Scan_SSID_List[Current_SSID].id));
     disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
     QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList)
                      {
@@ -398,7 +403,7 @@ void Wlanconfig::ConnectNetwork()
 
 void Wlanconfig::ScanWPAList()
 {
-    this->setEnabled(false);
+//    this->setEnabled(false);
 
     if(LastDev != ui->DevList->currentText())
     {
@@ -414,7 +419,7 @@ void Wlanconfig::ScanWPAList()
                          disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
                          ScanWPAList(CommandLine);
                      });
-    ((MainWindow*)FUI)->terminaldialog->SendCMD("sudo wpa_cli -i "+ui->DevList->currentText()+" list_network",TeminalState);
+    ((MainWindow*)FUI)->terminaldialog->SendCMD("wpa_cli -i "+ui->DevList->currentText()+" list_network",TeminalState);
 }
 
 void Wlanconfig::ScanWPAList(QStringList &Responses)
@@ -450,8 +455,6 @@ void Wlanconfig::ScanWPAList(QStringList &Responses)
 //            WPA_Scan_SSID_List[SSID].connectflags = SSID == WPA_SSID[ui->DevList->currentText()];
             WPA_Scan_SSID_List[SSID].connectflags = WPA_Flags;
             WPA_Scan_SSID_List[SSID].pwdError = WPA_PWD_Error;
-
-//            QMessageBox::warning(FUI,"",SSID + " -t- "+ QString::number(WPA_ID) + " -t- " + QString::number(WPA_Flags));
         }
         else if(item.toLower().startsWith("network"))
         {
@@ -479,7 +482,7 @@ void Wlanconfig::ScanWPA()
                          disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
                          ScanWPA(CommandLine);
                      });
-    ((MainWindow*)FUI)->terminaldialog->SendCMD("sudo wpa_cli -i "+ui->DevList->currentText()+" scan",TeminalState);
+    ((MainWindow*)FUI)->terminaldialog->SendCMD("wpa_cli -i "+ui->DevList->currentText()+" scan",TeminalState);
 }
 
 void Wlanconfig::ScanWPA(QStringList &Responses)
@@ -488,7 +491,7 @@ void Wlanconfig::ScanWPA(QStringList &Responses)
         ScanWPA_Ressult();
     else
     {
-        this->setEnabled(true);
+//        this->setEnabled(true);
 
         if(WPA_SSID[ui->DevList->currentText()].trimmed() == "")
         {
@@ -512,7 +515,7 @@ void Wlanconfig::ScanWPA_Ressult()
                          disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
                          ScanWPA_Ressult(CommandLine);
                      });
-    ((MainWindow*)FUI)->terminaldialog->SendCMD("sudo wpa_cli -i "+ui->DevList->currentText()+" scan_results",TeminalState);
+    ((MainWindow*)FUI)->terminaldialog->SendCMD("wpa_cli -i "+ui->DevList->currentText()+" scan_results",TeminalState);
 }
 
 void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
@@ -521,23 +524,16 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
     QStringList effectiveSSID;
     foreach(QString item , Responses)
     {
-//        QMessageBox::information(FUI,"",item);
         if(ReadData)
         {
             QStringList ModuleStr = item.replace("\t"," ").split(" ",QString::SkipEmptyParts);
 
-//            QMessageBox::information(FUI,"",ModuleStr.join("{-t-}\n"));
 
             int WPA_Level = ModuleStr[2].toInt();
             QString LastStr  = item.replace("\t"," ").remove(0,ModuleStr[0].count()).trimmed();//remove bssid
-//            QMessageBox::information(FUI,"",LastStr);
             LastStr  = LastStr.remove(0,ModuleStr[1].count()).trimmed();//remove freq
-//            QMessageBox::information(FUI,"",LastStr);
             LastStr  = LastStr.remove(0,ModuleStr[2].count()).trimmed();//remove level
-//            QMessageBox::information(FUI,"",LastStr);
             QString SSID = LastStr.remove(0,ModuleStr[3].count()).trimmed();//remove SecurityFlags
-//            QMessageBox::information(FUI,"",SSID);
-//            if((ModuleStr[2].toInt()) > ) continue;
             if(SSID.trimmed() == "")
                 continue;
             effectiveSSID.append(SSID);
@@ -546,7 +542,7 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
                 WPA_Scan_SSID_List.insert(SSID,WPAInfo());
             }
             WPA_Scan_SSID_List[SSID].level = WPA_Level;
-//            WPA_Scan_SSID_List[SSID].Quality_value ;
+//            WPA_Scan_SSID_List[SSID].Quality_value ;///信号强度排序
             if(WPA_Scan_SSID_List[SSID].level <= -100)
                 WPA_Scan_SSID_List[SSID].Quality_value = 0;
             else if(WPA_Scan_SSID_List[SSID].level >= -50)
@@ -595,7 +591,8 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
 //            if(WPAReader.key() == WPA_SSID[ui->DevList->currentText()])
 //                continue;
             QStandardItem *wpsitem = new QStandardItem(static_cast<QString>(WPAReader.key()));
-//            QMessageBox::warning(this,"",WPAReader.key()+":"+QString::number(WPAReader.value().id)+QString::number(WPAReader.value().connectflags)+QString::number(WPAReader.value().level));
+            wpsitem->setForeground(QColor(255,255,255));
+
             if(WPAReader.value().Quality_value < 95)
             {
                 wpsitem->setIcon(QIcon(":/assets/jinggao.svg"));
@@ -627,9 +624,6 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
                 wpsitem->setIcon(QIcon(":/assets/Wifi_Unlock.svg"));
                 if(WPAModel->rowCount() > 1)
                 {
-//                    QMessageBox::warning(NULL,"",WPAModel->item(0)->text());
-//                    QMessageBox::information(NULL,"",QString::number(WPA_Scan_SSID_List[WPAModel->item(0)->data().toString()].connectflags));
-
                     if(WPA_Scan_SSID_List[WPAModel->item(0)->text()].connectflags || WPA_Scan_SSID_List[WPAModel->item(0)->text()].pwdError)
                         WPAModel->insertRow(1,wpsitem);
                     else
@@ -646,14 +640,15 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
         }
     }
 
-    this->setEnabled(true);
-    for (int i=0;i<WPAModel->rowCount();i++)
-    {
-        if(i & 1)
-            WPAModel->item(i)->setBackground(QBrush(Qt::darkYellow));
-        else
-            WPAModel->item(i)->setBackground(QBrush(Qt::blue));
-    }
+//    this->setEnabled(true);
+
+//    for (int i=0;i<WPAModel->rowCount();i++)
+//    {
+//        if(i & 1)
+//            WPAModel->item(i)->setBackground(QBrush(Qt::gray));
+//        else
+//            WPAModel->item(i)->setBackground(QBrush(Qt::darkGray));
+//    }
     ui->WPA_List->setModel(WPAModel);
 
     if(WPA_SSID[ui->DevList->currentText()].trimmed() == "")
@@ -664,7 +659,7 @@ void Wlanconfig::ScanWPA_Ressult(QStringList &Responses)
 
 void Wlanconfig::GetDevState()
 {
-    this->setEnabled(false);
+//    this->setEnabled(false);
     LastDev = ui->DevList->currentText();
     disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
     QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
@@ -672,7 +667,7 @@ void Wlanconfig::GetDevState()
                          disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
                          GetDevState(CommandLine);
                      });
-    ((MainWindow*)FUI)->terminaldialog->SendCMD("sudo iwconfig | grep -E \"wlan[0-9]|ESSID|Tx-Power=\"",TeminalState);
+    ((MainWindow*)FUI)->terminaldialog->SendCMD("iwconfig | grep -E \"wlan[0-9]|ESSID|Tx-Power=\"",TeminalState);
 }
 
 void Wlanconfig::GetDevState(QStringList &Responses)
@@ -720,7 +715,7 @@ void Wlanconfig::GetDevState(QStringList &Responses)
         if(ui->DevList->itemText(i) == LastDev)
             ui->DevList->setCurrentIndex(i);
     }
-    this->setEnabled(true);
+//    this->setEnabled(true);
 }
 
 void Wlanconfig::on_DevList_currentIndexChanged(const QString &arg1)

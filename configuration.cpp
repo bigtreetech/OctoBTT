@@ -1,4 +1,4 @@
-#include "configuration.h"
+﻿#include "configuration.h"
 #include "ui_configuration.h"
 #include <mainwindow.h>
 //#include <QSizeF>
@@ -10,31 +10,36 @@ Configuration::Configuration(QWidget *parent) :
     ui->setupUi(this);
     FUI = (MainWindow*)parent;//((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_Setting);
 
+    //各个窗体名字
     QStringList strList;
     strList.append("Wifi");
 //    strList.append("GConde");
     strList.append("RPI Terminal");
     strList.append("Gcode Terminal");
+//    strList.append("OctoPrint Webside");
 
     foreach(QString item,strList)
     {
         QStandardItem *menulist = new QStandardItem(static_cast<QString>(item));
+        menulist->setForeground(QColor(255,255,255));
         menulist->setTextAlignment(Qt::AlignCenter);
         if(item == "Wifi")
         {
             menulist->setIcon(QIcon(":/assets/Wifi.svg"));
-            menulist->setBackground(QBrush(Qt::darkYellow));
         }
         else if(item == "RPI Terminal")
         {
             menulist->setIcon(QIcon(":/assets/terminal.svg"));
-            menulist->setBackground(QBrush(Qt::blue));
         }
         else if(item == "Gcode Terminal")
         {
             menulist->setIcon(QIcon(":/assets/yuanchengkongzhi.svg"));
-            menulist->setBackground(QBrush(Qt::darkYellow));
         }
+//        else if(item == "OctoPrint Webside")
+//        {
+//            menulist->setIcon(QIcon(":/assets/webside.svg"));
+//            menulist->setBackground(QBrush(Qt::blue));
+//        }
 
         ItemModel->appendRow(menulist);
     }
@@ -74,6 +79,8 @@ void Configuration::on_Frm_ListView_clicked(const QModelIndex &index)
         ((MainWindow*)FUI)->terminaldialog->show();
     if(index.data().toString() == "Gcode Terminal")//GCode 控制台
         ((MainWindow*)FUI)->gcodedialog->show();
+//    if(index.data().toString() == "OctoPrint Webside")
+//        ((MainWindow*)FUI)->webdialog->show();
 }
 
 void Configuration::on_Btn_Help_clicked()

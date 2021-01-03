@@ -1,4 +1,4 @@
-#include "filedialog.h"
+﻿#include "filedialog.h"
 #include "ui_filedialog.h"
 //MY Dialog
 #include <mainwindow.h>
@@ -6,11 +6,12 @@
 #include <QJsonArray>
 #include <QTreeWidgetItem>
 #include <QScrollBar>
-#include <QMessageBox>
 #include <QThread>
 #include <QDir>
 #include <QHttpMultiPart>
 #include <QDirIterator>
+#include <QTextBrowser>
+#include <QDesktopWidget>
 //#include <QSizeF>
 
 FileDialog::FileDialog(QWidget *parent) :
@@ -18,7 +19,6 @@ FileDialog::FileDialog(QWidget *parent) :
     ui(new Ui::FileDialog)
 {
     ui->setupUi(this);
-
     FUI = (MainWindow*)parent;
 
 //    SelectURL = QUrl(((MainWindow*)FUI)->octonetwork.MainUrl + "files/local/Demo.gcode");
@@ -27,60 +27,6 @@ FileDialog::FileDialog(QWidget *parent) :
 //    QObject::connect(((MainWindow*)FUI)->octonetwork.FSnetworkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(FSReply(QNetworkReply*)),Qt::UniqueConnection);
 //    ((MainWindow*)FUI)->octonetwork.FSnetworkAccessManager->get(((MainWindow*)FUI)->octonetwork.FileRequest);
 
-    ui->treeWidget->verticalScrollBar()->setStyleSheet("QScrollBar:vertical"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,0%);"
-                                                       "margin:0px,0px,0px,0px;"
-                                                       "padding-top:40px;"
-                                                       "padding-bottom:40px;"
-                                                       "}"
-                                                       "QScrollBar::handle:vertical"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,25%);"
-                                                       " border-radius:10px;"
-                                                       "min-height:40;"
-                                                       "}"
-                                                       "QScrollBar::handle:vertical:hover"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,50%);"
-                                                       " border-radius:10px;"
-                                                       "min-height:40;"
-                                                       "}"
-                                                       "QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical"
-                                                       "{"
-                                                       "background:rgba(0,128,255,10%);"
-                                                       "border-radius:0px;"
-                                                       "}");
-    ui->treeWidget->horizontalScrollBar()->setStyleSheet("QScrollBar:horizontal"
-                                                         "{"
-                                                         "height:40px;"
-                                                         "background:rgba(0,128,255,0%);"
-                                                         "margin:0px,0px,0px,0px;"
-                                                         "padding-left:40px;"
-                                                         "padding-right:40px;"
-                                                         "}"
-                                                         "QScrollBar::handle:horizontal"
-                                                         "{"
-                                                         "height:40x;"
-                                                         "background:rgba(0,128,255,25%);"
-                                                         " border-radius:10px;"
-                                                         "min-width:40;"
-                                                         "}"
-                                                         "QScrollBar::handle:horizontal:hover"
-                                                         "{"
-                                                         "height:40px;"
-                                                         "background:rgba(0,128,255,50%);"
-                                                         " border-radius:10px;"
-                                                         "min-width:40;"
-                                                         "}"
-                                                         "QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal"
-                                                         "{"
-                                                         "background:rgba(0,128,255,10%);"
-                                                         "border-radius:0px;"
-                                                         "}");
     terminal_timer = new QTimer(this);
 
     terminal_timer->setSingleShot(true);
@@ -102,6 +48,7 @@ FileDialog::FileDialog(QWidget *parent) :
     request->setRawHeader("X_Api_Key",((MainWindow*)FUI)->octonetwork.X_API_Key);
 
 //    InitializeUSBDrive();
+
 }
 
 FileDialog::~FileDialog()
@@ -113,6 +60,7 @@ void FileDialog::showEvent(QShowEvent *event)
 {
     Q_UNUSED(event);
     RefreshFileList();
+//    ui->Btn_Upload->setEnabled(true);
 }
 
 void FileDialog::on_Btn_back_clicked()
@@ -140,73 +88,6 @@ void FileDialog::RefreshFileList()
     QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
     {
         GetDirlist(CommandLine);
-//        disconnect(terminal_timer,SIGNAL(timeout()),0,0);
-//        terminal_timer->stop();
-//        DirList.clear();
-//        foreach(QString Dir , CommandLine)
-//        {
-//         DirList.append(Dir.split("\t", QString::SkipEmptyParts));
-//        }
-//        disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
-//        //Test
-////        QMessageBox::information(NULL, "Warning", "GetDirlist", QMessageBox::Ok, QMessageBox::Ok);
-
-////        QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,SLOT(GetDevlist(QStringList)));
-//        QObject::connect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,this,[=](QStringList CommandLine)
-//        {
-//            disconnect(terminal_timer,SIGNAL(timeout()),0,0);
-//            terminal_timer->stop();
-
-//            DevList.clear();
-//            foreach(QString Dev , CommandLine)
-//            {
-//                DevList.append(Dev.split("\t", QString::SkipEmptyParts));
-//            }
-
-//            disconnect(((MainWindow*)FUI)->terminaldialog,&TerminalDialog::CMD_Reply,0,0);
-
-//            RmList.clear();
-//            foreach(QString Dir , DirList)
-//            {
-//                if(!DevList.contains(Dir))
-//                    RmList.append(Dir);
-//            }
-//            NewList.clear();
-//            foreach(QString Dev , DevList)
-//            {
-//                if(!DirList.contains(Dev))
-//                    NewList.append(Dev);
-//            }
-
-//            if(!RmList.isEmpty())
-//            {
-//                QString RmCMD = "cd /home/pi/.octoprint/uploads ; sudo umount ";
-//                RmCMD = RmCMD + RmList.join(" ") + " ; rm -rf " + RmList.join(" ") + " ; cd /home/pi";
-//                ((MainWindow*)FUI)->terminaldialog->SendCMD(RmCMD,TeminalState);
-//            }
-
-//            if(!NewList.isEmpty())
-//            {
-//                QString NewCMD = "cd /home/pi/.octoprint/uploads  ;  mkdir " + NewList.join(" ");
-//                foreach(QString Newitem , NewList)
-//                {
-//                    NewCMD = NewCMD + " ; sudo mount /dev/" + Newitem + " " + Newitem;
-//                }
-//                NewCMD = NewCMD + " ; cd /home/pi";
-//                ((MainWindow*)FUI)->terminaldialog->SendCMD(NewCMD,TeminalState);
-//                QMessageBox::information(NULL, "Tip", "Parsing the USB file, please refresh it later!", QMessageBox::Ok, QMessageBox::Ok);
-//            }
-
-//            if(!RmList.isEmpty() || !NewList.isEmpty())
-//            {
-//                QThread::msleep(500);
-//                ReFreshJson();
-//            }
-//        });
-//        ((MainWindow*)FUI)->terminaldialog->SendCMD("cd /dev/ && find [s,h]d[a-z][0-9] -type b ; cd /home/pi",TeminalState);
-
-//        QObject::connect(terminal_timer,SIGNAL(timeout()),this,SLOT(GetDevlistTimeout()));
-//        terminal_timer->start(1000);
     });
     ((MainWindow*)FUI)->terminaldialog->SendCMD("cd /home/pi/USB && find [s,h]d[a-z]* -maxdepth 0 -type d -regex \"[s,h]d[a-z][0-9]+$\"; cd /home/pi",TeminalState);
 
@@ -270,12 +151,15 @@ void FileDialog::FSReply(QNetworkReply *reply)
         ui->treeWidget->setItemsExpandable(true);
         ui->treeWidget->expandAll();
 
-        if(QSysInfo::productType() != "raspbian"){qDebug()<<replyArray;}
+        if(QSysInfo::productType() != "raspbian"){
+
+            LibLog::LogRec(QString("%1___%2___%3").arg(QString(replyArray)).arg(__FILE__).arg(__LINE__), "connect");
+            }
     }
     if(QSysInfo::productType() != "raspbian")
     {
-        qDebug() << "statusCode:" << statusCode;
-        qDebug() << "***************************************";
+        LibLog::LogRec(QString("statusCode : %1___%2___%3").arg(statusCode).arg(__FILE__).arg(__LINE__), "connect");
+        LibLog::LogRec("***************************************" ,"connect");
     }
     reply->deleteLater();
     ui->Btn_Delete->setEnabled(false);
@@ -287,15 +171,12 @@ QList<QTreeWidgetItem *> FileDialog::LoadUSBPath(QString USBPath)
 {
     QList<QTreeWidgetItem *> USBDev;
     QDir RootDir = QDir(USBPath);
-//    QMessageBox::information(NULL, "item.dir().path()", USBPath, QMessageBox::Ok, QMessageBox::Ok);
     if(RootDir.exists() && RootDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot).count() > 0)//文件夹存在，并且包含内容
     {
         QDirIterator dir_iterator(USBPath, QDir::Dirs | QDir::NoDotAndDotDot/*,QDirIterator::Subdirectories*/);
         while(dir_iterator.hasNext())
         {
-            dir_iterator.next();
-//            QMessageBox::information(NULL, "item.dir().path()", "LoadUSBPath", QMessageBox::Ok, QMessageBox::Ok);
-//            QMessageBox::information(NULL, "item.dir().path()", dir_iterator.fileInfo().absoluteFilePath(), QMessageBox::Ok, QMessageBox::Ok);
+            dir_iterator.next();    
 //            dir_iterator.fileInfo().dir().path();
             QTreeWidgetItem *USBItem = new QTreeWidgetItem(ui->treeWidget,QStringList(QString(dir_iterator.fileName().toUpper())));
             USBItem->setIcon(0,QIcon(":/assets/usb.svg"));
@@ -314,20 +195,13 @@ QList<QTreeWidgetItem *> FileDialog::LoadUSBPath(QString USBPath)
 
 void FileDialog::LoadFiles(QTreeWidgetItem *MotherItem , QString DirPath)
 {
-
-//    QMessageBox::information(NULL, "item.dir().path()", DirPath, QMessageBox::Ok, QMessageBox::Ok);
-//    QMessageBox::information(NULL, "item.dir().path()", "LoadFiles", QMessageBox::Ok, QMessageBox::Ok);
     QDirIterator dir_iterator(DirPath,QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot/*,QDirIterator::Subdirectories*/);
     while(dir_iterator.hasNext())
     {
         dir_iterator.next();
 //        QFileInfo file_info = dir_iterator.fileInfo();
 //        QString files = file_info.absoluteFilePath();
-//        QMessageBox::information(NULL, "item.dir().path()", "LoadFiles", QMessageBox::Ok, QMessageBox::Ok);
-//        QMessageBox::information(NULL, "item.dir().path()", dir_iterator.fileInfo().absoluteFilePath(), QMessageBox::Ok, QMessageBox::Ok);
-//        QMessageBox::information(NULL, "item.dir().path()", dir_iterator.path(), QMessageBox::Ok, QMessageBox::Ok);
-//        QMessageBox::information(NULL, "item.dir().path()", dir_iterator.fileName(), QMessageBox::Ok, QMessageBox::Ok);
-//        QMessageBox::information(NULL, "item.dir().path()", dir_iterator.filePath(), QMessageBox::Ok, QMessageBox::Ok);
+
         if(dir_iterator.fileInfo().isDir())
         {
             if(dir_iterator.fileInfo().fileName() == "System Volume Information")
@@ -410,9 +284,10 @@ void FileDialog::FilesPraser(QTreeWidgetItem *MotherItem , QJsonArray Data)
 void FileDialog::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
 {
     if(QSysInfo::productType() != "raspbian")
-    {
-        qDebug()<<column<<":"<<item;
-        qDebug()<<item->data(1,0).toString();
+    {       
+        LibLog::LogRec(QString("%1:%2___%3___%4").arg(column).arg(item->text(column)).arg(__FILE__).arg(__LINE__), "connect");
+
+        LibLog::LogRec(QString("%1___%3___%4").arg(item->data(1,0).toString()).arg(__FILE__).arg(__LINE__), "connect");
     }
 
     if(((MainWindow*)FUI)->octonetwork.ConnectState.contains("Printing") ||((MainWindow*)FUI)->octonetwork.ConnectState == "Starting print from SD" || ((MainWindow*)FUI)->octonetwork.ConnectState == "Starting")
@@ -480,20 +355,27 @@ QUrl FileDialog::GetRealURL(QUrl URL)
 void FileDialog::DeleteURL(QUrl URL)
 {
     QString FileName = Hex2QString(URL.url(),false);
-    if(QMessageBox::information(NULL, "Warning", "Do you want to Delete "+FileName+"?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+
+    QStringList btnName = {"Yes", "No",} ;
+    CustomDialog *newDialog = new CustomDialog();
+    QObject::connect(newDialog, &CustomDialog::OutputEvent, newDialog,[=](QString instruct)
     {
-        if(URL.url().toLower().startsWith("http://"))
+        if(instruct == "Yes")
         {
-            request->setUrl(URL);
-            if(manager->deleteResource(*request)->error() == QNetworkReply::NoError)
-                RefreshFileList();
+            if(URL.url().toLower().startsWith("http://"))
+            {
+                request->setUrl(URL);
+                if(manager->deleteResource(*request)->error() == QNetworkReply::NoError)
+                    RefreshFileList();
+            }
+            else
+            {
+                DeleteFile(URL.url());
+            }
+            SelectURL.setUrl("");
         }
-        else
-        {
-            DeleteFile(URL.url());
-        }
-        SelectURL.setUrl("");
-    }
+    });
+    newDialog->showCustomDialog("Delete",":/assets/delete.svg",btnName,"Do you want to Delete "+FileName+" ?",this);
 }
 
 void FileDialog::DeleteFile(QString FilePath)
@@ -507,7 +389,6 @@ void FileDialog::DeleteFile(QString FilePath)
 
 QUrl FileDialog::UploadFile(QString FilePath)
 {
-//    QMessageBox::information(NULL, "FilePath", "FilePath:" +FilePath, QMessageBox::Ok, QMessageBox::Ok);//Debug
     QUrl _return;
     //设置发送的数据
     QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
@@ -617,7 +498,6 @@ void FileDialog::GetDevlist(QStringList CommandLine)
         QString RmCMD = "cd /home/pi/USB ; sudo umount ";
 //        RmCMD = RmCMD + RmList.join(" ") + " ; rm -rf " + RmList.join(" ") + " ; cd /home/pi";
         RmCMD = RmCMD + RmList.join(" ")  + " ; cd /home/pi";
-//        QMessageBox::information(NULL, "item.dir().path()", "GetDevlist:" + RmCMD, QMessageBox::Ok, QMessageBox::Ok);//Debug
         ((MainWindow*)FUI)->terminaldialog->SendCMD(RmCMD,TeminalState);
         QCoreApplication::processEvents();
         QThread::msleep(500);
@@ -625,7 +505,6 @@ void FileDialog::GetDevlist(QStringList CommandLine)
 
         RmCMD = "cd /home/pi/USB ; rm -rf " + RmList.join(" ") + " ; cd /home/pi";
         ((MainWindow*)FUI)->terminaldialog->SendCMD(RmCMD,TeminalState);
-//        QMessageBox::information(NULL, "item.dir().path()", "GetDevlistTimeout:" + RmCMD, QMessageBox::Ok, QMessageBox::Ok);//Debug
         QCoreApplication::processEvents();
         QThread::msleep(500);
         QCoreApplication::processEvents();
@@ -651,12 +530,10 @@ void FileDialog::GetDevlist(QStringList CommandLine)
         }
         NewCMD = NewCMD + " ; cd /home/pi";
 
-//        QMessageBox::information(NULL, "item.dir().path()", "GetDevlist:" + NewCMD, QMessageBox::Ok, QMessageBox::Ok);//Debug
         ((MainWindow*)FUI)->terminaldialog->SendCMD(NewCMD,TeminalState);
         QCoreApplication::processEvents();
         QThread::msleep(500);
         QCoreApplication::processEvents();
-//        QMessageBox::information(NULL, "Tip", "Mount the USB drive, please refresh it later!", QMessageBox::Ok, QMessageBox::Ok);
     }
 
     if(!RmList.isEmpty() || !NewList.isEmpty())
@@ -690,14 +567,12 @@ void FileDialog::GetDevlistTimeout()
         QString RmCMD = "cd /home/pi/USB ; sudo umount ";
 //        RmCMD = RmCMD + RmList.join(" ") + " ; rm -rf " + RmList.join(" ") + " ; cd /home/pi";
         RmCMD = RmCMD + RmList.join(" ")  + " ; cd /home/pi";
-//        QMessageBox::information(NULL, "item.dir().path()", "GetDevlistTimeout:" + RmCMD, QMessageBox::Ok, QMessageBox::Ok);//Debug
         ((MainWindow*)FUI)->terminaldialog->SendCMD(RmCMD,TeminalState);
         QCoreApplication::processEvents();
         QThread::msleep(500);
         QCoreApplication::processEvents();
 
         RmCMD = "cd /home/pi/USB ; rm -rf " + RmList.join(" ") + " ; cd /home/pi";
-//        QMessageBox::information(NULL, "item.dir().path()", "GetDevlistTimeout:" + RmCMD, QMessageBox::Ok, QMessageBox::Ok);//Debug
         ((MainWindow*)FUI)->terminaldialog->SendCMD(RmCMD,TeminalState);
         QCoreApplication::processEvents();
         QThread::msleep(500);
@@ -724,12 +599,10 @@ void FileDialog::GetDevlistTimeout()
             //字符集编码异常（iocharset=cp936,codepage=cp936） posix=true utf8=true uid=pi,gid=pi nls=utf8
         }
         NewCMD = NewCMD + " ; cd /home/pi";
-//        QMessageBox::information(NULL, "item.dir().path()", "GetDevlistTimeout:" + NewCMD, QMessageBox::Ok, QMessageBox::Ok);//Debug
         ((MainWindow*)FUI)->terminaldialog->SendCMD(NewCMD,TeminalState);
         QCoreApplication::processEvents();
         QThread::msleep(500);
         QCoreApplication::processEvents();
-//        QMessageBox::information(NULL, "Tip", "Mount the USB drive, please refresh it later!", QMessageBox::Ok, QMessageBox::Ok);
     }
 
     if(!RmList.isEmpty() || !NewList.isEmpty())
@@ -747,13 +620,11 @@ void FileDialog::InitializeUSBDrive()
         QStringList DirList = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
         QString RmCMD = "cd /home/pi/USB ; ";
         RmCMD = RmCMD + "sudo umount " + DirList.join(" ") + " ; cd /home/pi";
-//        QMessageBox::information(NULL, "item.dir().path()", "GetDevlistTimeout:" + RmCMD, QMessageBox::Ok, QMessageBox::Ok);//Debug
         ((MainWindow*)FUI)->terminaldialog->SendCMD(RmCMD,TeminalState);
 
 //        QStringList DirList = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 //        QString RmCMD = "cd /home/pi/USB ; ";
 //        RmCMD = RmCMD + "sudo umount " + DirList.join(" ") + " ;  rm -rf " + DirList.join(" ") + " ; cd /home/pi";
-//        QMessageBox::information(NULL, "item.dir().path()", "GetDevlistTimeout:" + RmCMD, QMessageBox::Ok, QMessageBox::Ok);//Debug
 //        ((MainWindow*)FUI)->terminaldialog->SendCMD(RmCMD,TeminalState);
 
         QCoreApplication::processEvents();
@@ -762,7 +633,6 @@ void FileDialog::InitializeUSBDrive()
 
         RmCMD = "cd /home/pi/USB ; ";
         RmCMD = RmCMD + "  rm -rf " + DirList.join(" ") + " ; cd /home/pi";
-//        QMessageBox::information(NULL, "item.dir().path()", "GetDevlistTimeout:" + RmCMD, QMessageBox::Ok, QMessageBox::Ok);//Debug
         ((MainWindow*)FUI)->terminaldialog->SendCMD(RmCMD,TeminalState);
         QCoreApplication::processEvents();
         QThread::msleep(500);
@@ -808,7 +678,6 @@ QString FileDialog::Hex2QString(QString hx,bool FullPath)
             _returnData=hx;
         else
         {
-
             if(hx.contains(QRegExp("([a-z]|[A-Z])+:\\\\")))//windows path mode
             {
                 _returnData = hx.split("\\").last();
@@ -824,7 +693,6 @@ QString FileDialog::Hex2QString(QString hx,bool FullPath)
             else
                 _returnData=hx;
         }
-
     }
     return _returnData;
 }

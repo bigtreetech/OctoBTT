@@ -1,12 +1,12 @@
-#ifndef TERMINALDIALOG_H
+﻿#ifndef TERMINALDIALOG_H
 #define TERMINALDIALOG_H
 
 #include <QDialog>
 #include <QProcess>
 #include <QShowEvent>
 #include <QSizeF>
-#include <QDebug>
 //#include <QEvent>
+
 
 extern int DebugFlat ;
 extern QSizeF SizePercent;
@@ -26,6 +26,8 @@ public:
     ~TerminalDialog();
 
     void SendCMD(QString CommandLine, QString argu = QString());
+
+    void Show_debug(QString msg);
 
 private slots:
     virtual void on_Btn_Back_clicked();

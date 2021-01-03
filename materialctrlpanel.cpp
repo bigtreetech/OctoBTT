@@ -1,7 +1,6 @@
-#include "materialctrlpanel.h"
+﻿#include "materialctrlpanel.h"
 #include "ui_materialctrlpanel.h"
-#include <QTimer>
-#include <QDebug>
+
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -19,20 +18,23 @@ MaterialCtrlPanel::MaterialCtrlPanel(QWidget *parent) :
     FUI = (MainWindow*)parent;
 
     ReLoopFlag = E_Temperature;
-//    qDebug() << "E_Bed:" <<E_Bed << ":" << (ReLoop) 0;
-//    qDebug() << "E_Tool:" <<E_Tool << ":" << (ReLoop) 1;
     QObject::connect(((MainWindow*)FUI)->octonetwork.MCPnetworkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(Reply(QNetworkReply*)),Qt::UniqueConnection);
 
     //SysTimer
     QTimer *m_timer= new QTimer(this);
     //启动或重启定时器, 并设置定时器时间：毫秒
-    m_timer->start(500);
+    m_timer->start(10);
     //定时器触发信号槽
     connect(m_timer, SIGNAL(timeout()), this, SLOT(TimerTimeOut()));
 
+    //屏幕自适应大小
     this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+
+    //设置Save按键的边框样式表
+    ui->Btn_Save->setStyleSheet("border-color: rgb(85, 255, 0);");
+
 }
 void MaterialCtrlPanel::TimerTimeOut()
 {
@@ -46,6 +48,7 @@ void MaterialCtrlPanel::TimerTimeOut()
         FanSpeed_Target = FanSpeed;
     }
     //update UI
+
     ui->Txt_Hotend->setText((Hotend < 0 ? "-" : QString::number(Hotend_Target))+Symb_Temp);
     ui->Btn_Hotend_A->setEnabled(Hotend >= 0);
     ui->Btn_Hotend_D->setEnabled(Hotend >= 0);
@@ -59,7 +62,6 @@ void MaterialCtrlPanel::TimerTimeOut()
     ui->Btn_Flowrate_A->setEnabled(Flowrate >= 0);
     ui->Btn_Flowrate_D->setEnabled(Flowrate >= 0);
 
-    //    qDebug()<<QString::number(materialctrlpanel->FanSpeed/materialctrlpanel->FanSpeed_Max)+materialctrlpanel->Symb_Per;
     //ui->Btn_ConnectState->repaint();
     if((((MainWindow*)FUI)->octonetwork.ConnectState == "Operational" || ((MainWindow*)FUI)->octonetwork.ConnectState == "Printing" || ((MainWindow*)FUI)->octonetwork.ConnectState == "Cancelling" || ((MainWindow*)FUI)->octonetwork.ConnectState == "Pausing" || ((MainWindow*)FUI)->octonetwork.ConnectState == "Starting" || ((MainWindow*)FUI)->octonetwork.ConnectState == "Printing from SD" || ((MainWindow*)FUI)->octonetwork.ConnectState == "Starting print from SD") && !ReplyFlag)
     {
@@ -76,7 +78,7 @@ void MaterialCtrlPanel::TimerTimeOut()
         }
         ReplyFlag = true;
     }
-    else
+    else if((((MainWindow*)FUI)->octonetwork.ConnectState == "Closed" || ((MainWindow*)FUI)->octonetwork.ConnectState.contains("Error")) || ((MainWindow*)FUI)->octonetwork.ConnectState == "Connecting" || ((MainWindow*)FUI)->octonetwork.ConnectState =="Detecting baudrate" || ((MainWindow*)FUI)->octonetwork.ConnectState =="Detecting serial port")
     {
         Hotend = -15;
         Heatbed = -15;
@@ -105,7 +107,9 @@ void MaterialCtrlPanel::Reply(QNetworkReply *reply)
                 Heatbed = _V_Temperature[0].toDouble();
                 foreach(QJsonValue item,_V_Temperature[1].toArray())
                 {
-                    if(QSysInfo::productType() != "raspbian"){qDebug()<<item.toDouble();}
+                    if(QSysInfo::productType() != "raspbian"){
+                        LibLog::LogRec(QString("%1___%2___%3").arg(item.toDouble()).arg(__FILE__).arg(__LINE__), "connect");
+                    }
                     if(item.toDouble() > HotendValue)
                         HotendValue = item.toDouble();
                     else if(item.toDouble() > ToolValue)
@@ -118,17 +122,19 @@ void MaterialCtrlPanel::Reply(QNetworkReply *reply)
                 break;
          }
 
-         if(QSysInfo::productType() != "raspbian"){qDebug()<<replyArray;}
+         if(QSysInfo::productType() != "raspbian")
+         {
+             LibLog::LogRec(QString("%1___%2___%3").arg(QString(replyArray)).arg(__FILE__).arg(__LINE__), "connect");
+         }
     }
     else
     {
         ((MainWindow*)FUI)->octonetwork.ConnectState = "Error";
-        //qDebug() << "=========";
     }
     if(QSysInfo::productType() != "raspbian")
     {
-        qDebug() << "statusCode:" << statusCode;
-        qDebug() << "***************************************";
+        LibLog::LogRec(QString("statusCode : %1___%2___%3").arg(statusCode).arg(__FILE__).arg(__LINE__), "connect");
+        LibLog::LogRec("***************************************", "connect");
     }
     reply->deleteLater();
     ReLoopFlag ++ ;
@@ -153,9 +159,6 @@ void MaterialCtrlPanel::on_Btn_back_clicked()
 
 void MaterialCtrlPanel::on_Btn_Save_pressed()
 {
-    StyleSheet_Temp = ui->Btn_Save->styleSheet();
-    ui->Btn_Save->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
-
     QList<QString> _GCode_Setting;
 
     if(Heatbed != Heatbed_Target)
@@ -176,66 +179,64 @@ void MaterialCtrlPanel::on_Btn_Save_pressed()
 
 void MaterialCtrlPanel::on_Btn_Save_released()
 {
-    ui->Btn_Save->setStyleSheet(StyleSheet_Temp);
+//    ui->Btn_Save->setStyleSheet(StyleSheet_Temp);
 }
 
 void MaterialCtrlPanel::on_Btn_Hotend_A_pressed()
 {
     SettingFlag = true;
-
     StyleSheet_Temp = ui->Btn_Hotend_A->styleSheet();
     ui->Btn_Hotend_A->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
+    timer = new mTimer(&Hotend_Target,qobject_cast<QPushButton *>(sender()),1);
+    MaterialCtrlPanel::longPress(&Hotend_Max);
 
-    if(Hotend_Target + SettingStep < Hotend_Max)
-        Hotend_Target += SettingStep;
-    else
-        Hotend_Target = Hotend_Max;
 
-    Hotend_Target = (int)Hotend_Target;
 }
 
 void MaterialCtrlPanel::on_Btn_Hotend_A_released()
 {
+    timer->stop();
+    timer->disconnect();
+    timerStartFlag = false;
+    firstClickedFlag = false;
     ui->Btn_Hotend_A->setStyleSheet(StyleSheet_Temp);
 }
 
 void MaterialCtrlPanel::on_Btn_Hotend_D_pressed()
 {
     SettingFlag = true;
-
     StyleSheet_Temp = ui->Btn_Hotend_D->styleSheet();
     ui->Btn_Hotend_D->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
+    timer = new mTimer(&Hotend_Target,qobject_cast<QPushButton *>(sender()),-1);
+    MaterialCtrlPanel::longPress(&Hotend_Max);
 
-    if(Hotend_Target - SettingStep > 0)
-        Hotend_Target -= SettingStep;
-    else
-        Hotend_Target = 0;
-
-    Hotend_Target = (int)Hotend_Target;
 }
 
 void MaterialCtrlPanel::on_Btn_Hotend_D_released()
 {
+    timer->stop();
+    timer->disconnect();
+    timerStartFlag = false;
+    firstClickedFlag = false;
     ui->Btn_Hotend_D->setStyleSheet(StyleSheet_Temp);
 }
 
 void MaterialCtrlPanel::on_Btn_Heatbed_A_pressed()
 {
     SettingFlag = true;
-
     StyleSheet_Temp = ui->Btn_Heatbed_A->styleSheet();
     ui->Btn_Heatbed_A->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
-
-    if(Heatbed_Target + SettingStep < Heatbed_Max)
-        Heatbed_Target += SettingStep;
-    else
-        Heatbed_Target = Heatbed_Max;
-
-    Heatbed_Target = (int)Heatbed_Target;
+    timer = new mTimer(&Heatbed_Target,qobject_cast<QPushButton *>(sender()),1);
+    MaterialCtrlPanel::longPress(&Heatbed_Max);
 }
 
 void MaterialCtrlPanel::on_Btn_Heatbed_A_released()
 {
+    timer->stop();
+    timer->disconnect();
+    timerStartFlag = false;
+    firstClickedFlag = false;
+
     ui->Btn_Heatbed_A->setStyleSheet(StyleSheet_Temp);
 }
 
@@ -246,76 +247,73 @@ void MaterialCtrlPanel::on_Btn_Heatbed_D_pressed()
     StyleSheet_Temp = ui->Btn_Heatbed_D->styleSheet();
     ui->Btn_Heatbed_D->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
 
-    if(Heatbed_Target - SettingStep > 0)
-        Heatbed_Target -= SettingStep;
-    else
-        Heatbed_Target = 0;
+    timer = new mTimer(&Heatbed_Target,qobject_cast<QPushButton *>(sender()),-1);
 
-    Heatbed_Target = (int)Heatbed_Target;
+    MaterialCtrlPanel::longPress(&Heatbed_Max);
 }
 
 void MaterialCtrlPanel::on_Btn_Heatbed_D_released()
 {
+    timer->stop();
+    timer->disconnect();
+    timerStartFlag = false;
+    firstClickedFlag = false;
     ui->Btn_Heatbed_D->setStyleSheet(StyleSheet_Temp);
 }
 
 void MaterialCtrlPanel::on_Btn_Feedrate_A_pressed()
 {
     SettingFlag = true;
-
     StyleSheet_Temp = ui->Btn_Feedrate_A->styleSheet();
     ui->Btn_Feedrate_A->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
+    timer = new mTimer(&Feedrate_Target,qobject_cast<QPushButton *>(sender()),1);
 
-    if(Feedrate_Target + SettingStep < Feedrate_Max)
-        Feedrate_Target+= SettingStep;
-    else
-        Feedrate_Target = Feedrate_Max;
-
-    Feedrate_Target = (int)Feedrate_Target;
+    MaterialCtrlPanel::longPress(&Feedrate_Max);
 }
 
 void MaterialCtrlPanel::on_Btn_Feedrate_A_released()
 {
+    timer->stop();
+    timer->disconnect();
+    timerStartFlag = false;
+    firstClickedFlag = false;
     ui->Btn_Feedrate_A->setStyleSheet(StyleSheet_Temp);
 }
 
 void MaterialCtrlPanel::on_Btn_Feedrate_D_pressed()
 {
     SettingFlag = true;
-
     StyleSheet_Temp = ui->Btn_Feedrate_D->styleSheet();
     ui->Btn_Feedrate_D->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
-
-    if(Feedrate_Target - SettingStep > 0)
-        Feedrate_Target -= SettingStep;
-    else
-        Feedrate_Target = 0;
-
-    Feedrate_Target = (int)Feedrate_Target;
+    timer = new mTimer(&Feedrate_Target,qobject_cast<QPushButton *>(sender()),-1);
+    MaterialCtrlPanel::longPress(&Feedrate_Max);
 }
 
 void MaterialCtrlPanel::on_Btn_Feedrate_D_released()
 {
+    timer->stop();
+    timer->disconnect();
+    timerStartFlag = false;
+    firstClickedFlag = false;
     ui->Btn_Feedrate_D->setStyleSheet(StyleSheet_Temp);
 }
 
 void MaterialCtrlPanel::on_Btn_Flowrate_A_pressed()
 {
     SettingFlag = true;
-
     StyleSheet_Temp = ui->Btn_Flowrate_A->styleSheet();
     ui->Btn_Flowrate_A->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
+    timer = new mTimer(&Flowrate_Target,qobject_cast<QPushButton *>(sender()),1);
 
-    if(Flowrate_Target + SettingStep < Flowrate_Max)
-        Flowrate_Target += SettingStep;
-    else
-        Flowrate_Target = Flowrate_Max;
-
-    Flowrate_Target = (int)Flowrate_Target;
+    MaterialCtrlPanel::longPress(&Flowrate_Max);
 }
 
 void MaterialCtrlPanel::on_Btn_Flowrate_A_released()
 {
+    timer->stop();
+    timer->disconnect();
+    timerStartFlag = false;
+    firstClickedFlag = false;
     ui->Btn_Flowrate_A->setStyleSheet(StyleSheet_Temp);
 }
 
@@ -326,20 +324,70 @@ void MaterialCtrlPanel::on_Btn_Flowrate_D_pressed()
     StyleSheet_Temp = ui->Btn_Flowrate_D->styleSheet();
     ui->Btn_Flowrate_D->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
 
-    if(Flowrate_Target - SettingStep > 0)
-        Flowrate_Target -= SettingStep;
-    else
-        Flowrate_Target = 0;
 
-    Flowrate_Target = (int)Flowrate_Target;
+    timer = new mTimer(&Flowrate_Target,qobject_cast<QPushButton *>(sender()),-1);
+
+    MaterialCtrlPanel::longPress(&Flowrate_Max);
 }
 
 void MaterialCtrlPanel::on_Btn_Flowrate_D_released()
 {
+    timer->stop();
+    timer->disconnect();
+    timerStartFlag = false;
+    firstClickedFlag = false;
     ui->Btn_Flowrate_D->setStyleSheet(StyleSheet_Temp);
 }
 
-void MaterialCtrlPanel::on_Box_SettingStep_valueChanged(int arg1)
+void MaterialCtrlPanel::longPress(const double *maximumCount)
 {
-    SettingStep = arg1;
+    //设置长按效果--12.25
+    timerStartFlag = true;
+    if(timerStartFlag)
+    {
+        connect(timer, &mTimer::mtimeout, this, [=](){
+            if(timer->addval > 0)
+            {
+                if(*(timer->value) + timer->addval < *maximumCount)
+                    *(timer->value) += timer->addval;
+                else
+                    *(timer->value) = *maximumCount;
+            }
+            else
+            {
+                if(*(timer->value) + timer->addval > 0)
+                    *(timer->value) += timer->addval;
+                else
+                    *(timer->value) = 0;
+            }
+            *timer->value = (int)*(timer->value);
+        });
+    }
+
+    //第一次点击
+    if(firstClickedFlag == false)
+    {
+        if(timer->addval > 0)
+        {
+            if(*(timer->value) + timer->addval < *maximumCount)
+            {
+                *(timer->value) += timer->addval;
+            }
+            else
+                *(timer->value) = *maximumCount;
+        }
+        else
+        {
+            if(*(timer->value) + timer->addval > 0)
+                *(timer->value) += timer->addval;
+            else
+                *(timer->value) = 0;
+        }
+        *(timer->value) = (int)*(timer->value);
+
+        firstClickedFlag = true;
+
+        timer->start(100);
+    }
 }
+

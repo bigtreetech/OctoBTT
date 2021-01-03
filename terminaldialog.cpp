@@ -1,16 +1,16 @@
-#include "terminaldialog.h"
+﻿#include "terminaldialog.h"
 #include "ui_terminaldialog.h"
 #include <QTreeWidgetItem>
 #include <QScrollBar>
 #include <QProcess>
-#include <QDebug>
 //#include <QSizeF>
 #include <QTimer>
 #include <QStringList>
 #include <mainwindow.h>
-#include <QMessageBox>
 #include <QTextCodec>
+#include <QTextBrowser>
 #include "inputdialog.h"
+#include <QDesktopWidget>
 
 TerminalDialog::TerminalDialog(QWidget *parent) :
     QDialog(parent),
@@ -19,61 +19,6 @@ TerminalDialog::TerminalDialog(QWidget *parent) :
     ui->setupUi(this);
 
     FUI = (MainWindow*)parent;//((MainWindow*)FUI)->octonetwork.SendGCode(_GCode_Setting);
-
-    ui->Receiver->verticalScrollBar()->setStyleSheet("QScrollBar:vertical"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,0%);"
-                                                       "margin:0px,0px,0px,0px;"
-                                                       "padding-top:40px;"
-                                                       "padding-bottom:40px;"
-                                                       "}"
-                                                       "QScrollBar::handle:vertical"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,25%);"
-                                                       " border-radius:10px;"
-                                                       "min-height:40;"
-                                                       "}"
-                                                       "QScrollBar::handle:vertical:hover"
-                                                       "{"
-                                                       "width:40px;"
-                                                       "background:rgba(0,128,255,50%);"
-                                                       " border-radius:10px;"
-                                                       "min-height:40;"
-                                                       "}"
-                                                       "QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical"
-                                                       "{"
-                                                       "background:rgba(0,128,255,10%);"
-                                                       "border-radius:0px;"
-                                                       "}");
-    ui->Receiver->horizontalScrollBar()->setStyleSheet("QScrollBar:horizontal"
-                                                         "{"
-                                                         "height:40px;"
-                                                         "background:rgba(0,128,255,0%);"
-                                                         "margin:0px,0px,0px,0px;"
-                                                         "padding-left:40px;"
-                                                         "padding-right:40px;"
-                                                         "}"
-                                                         "QScrollBar::handle:horizontal"
-                                                         "{"
-                                                         "height:40x;"
-                                                         "background:rgba(0,128,255,25%);"
-                                                         " border-radius:10px;"
-                                                         "min-width:40;"
-                                                         "}"
-                                                         "QScrollBar::handle:horizontal:hover"
-                                                         "{"
-                                                         "height:40px;"
-                                                         "background:rgba(0,128,255,50%);"
-                                                         " border-radius:10px;"
-                                                         "min-width:40;"
-                                                         "}"
-                                                         "QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal"
-                                                         "{"
-                                                         "background:rgba(0,128,255,10%);"
-                                                         "border-radius:0px;"
-                                                         "}");
 
     cmd = new QProcess(this);
 
@@ -164,6 +109,7 @@ TerminalDialog::TerminalDialog(QWidget *parent) :
     this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
+
 }
 
 //QString TerminalDialog::unicodeToUtf8(const QString resStr)
@@ -206,7 +152,6 @@ void TerminalDialog::showEvent(QShowEvent *event)
     Q_UNUSED(event);
     if(FirstLoad)
     {
-//        QMessageBox::information(NULL, "Warning", "Dangerous, careful operation!", QMessageBox::Ok, QMessageBox::Ok);
         FirstLoad = !FirstLoad;
     }
 }
@@ -234,6 +179,10 @@ void TerminalDialog::on_pushButton_clicked()
     ui->Receiver->clear();
 }
 
+void TerminalDialog::Show_debug(QString msg)
+{
+    ui->Receiver->append("->System MSG->->->" + msg);
+}
 void TerminalDialog::SendCMD(QString CommandLine , QString argu)
 {
     SendCMD_argu = argu;
@@ -248,6 +197,10 @@ void TerminalDialog::SendCMD(QString CommandLine , QString argu)
     }
     if(command.toLower() == "exit app" || command.toLower() == "exitapp")
         qApp->exit(Base_OnlyExitApp);
+//    else if(command.toLower().startsWith("qdebug "))
+//    {
+//        qDebug() << command.remove(0,6);
+//    }
     else if(cmd->isOpen() && cmd->waitForStarted())
     {
         if(!SendCMD_argu.contains("-q")) ui->Receiver->append(">>Sender:");
@@ -294,17 +247,24 @@ void TerminalDialog::SendCMD(QString CommandLine , QString argu)
 
 void TerminalDialog::on_Btn_Logo_clicked()
 {
-    if(QMessageBox::information(NULL, "Warning", "Do you want to change the incoming password from the console?", QMessageBox::Yes | QMessageBox::No,QMessageBox::No) == QMessageBox::No)
-        return;
-    InputDialog *inputdialog = new InputDialog(this);
-    connect(inputdialog,&InputDialog::closedialog,this,[=](QString value,bool SettingMark){
-        if(SettingMark)
+    QStringList btnName = {"Yes", "No"} ;
+    CustomDialog *newDialog = new CustomDialog();
+    QObject::connect(newDialog, &CustomDialog::OutputEvent, newDialog,[=](QString instruct)
+    {
+        if(instruct == "Yes")
         {
-            CMD_Password = value;
+            InputDialog *inputdialog = new InputDialog(this);
+            connect(inputdialog,&InputDialog::closedialog,this,[=](QString value,bool SettingMark){
+                if(SettingMark)
+                {
+                    CMD_Password = value;
+                }
+                delete sender();
+            });
+            inputdialog->setvalue("Please Input Password","",CMD_Password);
         }
-        delete sender();
     });
-    inputdialog->setvalue("Please Input Password","",CMD_Password);
+    newDialog->showCustomDialog("Warning",":/assets/terminal-box-line.svg",btnName,"Do you want to change the incoming password from the console ?",this);
 }
 
 void TerminalDialog::on_Btn_Kill_clicked()

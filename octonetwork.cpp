@@ -1,17 +1,23 @@
-#include "octonetwork.h"
+﻿#include "octonetwork.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkReply>
 #include <QDebug>
 #include <QJsonArray>
-#include <QMessageBox>
 #include <filedialog.h>
 #include <mainwindow.h>
+#include <QDialog>
+#include <QLayout>
+#include <QTextBrowser>
+#include <QApplication>
+#include <QPushButton>
+#include <QDesktopWidget>
+#include "customdialog.h"
+
 
 OctoNetwork::OctoNetwork(QWidget *parent)
 {
     FUI = (MainWindow*)parent;
-//    QMessageBox::information(NULL, "Warning", X_API_Key, QMessageBox::Yes  | QMessageBox::No , QMessageBox::No);
 
     GetConnectRequest.setUrl(QUrl(MainUrl + "connection"));
     GetConnectRequest.setRawHeader("X_Api_Key",X_API_Key);
@@ -50,7 +56,10 @@ OctoNetwork::OctoNetwork(QWidget *parent)
 QJsonValue OctoNetwork::SearchJsonValue(QList<QString> Find_List_Name ,QNetworkReply *reply)
 {
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if(QSysInfo::productType() != "raspbian"){qDebug() << "statusCode:" << statusCode;}
+    if(QSysInfo::productType() != "raspbian")
+    {
+        LibLog::LogRec(QString("statusCode : %1___%2___%3").arg(statusCode).arg(__FILE__).arg(__LINE__), "connect");
+    }
     if(statusCode != 200)
     {
         ConnectState = "Error";
@@ -63,8 +72,8 @@ QJsonValue OctoNetwork::SearchJsonValue(QList<QString> Find_List_Name ,QNetworkR
         QJsonObject QObj = loadDoc.object();
         if(QSysInfo::productType() != "raspbian")
         {
-            qDebug()<<replyArray;
-            qDebug()<<"***************************************";
+            LibLog::LogRec(QString("%1___%2___%3").arg(QString(replyArray)).arg(__FILE__).arg(__LINE__), "connect");
+            LibLog::LogRec("***************************************", "connect");
         }
         QList<QString> SearchLink ;
         SearchLink << Find_List_Name;
@@ -78,7 +87,9 @@ QJsonValue OctoNetwork::SearchJsonValue(QList<QString> Find_List_Name ,QNetworkR
 QList<QJsonValue> OctoNetwork::SearchJsonValue(QList<QList<QString>> Find_List_Names ,QNetworkReply *reply)
 {
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if(QSysInfo::productType() != "raspbian"){qDebug() << "statusCode:" << statusCode;}
+    if(QSysInfo::productType() != "raspbian"){
+        LibLog::LogRec(QString("statusCode : %1___%2___%3").arg(statusCode).arg(__FILE__).arg(__LINE__), "connect");
+    }
     if(statusCode != 200)
     {
         ConnectState = "Error";
@@ -92,8 +103,8 @@ QList<QJsonValue> OctoNetwork::SearchJsonValue(QList<QList<QString>> Find_List_N
 
         if(QSysInfo::productType() != "raspbian")
         {
-            qDebug()<<replyArray;
-            qDebug()<<"***************************************";
+            LibLog::LogRec(QString("%1___%2___%3").arg(QString(replyArray)).arg(__FILE__).arg(__LINE__), "connect");
+            LibLog::LogRec("***************************************", "connect");
         }
         QList<QList<QString>> SearchLink ;
         SearchLink << Find_List_Names;
@@ -158,7 +169,7 @@ void OctoNetwork::SendGCode(QList<QString> _GCode_)
     {
         QJsonObject TemperatureJsonObj;
         QJsonArray _Commands;
-        foreach(QString item,_GCode_)
+        foreach(QString item,_GCode_)//遍历_GCode_，把所有指令加入指令合集
         {
             _Commands.append(item);
         }
@@ -168,8 +179,7 @@ void OctoNetwork::SendGCode(QList<QString> _GCode_)
         QJsonDocument _SenderJson;
         _SenderJson.setObject(TemperatureJsonObj);
 
-        //        qDebug()<<_SenderJson.toJson();
-
+        //网络访问管理器将Json格式的指令集发送给SetCMDRequest
         MCPnetworkAccessManager->post(SetCMDRequest,_SenderJson.toJson());
 
     }
@@ -186,8 +196,6 @@ void OctoNetwork::SendGCode(QString _GCode_)
 
         QJsonDocument _SenderJson;
         _SenderJson.setObject(TemperatureJsonObj);
-
-        //        qDebug()<<_SenderJson.toJson();
 
         MCPnetworkAccessManager->post(SetCMDRequest,_SenderJson.toJson());
     }
@@ -211,7 +219,10 @@ void OctoNetwork::SD_CMD(QString CMD)
 
         QJsonDocument _SenderJson;
         _SenderJson.setObject(TemperatureJsonObj);
-        if(QSysInfo::productType() != "raspbian"){qDebug()<<_SenderJson.toJson();}
+        if(QSysInfo::productType() != "raspbian")
+        {
+            LibLog::LogRec(QString("%1___%2___%3").arg(QString(_SenderJson.toJson())).arg(__FILE__).arg(__LINE__), "connect");
+        }
         FSnetworkAccessManager->post(SDRequest,_SenderJson.toJson());
     }
 }
@@ -220,8 +231,16 @@ void OctoNetwork::JobSwitch(QString FilePath)
 {
     if(ConnectState == "Operational")
     {
-        if(QMessageBox::information(NULL, "Warning", "Do you want to Start Print ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
-        {JobSwitch(QUrl(MainUrl + "files/" +FilePath));}
+        QStringList btnName = {"Yes", "No"} ;
+        CustomDialog *newDialog = new CustomDialog();
+        QObject::connect(newDialog, &CustomDialog::OutputEvent, newDialog,[=](QString instruct)
+        {
+            if(instruct == "Yes")
+            {
+                JobSwitch(QUrl(MainUrl + "files/" +FilePath));
+            }
+        });
+        newDialog->showCustomDialog("Warning",":/assets/info.svg",btnName,"Do you want to Start Print ?",FUI);
     }
     else if(ConnectState.contains("Printing") || ConnectState == "Pausing")
     {
@@ -230,35 +249,43 @@ void OctoNetwork::JobSwitch(QString FilePath)
 }
 void OctoNetwork::JobSwitch(QUrl FileUrl)
 {
+    _FileUrl = FileUrl;
     if(ConnectState == "Operational")
     {
         QString FileName = FileDialog::Hex2QString(FileUrl.url(),false);
-        if(QMessageBox::information(NULL, "Warning", "Do you want to Start Print "+FileName+"?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+
+        QStringList btnName = {"Yes", "No"} ;
+        CustomDialog *newDialog = new CustomDialog();
+        QObject::connect(newDialog, &CustomDialog::OutputEvent, newDialog,[=](QString instruct)
         {
-            FileUrl = ((MainWindow*)FUI)->filedialog->GetRealURL(FileUrl);
-            //Auto Level
-//            QList<QString> _GCode_;
-//            _GCode_.append("G91");
-//            _GCode_.append("G28");
-//            _GCode_.append("G29");
-//            _GCode_.append("G28");
-//            _GCode_.append("G90");
-//            SendGCode(_GCode_);
+            if(instruct == "Yes")
+            {
+                _FileUrl = ((MainWindow*)FUI)->filedialog->GetRealURL(FileUrl);
+                //Auto Level
+    //            QList<QString> _GCode_;
+    //            _GCode_.append("G91");
+    //            _GCode_.append("G28");
+    //            _GCode_.append("G29");
+    //            _GCode_.append("G28");
+    //            _GCode_.append("G90");
+    //            SendGCode(_GCode_);
 
-            QJsonObject TemperatureJsonObj;
-            TemperatureJsonObj.insert("command","select");
-            TemperatureJsonObj.insert("print",true);
+                QJsonObject TemperatureJsonObj;
+                TemperatureJsonObj.insert("command","select");
+                TemperatureJsonObj.insert("print",true);
 
-            QNetworkRequest _Request;
-            _Request.setUrl(FileUrl);
-            _Request.setRawHeader("X_Api_Key",X_API_Key);
-            _Request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/json"));
+                QNetworkRequest _Request;
+                _Request.setUrl(FileUrl);
+                _Request.setRawHeader("X_Api_Key",X_API_Key);
+                _Request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/json"));
 
-            QJsonDocument _SenderJson;
-            _SenderJson.setObject(TemperatureJsonObj);
+                QJsonDocument _SenderJson;
+                _SenderJson.setObject(TemperatureJsonObj);
 
-            MCPnetworkAccessManager->post(_Request,_SenderJson.toJson());
-        }
+                MCPnetworkAccessManager->post(_Request,_SenderJson.toJson());
+            }
+        });
+        newDialog->showCustomDialog("Warning",":/assets/info.svg",btnName,"Do you want to Start Print "+FileName+"?",FUI);
     }
     else if(ConnectState.contains("Printing")  || ConnectState == "Pausing")
     {
@@ -271,20 +298,26 @@ void OctoNetwork::JobSwitch()
     //up z-axis 5cm
     if(ConnectState.contains("Printing")  || ConnectState == "Pausing")
     {
-        if(QMessageBox::information(NULL, "Warning", "Do you want to Stop Print ?", QMessageBox::Yes  | QMessageBox::No , QMessageBox::No) == QMessageBox::Yes)
+        QStringList btnName = {"Yes", "No"} ;
+        CustomDialog *newDialog = new CustomDialog();
+        QObject::connect(newDialog, &CustomDialog::OutputEvent, newDialog,[=](QString instruct)
         {
-            QJsonObject TemperatureJsonObj;
-            TemperatureJsonObj.insert("command","cancel");
+            if(instruct == "Yes")
+            {
+                QJsonObject TemperatureJsonObj;
+                TemperatureJsonObj.insert("command","cancel");
 
-            QNetworkRequest _Request;
-            _Request.setUrl(QUrl(MainUrl + "job"));
-            _Request.setRawHeader("X_Api_Key",X_API_Key);
-            _Request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/json"));
+                QNetworkRequest _Request;
+                _Request.setUrl(QUrl(MainUrl + "job"));
+                _Request.setRawHeader("X_Api_Key",X_API_Key);
+                _Request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/json"));
 
-            QJsonDocument _SenderJson;
-            _SenderJson.setObject(TemperatureJsonObj);
+                QJsonDocument _SenderJson;
+                _SenderJson.setObject(TemperatureJsonObj);
 
-            MCPnetworkAccessManager->post(_Request,_SenderJson.toJson());
-        }
+                MCPnetworkAccessManager->post(_Request,_SenderJson.toJson());
+            }
+        });
+        newDialog->showCustomDialog("Information",":/assets/info.svg",btnName,"Do you want to Stop Print ?",FUI);
     }
 }

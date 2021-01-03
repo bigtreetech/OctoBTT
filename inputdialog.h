@@ -1,8 +1,9 @@
-#ifndef INPUTDIALOG_H
+﻿#ifndef INPUTDIALOG_H
 #define INPUTDIALOG_H
 
 #include <QDialog>
 #include <QSizeF>
+#include <QTimer>
 
 extern int DebugFlat ;
 extern QSizeF SizePercent;
@@ -60,11 +61,11 @@ private slots:
 
     virtual void on_Func_Ang_clicked(bool checked);
 
-    virtual void on_Func_BS_clicked();
+    virtual void on_Func_BS_pressed();
 
-    virtual void on_Key_Left_clicked();
+    virtual void on_Key_Left_pressed();
 
-    virtual void on_Key_Right_clicked();
+    virtual void on_Key_Right_pressed();
 
     virtual void on_CharKey_click();
 
@@ -78,6 +79,12 @@ private slots:
 
     virtual void released_clicked();
 
+    void on_Func_BS_released();
+
+    void on_Key_Left_released();
+
+    void on_Key_Right_released();
+
 private:
     Ui::InputDialog *ui;
 //    QWidget *FUI;
@@ -88,6 +95,11 @@ private:
 
     bool Func_UL_State = false;
     bool Func_Ang_State = false;
+
+    bool Flag = false;
+    bool Flag1 = false;
+
+    QTimer *timer = new QTimer();
 
     Qt::KeyboardModifier Key_Modifier = Qt::NoModifier;
 

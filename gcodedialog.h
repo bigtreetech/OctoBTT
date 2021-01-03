@@ -1,11 +1,10 @@
-#ifndef GCODEDIALOG_H
+﻿#ifndef GCODEDIALOG_H
 #define GCODEDIALOG_H
 
 #include <QDialog>
 #include <QProcess>
 #include <QShowEvent>
 #include <QSizeF>
-#include <QDebug>
 //#include <QEvent>
 
 #include <QWebSocket>

@@ -1,0 +1,426 @@
+﻿/*1.0.0*/
+
+/*
+=================================
+上述为版本号，如您自己更换了新的样式表，
+请将版本号首位改为0，例如：0.5.6
+=================================
+*/
+
+/*
+============================================
+The above is the version number.
+If you change the new style sheet yourself,
+change the first part of the version
+number to 0, for example: 0.5.6
+============================================
+*/
+
+QWidget
+{
+    background-color:rgb(25, 25, 25);
+}
+
+
+
+/*按钮静止无操作样式*/
+QPushButton[whatsThis="BTStyleSheet"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    border-color: rgb(255, 0, 0);
+    color: rgb(245, 246, 250);
+}
+
+/*鼠标悬停在按钮样式*/
+QPushButton:hover[whatsThis="BTStyleSheet"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    border-color: rgb(0, 255, 0);
+    background-color: rgba(128, 128, 128, 25%);
+    color: rgb(245, 246, 250);
+}
+
+/*鼠标按下按钮样式*/
+QPushButton:pressed[whatsThis="BTStyleSheet"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    border-color: rgb(0, 255, 0);
+    background-color: rgba(128, 128, 128, 25%);
+    color: rgb(245, 246, 250);
+    padding-right:4px;
+    padding-bottom:4px;
+}
+
+
+/*按钮静止无操作样式*/
+QPushButton[whatsThis="BTStyleSheet1"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标悬停在按钮样式*/
+QPushButton:hover[whatsThis="BTStyleSheet1"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    background-color:rgb(128, 128, 128, 25%);
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标按下按钮样式*/
+QPushButton:pressed[whatsThis="BTStyleSheet1"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    background-color:rgba(128, 128, 128, 25%);
+    color: rgb(245, 246, 255);
+    padding-right:4px;
+    padding-bottom:4px;
+}
+
+
+/*按钮静止无操作样式*/
+QPushButton[whatsThis="BTStyleSheet2"] 
+{
+    border:none;
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标悬停在按钮样式*/
+QPushButton:hover[whatsThis="BTStyleSheet2"] 
+{
+    border:none;
+    background-color:rgba(128, 128, 128, 25%);
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标按下按钮样式*/
+QPushButton:pressed[whatsThis="BTStyleSheet2"] 
+{
+    border:none;
+    background-color:rgba(128, 128, 128, 25%);
+    padding-left:4px; padding-top:4px;
+    color: rgb(245, 246, 255); 
+}
+
+/*按钮静止无操作样式*/
+QPushButton[whatsThis="BTStyleSheet3"] 
+{
+    border:none;
+    font: 75 30pt Gill Sans MT;
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标悬停在按钮样式*/
+QPushButton:hover[whatsThis="BTStyleSheet3"] 
+{
+    border:none;
+    background-color: rgba(128, 128, 128, 25%);
+    font: 75 30pt Gill Sans MT;
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标按下按钮样式*/
+QPushButton:pressed[whatsThis="BTStyleSheet3"] 
+{
+    border:none;
+    background-color: rgba(128, 128, 128, 25%);
+    font: 75 30pt Gill Sans MT;
+    color: rgb(245, 246, 255);
+    padding-left:4px;
+    padding-top:4px;
+}
+
+
+/*按钮静止无操作样式*/
+QPushButton[whatsThis="BTStyleSheet4"] 
+{
+    border:none;
+}
+
+/*鼠标悬停在按钮样式*/
+QPushButton:hover[whatsThis="BTStyleSheet4"] 
+{
+    border:none;
+    background-color: rgba(128, 128, 128, 25%);
+}
+
+/*鼠标按下按钮样式*/
+QPushButton:pressed[whatsThis="BTStyleSheet4"] 
+{
+    border:none;
+    background-color: rgba(128, 128, 128, 25%);
+    padding-left:4px;
+    padding-top:4px;
+}
+
+
+/*按钮静止无操作样式*/
+QPushButton[whatsThis="BTStyleSheet5"] 
+{
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标悬停在按钮样式*/
+QPushButton:hover[whatsThis="BTStyleSheet5"] 
+{
+    background-color:rgba(128, 128, 128, 25%);
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标按下按钮样式*/
+QPushButton:pressed[whatsThis="BTStyleSheet5"] 
+{
+    background-color:rgba(128, 128, 128, 25%);
+    padding-left:4px; padding-top:4px; 
+    color: rgb(245, 246, 255);
+}
+
+
+/*按钮静止无操作样式*/
+QPushButton[whatsThis="BTStyleSheet6"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;border-radius: 20px;
+    border-color: rgb(245, 246, 255);
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标悬停在按钮样式*/
+QPushButton:hover[whatsThis="BTStyleSheet6"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;border-color: rgb(245,246,255); 
+    background-color:rgba(128, 128, 128, 25%);
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标按下按钮样式*/
+QPushButton:pressed[whatsThis="BTStyleSheet6"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;border-radius: 20px;
+    border-color: rgb(245,246,255); 
+    background-color:rgb(128, 128, 128, 25%);
+    color: rgb(245, 246, 255);padding-right:4px;
+    padding-bottom:4px;
+}
+
+/*按钮静止无操作样式*/
+QPushButton[whatsThis="BTStyleSheet7"] 
+{
+    background-color: rgb(0, 0, 0); 
+    color: rgb(255, 255, 10);
+}
+
+/*鼠标悬停在按钮样式*/
+QPushButton:hover[whatsThis="BTStyleSheet7"] 
+{
+    color: rgb(255, 255, 10); 
+    background-color: rgba(128, 128, 128, 25%);
+}
+
+/*鼠标按下按钮样式*/
+QPushButton:pressed[whatsThis="BTStyleSheet7"] 
+{
+    color: rgb(255, 255, 10); 
+    background-color: rgba(128, 128, 128, 25%);
+    padding-left:4px;padding-top:4px;
+}
+
+
+/*按钮静止无操作样式*/
+QToolButton[whatsThis="BTStyleSheet8"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;border-radius: 20px;
+    border-color: rgb(245, 246, 255);
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标悬停在按钮样式*/
+QToolButton:hover[whatsThis="BTStyleSheet8"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;border-radius: 20px;
+    background-color:rgba(128, 128, 128, 25%);
+    color: rgb(245, 246, 255);
+}
+
+/*鼠标按下按钮样式*/
+QToolButton:pressed[whatsThis="BTStyleSheet8"] 
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+    background-color:rgba(128, 128, 128, 25%);
+    color: rgb(245, 246, 255); 
+    padding-right:4px;
+    padding-bottom:4px;
+}
+
+/*按钮静止无操作样式*/
+QToolButton[whatsThis="BTStyleSheet9"]
+{
+    border:none;
+    font: 20pt "Gill Sans Ultra Bold Condensed";
+    color: rgb(245, 246, 250);
+}
+
+/*鼠标悬停在按钮样式*/
+QToolButton:hover[whatsThis="BTStyleSheet9"]
+{
+    border:none;
+    background-color: rgba(128, 128, 128, 25%);
+    font: 20pt "Gill Sans Ultra Bold Condensed";
+    color: rgb(245, 246, 250);
+}
+
+/*鼠标按下按钮样式*/
+QToolButton:pressed[whatsThis="BTStyleSheet9"]
+{
+    border:none;
+    background-color: rgba(128, 128, 128, 25%);
+    padding-left:4px;
+    padding-top:4px;
+    font: 20pt "Gill Sans Ultra Bold Condensed";
+    color: rgb(245, 246, 250);
+}
+
+/*按钮静止无操作样式*/
+QPushButton[whatsThis="BTStyleSheet10"]
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+    border: rgba(60, 255, 138, 25%);
+}
+
+/*鼠标悬停在按钮样式*/
+QPushButton:hover[whatsThis="BTStyleSheet10"]
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+    border: rgba(60, 255, 138, 25%);
+    background-color:rgba(128, 128, 128, 25%);
+}
+
+/*鼠标按下按钮样式*/
+QPushButton:pressed[whatsThis="BTStyleSheet10"]
+{
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+    border: rgba(60, 255, 138, 25%);
+    background-color:rgba(128, 128, 128, 25%);
+    padding-right:4px;
+    padding-bottom:4px;
+}
+
+
+
+/*滑动条样式表*/
+QScrollBar:vertical
+{
+    width:40px;
+    background:rgba(0,128,255,0%);
+    margin:0px,0px,0px,0px;
+    padding-top:40px;
+    padding-bottom:40px;
+}
+
+QScrollBar::handle:vertical
+{
+    width:40px;
+    background:rgba(0,128,255,25%);
+    border-radius:10px;
+    min-height:40;
+}
+
+QScrollBar::handle:vertical:hover
+{
+    width:40px;
+    background:rgba(0,128,255,50%);
+    border-radius:10px;
+    min-height:40;
+}
+
+QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical
+{
+    background:rgba(0,128,255,10%);
+    border-radius:0px;
+}
+
+
+QScrollBar:horizontal
+{
+    height:40px;
+    background:rgba(0,128,255,0%);
+    margin:0px,0px,0px,0px;
+    padding-left:40px;
+    padding-right:40px;
+}
+
+QScrollBar::handle:horizontal
+{
+    height:40x;
+    background:rgba(0,128,255,25%);
+    border-radius:10px;
+    min-width:40;
+}
+
+QScrollBar::handle:horizontal:hover
+{
+    height:40px;
+    background:rgba(0,128,255,50%);
+    border-radius:10px;
+    min-width:40;
+}
+
+QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal
+{
+    background:rgba(0,128,255,10%);
+    border-radius:0px;
+}
+
+/* 未下拉时，QComboBox的样式 */
+QComboBox {
+    border: none;
+}
+
+QComboBox::showPopup QAbstractItemView
+{
+    outline: 0px solid gray;   /* 选定项的虚框 */
+    color: rgb(255, 255, 255);   /* 整个下拉窗体被选中项的背景色 */
+    background-color: rgb(128, 128, 128);   /* 整个下拉窗体的背景色 */
+    selection-background-color: rgb(64, 64, 192);   /* 整个下拉窗体被选中项的背景色 */
+    selection-color: rgb(0, 0, 0);   /* 整个下拉窗体被选中项的背景色 */
+}

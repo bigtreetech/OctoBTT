@@ -1,11 +1,10 @@
-#include "inputdialog.h"
+﻿#include "inputdialog.h"
 #include "ui_inputdialog.h"
 #include <mainwindow.h>
 //#include <QSizeF>
 //#include <QSound>
 //#include <QSoundEffect>
 
-#include <QMessageBox>
 InputDialog::InputDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::InputDialog)
@@ -58,6 +57,7 @@ InputDialog::InputDialog(QWidget *parent) :
     font.setPointSize((int)(ui->TextBlock->font().pointSize()*(SizePercent.width() < SizePercent.height() ? SizePercent.width():SizePercent.height())));
     ui->TextBlock->setFont(font);
 
+    //窗体自适应屏幕大小
     this->resize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setMaximumSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
     this->setFixedSize((int)(SizePercent.width()*800),(int)(SizePercent.height()*480));
@@ -130,7 +130,6 @@ void InputDialog::on_CharKey_click()
     //QString name = sender()->objectName();
     QKeySequence Key = QKeySequence(QString(optBtn->text().toUpper()[0]));
 //    Qt::Key key = Qt::Key();
-//    QMessageBox::information(NULL, "System",QString::number(Key[0] == Qt::Key_A));
 
 //    Qt::KeyboardModifier Key_Modifier = Func_Ang_State ? Qt::ShiftModifier : Qt::NoModifier;
 
@@ -379,30 +378,89 @@ void InputDialog::on_Func_Ang_clicked(bool checked)
     ui->TextBlock->setFocus();
 }
 
-void InputDialog::on_Func_BS_clicked()
+void InputDialog::on_Func_BS_pressed()
 {
 //    QKeyEvent keyPress(QEvent::KeyPress, Qt::Key(), Qt::NoModifier, QString());
 //    ui->TextBlock->keyPressEvent(key);
-    QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Backspace, Key_Modifier, QString());
-    QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
 
-    ui->TextBlock->setFocus();
+    Flag = true;
+    if(Flag)
+    {
+        QObject::connect(timer, &QTimer::timeout, this, [=](){
+            QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Backspace, Key_Modifier, QString());
+            QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+            ui->TextBlock->setFocus();
+        });
+    }
+
+    //第一次点击
+    if(Flag1 == false)
+    {
+        QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Backspace, Key_Modifier, QString());
+        QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+        ui->TextBlock->setFocus();
+
+        Flag1 = true;
+
+        timer->start(100);
+    }
+
+
 }
 
-void InputDialog::on_Key_Left_clicked()
+void InputDialog::on_Key_Left_pressed()
 {
-    QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Left, Key_Modifier, QString());
-    QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+    Flag = true;
+    if(Flag)
+    {
+        QObject::connect(timer, &QTimer::timeout, this, [=](){
+            QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Left, Key_Modifier, QString());
+            QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+            ui->TextBlock->setFocus();
+        });
+    }
 
-    ui->TextBlock->setFocus();
+    //第一次点击
+    if(Flag1 == false)
+    {
+        QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Left, Key_Modifier, QString());
+        QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+        ui->TextBlock->setFocus();
+
+        Flag1 = true;
+
+        timer->start(100);
+    }
+
 }
 
-void InputDialog::on_Key_Right_clicked()
+void InputDialog::on_Key_Right_pressed()
 {
-    QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Right, Key_Modifier, QString());
-    QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+    Flag = true;
+    if(Flag)
+    {
+        QObject::connect(timer, &QTimer::timeout, this, [=](){
+            QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Right, Key_Modifier, QString());
+            QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+            ui->TextBlock->setFocus();
+        });
+    }
 
-    ui->TextBlock->setFocus();
+    //第一次点击
+    if(Flag1 == false)
+    {
+        QKeyEvent keyPress(QEvent::KeyPress, Qt::Key_Right, Key_Modifier, QString());
+        QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
+
+        ui->TextBlock->setFocus();
+
+        Flag1 = true;
+
+        timer->start(100);
+    }
+
 }
 
 void InputDialog::on_Space_clicked()
@@ -411,4 +469,28 @@ void InputDialog::on_Space_clicked()
     QCoreApplication::sendEvent(ui->TextBlock, &keyPress);
 
     ui->TextBlock->setFocus();
+}
+
+void InputDialog::on_Func_BS_released()
+{
+    timer->stop();
+    timer->disconnect();
+    Flag = false;
+    Flag1 = false;
+}
+
+void InputDialog::on_Key_Left_released()
+{
+    timer->stop();
+    timer->disconnect();
+    Flag = false;
+    Flag1 = false;
+}
+
+void InputDialog::on_Key_Right_released()
+{
+    timer->stop();
+    timer->disconnect();
+    Flag = false;
+    Flag1 = false;
 }

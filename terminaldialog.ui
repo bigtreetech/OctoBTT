@@ -17,9 +17,25 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Terminal</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="assets.qrc">
+    <normaloff>:/assets/terminal-box-line.svg</normaloff>:/assets/terminal-box-line.svg</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
+    <number>5</number>
+   </property>
    <item row="3" column="0" colspan="6">
     <widget class="QPushButton" name="pushButton">
      <property name="font">
@@ -27,9 +43,8 @@
        <pointsize>20</pointsize>
       </font>
      </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(0, 0, 0);
-color: rgb(255, 255, 10);</string>
+     <property name="whatsThis">
+      <string>BTStyleSheet7</string>
      </property>
      <property name="text">
       <string>Clean Window</string>
@@ -60,12 +75,22 @@ color: rgb(0, 255, 0);</string>
    </item>
    <item row="0" column="0" colspan="6">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="leftMargin">
+      <number>5</number>
+     </property>
+     <property name="topMargin">
+      <number>5</number>
+     </property>
+     <property name="rightMargin">
+      <number>5</number>
+     </property>
+     <property name="bottomMargin">
+      <number>5</number>
+     </property>
      <item>
       <widget class="QPushButton" name="Btn_Back">
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+       <property name="whatsThis">
+        <string>BTStyleSheet2</string>
        </property>
        <property name="text">
         <string/>
@@ -97,6 +122,9 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
      </item>
      <item>
       <widget class="QPushButton" name="Btn_Logo">
+       <property name="whatsThis">
+        <string>BTStyleSheet2</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">border:none;
 font: 75 30pt &quot;Gill Sans MT&quot;;
@@ -131,27 +159,15 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="Btn_Help">
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+      <widget class="QLabel" name="label">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>78</height>
+        </size>
        </property>
        <property name="text">
         <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="assets.qrc">
-         <normaloff>:/assets/help.svg</normaloff>:/assets/help.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>72</width>
-         <height>72</height>
-        </size>
        </property>
       </widget>
      </item>
@@ -178,12 +194,11 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
        <bold>true</bold>
       </font>
      </property>
+     <property name="whatsThis">
+      <string>BTStyleSheet7</string>
+     </property>
      <property name="autoFillBackground">
       <bool>false</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(0, 0, 0);
-color: rgb(255, 255, 10);</string>
      </property>
      <property name="text">
       <string>Kill CMD</string>
@@ -214,12 +229,11 @@ color: rgb(255, 255, 10);</string>
        <bold>true</bold>
       </font>
      </property>
+     <property name="whatsThis">
+      <string>BTStyleSheet7</string>
+     </property>
      <property name="autoFillBackground">
       <bool>false</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(0, 0, 0);
-color: rgb(255, 255, 10);</string>
      </property>
      <property name="text">
       <string>Send CMD</string>
@@ -256,7 +270,7 @@ color: rgb(255, 255, 10);</string>
 color: rgb(0, 255, 0);</string>
      </property>
      <property name="text">
-      <string>sudo iwlist wlan0 scan | grep -E &quot;ESSID|Quality&quot;</string>
+      <string>iwlist wlan0 scan | grep -E &quot;ESSID|Quality&quot;</string>
      </property>
     </widget>
    </item>

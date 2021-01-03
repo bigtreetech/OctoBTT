@@ -1,4 +1,4 @@
-<RCC>
+﻿<RCC>
     <qresource prefix="/">
         <file>assets/adjust.svg</file>
         <file>assets/back.svg</file>
@@ -113,5 +113,21 @@
         <file>assets/wangluolianjiechaoshi.svg</file>
         <file>assets/Wifi_Lock.svg</file>
         <file>assets/Wifi_Unlock.svg</file>
+        <file>assets/WiFi2.svg</file>
+        <file>assets/kongzhimianban2.svg</file>
+        <file>assets/xiangji.svg</file>
+        <file>assets/yuanchengkongzhi2.svg</file>
+        <file>assets/terminal-box-line.svg</file>
+        <file>assets/ceshi.gif</file>
+        <file>assets/start.svg</file>
+        <file>assets/stop.svg</file>
+        <file>assets/flip-2.svg</file>
+        <file>assets/flip.svg</file>
+        <file>assets/webside.svg</file>
+        <file>assets/webside2.svg</file>
+        <file>config.conf</file>
+        <file>StyleSheet/globalStyleSheet.qss</file>
+        <file>assets/kongge.svg</file>
+        <file>assets/deleteBtn.svg</file>
     </qresource>
 </RCC>

@@ -4,6 +4,7 @@ QT += core gui svg
 QT += network websockets
 #QT += multimedia
 #QT += script
+#QT += webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,34 +31,40 @@ QMAKE_TARGET_DESCRIPTION = First suggested for OctoPi
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    accesscontrol.cpp \
     cameradialog.cpp \
     configuration.cpp \
     controlpanel.cpp \
+    customdialog.cpp \
     filedialog.cpp \
     gcodedialog.cpp \
     inputdialog.cpp \
+    liblog.cpp \
     main.cpp \
     mainwindow.cpp \
     materialctrlpanel.cpp \
     mylineedit.cpp \
     octonetwork.cpp \
     terminaldialog.cpp \
-    url_camera.cpp \
+#    webdialog.cpp \
     wlanconfig.cpp
 
 HEADERS += \
+    accesscontrol.h \
     cameradialog.h \
     configuration.h \
     controlpanel.h \
+    customdialog.h \
     filedialog.h \
     gcodedialog.h \
     inputdialog.h \
+    liblog.h \
     mainwindow.h \
     materialctrlpanel.h \
     mylineedit.h \
     octonetwork.h \
     terminaldialog.h \
-    url_camera.h \
+#    webdialog.h \
     wlanconfig.h
 
 FORMS += \
@@ -70,7 +77,7 @@ FORMS += \
     mainwindow.ui \
     materialctrlpanel.ui \
     terminaldialog.ui \
-    url_camera.ui \
+#    webdialog.ui \
     wlanconfig.ui
 
 TRANSLATIONS += \

@@ -17,32 +17,34 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Control</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="assets.qrc">
+    <normaloff>:/assets/Ddayin.svg</normaloff>:/assets/Ddayin.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,7">
    <property name="spacing">
     <number>3</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QPushButton" name="Btn_Back">
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+       <property name="whatsThis">
+        <string>BTStyleSheet2</string>
        </property>
        <property name="text">
         <string/>
@@ -108,34 +110,22 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="Btn_Help">
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+      <widget class="QLabel" name="label">
+       <property name="minimumSize">
+        <size>
+         <width>84</width>
+         <height>78</height>
+        </size>
        </property>
        <property name="text">
         <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="assets.qrc">
-         <normaloff>:/assets/help.svg</normaloff>:/assets/help.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>72</width>
-         <height>72</height>
-        </size>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,0">
      <property name="spacing">
       <number>2</number>
      </property>
@@ -152,8 +142,8 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
          <property name="spacing">
           <number>2</number>
          </property>
-         <item row="4" column="2">
-          <spacer name="horizontalSpacer_13">
+         <item row="6" column="6">
+          <spacer name="horizontalSpacer_8">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -168,55 +158,23 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
            </property>
           </spacer>
          </item>
-         <item row="4" column="6">
-          <spacer name="horizontalSpacer_12">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="6" column="2">
-          <spacer name="horizontalSpacer_16">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="5" column="1" alignment="Qt::AlignVCenter">
-          <widget class="QPushButton" name="Btn_Axle_Z">
+         <item row="3" column="5" alignment="Qt::AlignLeft|Qt::AlignVCenter">
+          <widget class="QPushButton" name="Btn_X_Add">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
             <iconset resource="assets.qrc">
-             <normaloff>:/assets/chuizhijuzhong.svg</normaloff>:/assets/chuizhijuzhong.svg</iconset>
+             <normaloff>:/assets/you.svg</normaloff>:/assets/you.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -224,6 +182,9 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
              <height>64</height>
             </size>
            </property>
+           <attribute name="buttonGroup">
+            <string notr="true">Btn_Axle</string>
+           </attribute>
           </widget>
          </item>
          <item row="3" column="1" alignment="Qt::AlignVCenter">
@@ -233,6 +194,9 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
            </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
@@ -252,23 +216,39 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
            </property>
           </widget>
          </item>
-         <item row="3" column="3" alignment="Qt::AlignRight|Qt::AlignVCenter">
-          <widget class="QPushButton" name="Btn_X_Dec">
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer_15">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="3" alignment="Qt::AlignRight|Qt::AlignBottom">
+          <widget class="QPushButton" name="Btn_Z_Add">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
             <iconset resource="assets.qrc">
-             <normaloff>:/assets/zuo.svg</normaloff>:/assets/zuo.svg</iconset>
+             <normaloff>:/assets/youshang.svg</normaloff>:/assets/youshang.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -281,8 +261,8 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
            </attribute>
           </widget>
          </item>
-         <item row="6" column="6">
-          <spacer name="horizontalSpacer_8">
+         <item row="2" column="2">
+          <spacer name="horizontalSpacer_14">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -297,24 +277,8 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
            </property>
           </spacer>
          </item>
-         <item row="0" column="6">
-          <spacer name="horizontalSpacer_10">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="7" column="7" alignment="Qt::AlignHCenter">
-          <widget class="QPushButton" name="pushButton_15">
+         <item row="7" column="3" colspan="3">
+          <widget class="QPushButton" name="pushButton_12">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -334,160 +298,8 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
 color: rgb(245, 246, 250);</string>
            </property>
            <property name="text">
-            <string>Level</string>
+            <string>Z BabyStep</string>
            </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <spacer name="horizontalSpacer_14">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="2" column="6">
-          <spacer name="horizontalSpacer_11">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="2">
-          <spacer name="horizontalSpacer_15">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="1" alignment="Qt::AlignVCenter">
-          <widget class="QPushButton" name="Btn_Axle_X">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="assets.qrc">
-             <normaloff>:/assets/zuoyoujuzhong.svg</normaloff>:/assets/zuoyoujuzhong.svg</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>64</width>
-             <height>64</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="7" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-          <widget class="QPushButton" name="Btn_Level">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="assets.qrc">
-             <normaloff>:/assets/kongzhimianban.svg</normaloff>:/assets/kongzhimianban.svg</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>64</width>
-             <height>64</height>
-            </size>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">Btn_Axle</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="1" column="4" alignment="Qt::AlignHCenter|Qt::AlignBottom">
-          <widget class="QPushButton" name="Btn_Y_Add">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="assets.qrc">
-             <normaloff>:/assets/shang.svg</normaloff>:/assets/shang.svg</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>64</width>
-             <height>64</height>
-            </size>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">Btn_Axle</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="3" column="5" alignment="Qt::AlignLeft|Qt::AlignVCenter">
-          <widget class="QPushButton" name="Btn_X_Add">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="assets.qrc">
-             <normaloff>:/assets/you.svg</normaloff>:/assets/you.svg</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>64</width>
-             <height>64</height>
-            </size>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">Btn_Axle</string>
-           </attribute>
           </widget>
          </item>
          <item row="5" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
@@ -512,31 +324,6 @@ color: rgb(245, 246, 250);</string>
            </property>
            <property name="text">
             <string>Z</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0" colspan="2">
-          <widget class="QPushButton" name="pushButton_13">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <family>Gill Sans MT</family>
-             <pointsize>15</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">border: none;
-color: rgb(245, 246, 250);</string>
-           </property>
-           <property name="text">
-            <string>Restore</string>
            </property>
           </widget>
          </item>
@@ -565,8 +352,8 @@ color: rgb(245, 246, 250);</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
-          <widget class="QPushButton" name="pushButton_17">
+         <item row="7" column="0" colspan="2">
+          <widget class="QPushButton" name="pushButton_13">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -586,7 +373,7 @@ color: rgb(245, 246, 250);</string>
 color: rgb(245, 246, 250);</string>
            </property>
            <property name="text">
-            <string>Y</string>
+            <string>Restore</string>
            </property>
           </widget>
          </item>
@@ -606,12 +393,8 @@ color: rgb(245, 246, 250);</string>
              <bold>true</bold>
             </font>
            </property>
-           <property name="styleSheet">
-            <string notr="true"> padding: 10px;
- border-style: solid;
- border-width: 5px;
- border-radius: 20px;
-color: rgb(245, 246, 250);</string>
+           <property name="whatsThis">
+            <string>BTStyleSheet1</string>
            </property>
            <property name="text">
             <string>Ext.</string>
@@ -624,31 +407,42 @@ color: rgb(245, 246, 250);</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="7" alignment="Qt::AlignHCenter|Qt::AlignBottom">
-          <widget class="QPushButton" name="Btn_Extruder_R">
+         <item row="2" column="6">
+          <spacer name="horizontalSpacer_11">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="1" alignment="Qt::AlignVCenter">
+          <widget class="QPushButton" name="Btn_Axle_X">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="font">
-            <font>
-             <family>Gill Sans MT</family>
-             <pointsize>20</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true"> padding: 10px;
- border-style: solid;
- border-width: 5px;
- border-radius: 20px;
-color: rgb(245, 246, 250);</string>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string>Ret.</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="assets.qrc">
+             <normaloff>:/assets/zuoyoujuzhong.svg</normaloff>:/assets/zuoyoujuzhong.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -658,8 +452,8 @@ color: rgb(245, 246, 250);</string>
            </property>
           </widget>
          </item>
-         <item row="7" column="3" colspan="3">
-          <widget class="QPushButton" name="pushButton_12">
+         <item row="7" column="7" alignment="Qt::AlignHCenter">
+          <widget class="QPushButton" name="pushButton_15">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -679,35 +473,25 @@ color: rgb(245, 246, 250);</string>
 color: rgb(245, 246, 250);</string>
            </property>
            <property name="text">
-            <string>Z BabyStep</string>
+            <string>Level</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="4" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-          <widget class="QPushButton" name="Btn_Y_Dec">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+         <item row="4" column="6">
+          <spacer name="horizontalSpacer_12">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
-           <property name="text">
-            <string/>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
            </property>
-           <property name="icon">
-            <iconset resource="assets.qrc">
-             <normaloff>:/assets/xia.svg</normaloff>:/assets/xia.svg</iconset>
-           </property>
-           <property name="iconSize">
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>64</width>
-             <height>64</height>
+             <width>40</width>
+             <height>10</height>
             </size>
            </property>
-           <attribute name="buttonGroup">
-            <string notr="true">Btn_Axle</string>
-           </attribute>
-          </widget>
+          </spacer>
          </item>
          <item row="5" column="4" alignment="Qt::AlignHCenter|Qt::AlignTop">
           <widget class="QPushButton" name="Btn_XY_Res">
@@ -719,6 +503,9 @@ color: rgb(245, 246, 250);</string>
            </property>
            <property name="toolTip">
             <string>XY Axle Restore</string>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
            </property>
            <property name="text">
             <string/>
@@ -749,6 +536,9 @@ color: rgb(245, 246, 250);</string>
            <property name="toolTip">
             <string>BabyStep : Speed Value Divided By One Hundred</string>
            </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -764,6 +554,196 @@ color: rgb(245, 246, 250);</string>
            </property>
           </widget>
          </item>
+         <item row="1" column="4" alignment="Qt::AlignHCenter|Qt::AlignBottom">
+          <widget class="QPushButton" name="Btn_Y_Add">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="assets.qrc">
+             <normaloff>:/assets/shang.svg</normaloff>:/assets/shang.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">Btn_Axle</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="3" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+          <widget class="QPushButton" name="pushButton_17">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <family>Gill Sans MT</family>
+             <pointsize>15</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border: none;
+color: rgb(245, 246, 250);</string>
+           </property>
+           <property name="text">
+            <string>Y</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+          <widget class="QPushButton" name="Btn_Y_Dec">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="assets.qrc">
+             <normaloff>:/assets/xia.svg</normaloff>:/assets/xia.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">Btn_Axle</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <spacer name="horizontalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="7" alignment="Qt::AlignHCenter|Qt::AlignBottom">
+          <widget class="QPushButton" name="Btn_Extruder_R">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <family>Gill Sans MT</family>
+             <pointsize>20</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet1</string>
+           </property>
+           <property name="text">
+            <string>Ret.</string>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2">
+          <spacer name="horizontalSpacer_16">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="3" column="7" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+          <widget class="QPushButton" name="Btn_Level">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="assets.qrc">
+             <normaloff>:/assets/kongzhimianban.svg</normaloff>:/assets/kongzhimianban.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">Btn_Axle</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="0" column="6">
+          <spacer name="horizontalSpacer_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
          <item row="5" column="5" alignment="Qt::AlignLeft|Qt::AlignTop">
           <widget class="QPushButton" name="Btn_Z_BS_Dec">
            <property name="sizePolicy">
@@ -774,6 +754,9 @@ color: rgb(245, 246, 250);</string>
            </property>
            <property name="toolTip">
             <string>BabyStep : Speed Value Divided By One Hundred</string>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
            </property>
            <property name="text">
             <string/>
@@ -790,32 +773,6 @@ color: rgb(245, 246, 250);</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="3" alignment="Qt::AlignRight|Qt::AlignBottom">
-          <widget class="QPushButton" name="Btn_Z_Add">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="assets.qrc">
-             <normaloff>:/assets/youshang.svg</normaloff>:/assets/youshang.svg</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>64</width>
-             <height>64</height>
-            </size>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">Btn_Axle</string>
-           </attribute>
-          </widget>
-         </item>
          <item row="1" column="5" alignment="Qt::AlignLeft|Qt::AlignBottom">
           <widget class="QPushButton" name="Btn_Z_Dec">
            <property name="sizePolicy">
@@ -823,6 +780,9 @@ color: rgb(245, 246, 250);</string>
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
            </property>
            <property name="text">
             <string/>
@@ -840,6 +800,67 @@ color: rgb(245, 246, 250);</string>
            <attribute name="buttonGroup">
             <string notr="true">Btn_Axle</string>
            </attribute>
+          </widget>
+         </item>
+         <item row="3" column="3" alignment="Qt::AlignRight|Qt::AlignVCenter">
+          <widget class="QPushButton" name="Btn_X_Dec">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="assets.qrc">
+             <normaloff>:/assets/zuo.svg</normaloff>:/assets/zuo.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">Btn_Axle</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="5" column="1" alignment="Qt::AlignVCenter">
+          <widget class="QPushButton" name="Btn_Axle_Z">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="whatsThis">
+            <string>BTStyleSheet2</string>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="assets.qrc">
+             <normaloff>:/assets/chuizhijuzhong.svg</normaloff>:/assets/chuizhijuzhong.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
           </widget>
          </item>
         </layout>
@@ -1041,12 +1062,8 @@ color: rgb(245, 246, 250);</string>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="styleSheet">
-           <string notr="true">padding: 10px;
-border-style: solid;
-border-width: 5px;
-border-radius: 20px;
-border-color: rgb(205, 205, 205);</string>
+          <property name="whatsThis">
+           <string>BTStyleSheet1</string>
           </property>
           <property name="text">
            <string/>
@@ -1071,12 +1088,8 @@ border-color: rgb(205, 205, 205);</string>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="styleSheet">
-           <string notr="true">padding: 10px;
-border-style: solid;
-border-width: 5px;
-border-radius: 20px;
-border-color: rgb(216, 30, 6);</string>
+          <property name="whatsThis">
+           <string>BTStyleSheet1</string>
           </property>
           <property name="text">
            <string/>
@@ -1100,13 +1113,6 @@ border-color: rgb(216, 30, 6);</string>
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">padding: 10px;
-border-style: solid;
-border-width: 5px;
-border-radius: 20px;
-border-color: rgb(36, 148, 251);</string>
           </property>
           <property name="text">
            <string/>
@@ -1137,12 +1143,8 @@ border-color: rgb(36, 148, 251);</string>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="styleSheet">
-           <string notr="true">padding: 10px;
-border-style: solid;
-border-width: 5px;
-border-radius: 20px;
-border-color: rgb(230, 230, 230);</string>
+          <property name="whatsThis">
+           <string>BTStyleSheet1</string>
           </property>
           <property name="text">
            <string/>
@@ -1167,12 +1169,8 @@ border-color: rgb(230, 230, 230);</string>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="styleSheet">
-           <string notr="true">padding: 10px;
-border-style: solid;
-border-width: 5px;
-border-radius: 20px;
-border-color: rgb(43, 166, 56);</string>
+          <property name="whatsThis">
+           <string>BTStyleSheet1</string>
           </property>
           <property name="text">
            <string/>
@@ -1196,13 +1194,6 @@ border-color: rgb(43, 166, 56);</string>
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">padding: 10px;
-border-style: solid;
-border-width: 5px;
-border-radius: 20px;
-border-color: rgb(216, 30, 6);</string>
           </property>
           <property name="text">
            <string/>
@@ -1237,7 +1228,7 @@ border-color: rgb(216, 30, 6);</string>
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="Btn_Axle"/>
   <buttongroup name="Btn_Rate"/>
+  <buttongroup name="Btn_Axle"/>
  </buttongroups>
 </ui>

@@ -17,32 +17,52 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Files</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="assets.qrc">
+    <normaloff>:/assets/wenjian.svg</normaloff>:/assets/wenjian.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,7">
    <property name="spacing">
     <number>3</number>
    </property>
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QPushButton" name="Btn_back">
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
+       <property name="whatsThis">
+        <string>BTStyleSheet2</string>
        </property>
        <property name="text">
         <string/>
@@ -63,6 +83,9 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -99,6 +122,9 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
@@ -109,13 +135,23 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
      </item>
      <item>
       <widget class="QPushButton" name="Btn_Refresh">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>76</width>
+         <height>72</height>
+        </size>
+       </property>
+       <property name="whatsThis">
+        <string>BTStyleSheet2</string>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-font: 75 30pt &quot;Gill Sans MT&quot;;
-</string>
        </property>
        <property name="text">
         <string/>
@@ -135,9 +171,12 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0,0">
+    <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0,0,0">
      <property name="spacing">
       <number>3</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
      </property>
      <item>
       <widget class="QTreeWidget" name="treeWidget">
@@ -197,7 +236,26 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1,0,1,0,1,0">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item>
         <widget class="QPushButton" name="Btn_Upload">
          <property name="minimumSize">
@@ -206,8 +264,8 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
            <height>50</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+         <property name="whatsThis">
+          <string>BTStyleSheet6</string>
          </property>
          <property name="text">
           <string>UpLoad to OctoPrint</string>
@@ -225,6 +283,22 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
         </widget>
        </item>
        <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QPushButton" name="Btn_Print">
          <property name="minimumSize">
           <size>
@@ -232,8 +306,8 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
            <height>50</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+         <property name="whatsThis">
+          <string>BTStyleSheet6</string>
          </property>
          <property name="text">
           <string>Print</string>
@@ -251,6 +325,22 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
         </widget>
        </item>
        <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QPushButton" name="Btn_Delete">
          <property name="minimumSize">
           <size>
@@ -258,8 +348,8 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
            <height>50</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+         <property name="whatsThis">
+          <string>BTStyleSheet6</string>
          </property>
          <property name="text">
           <string>Delete</string>
@@ -276,7 +366,39 @@ font: 75 30pt &quot;Gill Sans MT&quot;;
          </property>
         </widget>
        </item>
+       <item>
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>10</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

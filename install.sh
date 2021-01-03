@@ -46,7 +46,7 @@ sudo sed -i '/exit 0/ i su -l pi -c "startx -- -nocursor"' /etc/rc.local
 echo "Done."
 
 echo "Installing Dependencies ..."
-sudo apt install qt5-default qtcreator python3-pyqt5-dbg libqt5svg5 libqt5svg5-dev python3-pyqt5.qtsvg qtsvg5-doc libqt5websockets5 libqt5websockets5-dev -y
+sudo apt install qt5-default qtcreator python3-pyqt5-dbg libqt5svg5 libqt5svg5-dev python3-pyqt5.qtsvg qtsvg5-doc libqt5websockets5 libqt5websockets5-dev ttf-wqy-zenhei -y
 echo "Done."
 
 echo "Download OctoBTT ..."
