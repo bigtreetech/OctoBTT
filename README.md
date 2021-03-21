@@ -44,7 +44,7 @@
 
 ### 2. Install OctoBTT : 
 > Run Command:
-* svn export https://github.com/bigtreetech/OctoBTT.git/trunk/install.sh && sudo /bin/sh install.sh
+* wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/install.sh && sudo /bin/sh install.sh
 
 ![InstallOctoBTT.png](IMG/2_InstallOctoBTT.png "InstallOctoBTT")
 
