@@ -182,7 +182,7 @@ void ControlPanel::on_Btn_Restore_clicked()
 //    StyleSheet_Temp = ui->Btn_Restore->styleSheet();//获取按键的样式表用以恢复颜色
 //    ui->Btn_Restore->setStyleSheet(StyleSheet_Temp+"\nbackground-color:rgb(128,128,128,128);");
 
-    QStringList btnName = {"Restart OctoBTT" , "Restart OctoPrint", "Cencal"} ;
+    QStringList btnName = {"Restart OctoBTT" , "Restart OctoPrint", "Cancel"} ;
     CustomDialog *newDialog = new CustomDialog();
     QObject::connect(newDialog, &CustomDialog::OutputEvent, newDialog,[=](QString instruct)
     {
@@ -207,7 +207,7 @@ void ControlPanel::on_Btn_Restore_clicked()
 //紧急制停、关机以及取消
 void ControlPanel::on_Btn_Shutdown_clicked()
 {
-    QStringList btnName = {"Emergency Stop" , "Shutdown", "Cencal"} ;
+    QStringList btnName = {"Emergency Stop" , "Shutdown", "Cancel"} ;
     CustomDialog *newDialog = new CustomDialog();
     QObject::connect(newDialog, &CustomDialog::OutputEvent, newDialog,[=](QString instruct)
     {
