@@ -1,4 +1,4 @@
-﻿#include "mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <QTimer>
@@ -142,30 +142,30 @@ void MainWindow::TimerTimeOut()
             octonetwork.networkAccessManager->get(octonetwork.GetStateRequest);
 
             ui->Btn_Filament->setIcon(QIcon(":/assets/cancel.svg"));
-//            ui->Btn_Filament_B->setText(octonetwork.ConnectState);
+            ui->Btn_Filament->setText(octonetwork.ConnectState);
 //            ui->Btn_Filament->setEnabled(true);
         }
         else if(octonetwork.ConnectState == "Connecting" || octonetwork.ConnectState =="Detecting baudrate" || octonetwork.ConnectState =="Detecting serial port")
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
-//            ui->Btn_Filament_B->setText("Connecting");
+            ui->Btn_Filament->setText("Connecting");
             //            ui->Btn_Filament->setEnabled(false);
         }
         else if(octonetwork.ConnectState == "Cancelling" || octonetwork.ConnectState =="Error" || octonetwork.ConnectState == "Starting print from SD" || octonetwork.ConnectState == "Starting")
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
-//            ui->Btn_Filament_B->setText("Busy");
+            ui->Btn_Filament->setText("Busy");
 //            ui->Btn_Filament->setEnabled(false);
         }
         else if(octonetwork.ConnectState =="Closed" || octonetwork.ConnectState =="Offline")
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/emoji.svg"));
-//            ui->Btn_Filament_B->setText("Lost connection");
+            ui->Btn_Filament->setText("Lost connection");
         }
         else
         {
             ui->Btn_Filament->setIcon(QIcon(":/assets/haocaiguanli.svg"));
-//            ui->Btn_Filament_B->setText("Print " + (filedialog->SelectURL.url() == "" ? "" : filedialog->DisplayName));
+            ui->Btn_Filament->setText("Print " + (filedialog->SelectURL.url() == "" ? "" : filedialog->DisplayName));
 //            ui->Btn_Filament->setEnabled(true);
         }
     }

@@ -1,4 +1,4 @@
-﻿#include "cameradialog.h"
+#include "cameradialog.h"
 #include "ui_cameradialog.h"
 #include <mainwindow.h>
 //#include <QSizeF>
@@ -90,6 +90,7 @@ void CameraDialog::mjpeg_streamer_reply(QNetworkReply *reply)
     ui->Windows->setPixmap(QPixmap::fromImage(image.mirrored(ui->Btn_FlipH->isChecked(), ui->Btn_FlipV->isChecked())));
 //    ui->Windows->setScaledContents(true);
     ui->Windows->show();
+    delete(reply);
 
     /* 继续请求URL */
     manager->get(*request);

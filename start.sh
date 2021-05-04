@@ -1,2 +1,2 @@
 sleep 2
-startx -- -nocursor
+cd /home/pi/OctoBTT && ./OctoBTT -platform eglfs
