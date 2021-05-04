@@ -45,6 +45,7 @@
 ### 2. Install OctoBTT : 
 > Run Command:
 * wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/startup.sh && sudo /bin/sh startup.sh
+> Contact Email: developer01@biqu3d.com
 
 ![InstallOctoBTT.png](IMG/2_InstallOctoBTT.png "InstallOctoBTT")
 
