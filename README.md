@@ -44,10 +44,10 @@
 
 ### 2. Install OctoBTT : 
 > Run Command (Installation):
-* wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/startup.sh && sudo /bin/sh startup.sh
+* rm -f startup.sh ; wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/startup.sh && sudo /bin/sh startup.sh
 
 > Run Command (Upgrade):
-* wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/upgrade.sh && sudo /bin/sh upgrade.sh
+* rm -f upgrade.sh ; wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/upgrade.sh && sudo /bin/sh upgrade.sh
 
 > Contact Email: developer01@biqu3d.com
 
