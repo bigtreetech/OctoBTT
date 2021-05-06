@@ -30,6 +30,5 @@ make -j$(cat /proc/cpuinfo | grep processor | wc -l)
 make clean
 echo "Done."
 EOF
-echo "Run OctoBTT ..."
-sleep 2
-cd /home/pi/OctoBTT && ./OctoBTT -platform eglfs
+
+sudo reboot

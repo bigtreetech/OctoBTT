@@ -43,8 +43,11 @@
 ![TermiusShow](IMG/Login/TermiusShow.jpeg "TermiusShow")
 
 ### 2. Install OctoBTT : 
-> Run Command:
+> Run Command (Installation):
 * wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/startup.sh && sudo /bin/sh startup.sh
+
+> Run Command (Upgrade):
+* wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/upgrade.sh && sudo /bin/sh upgrade.sh
 
 ![InstallOctoBTT.png](IMG/2_InstallOctoBTT.png "InstallOctoBTT")
 
