@@ -14,7 +14,7 @@
 #include <QFile>
 
 QSharedMemory mem("OctoBTT");
-QByteArray Global_X_API_Key = "C1B64D24AE99475EAA9385B5DBC77820";//Test Key
+QByteArray Global_X_API_Key = "";//Test Key
 int DebugFlat = 0;//Normal Flat : 0 ;Debug Mode : 1
 QSizeF SizePercent = QSizeF(1.0,1.0);//Design Size 800:480
 //QSize SizePercent(1,1);
