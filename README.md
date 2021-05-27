@@ -12,7 +12,7 @@
 ## Install the tutorial
 
 > (The update and upgrade operations are not redundant)
-### 1.  Install OctoPrint(direct use of OctoPi is recommended , Up to Octopi 0.17 is supported, and you need to go to OctoprInt's Web page to complete the initialization)-- (install under directory)
+### 1.  Install OctoPrint(direct use of OctoPi is recommended , Up to Octopi 0.17 is supported, and you need to go to OctoprInt's Web page to complete the initialization, need to be disable access control)-- (install under directory)
 
 ![Flash](IMG/Ready/Flash.png "Flash")
 
