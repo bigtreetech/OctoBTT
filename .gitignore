@@ -53,6 +53,7 @@ compile_commands.json
 
 # OS-specific files
 .DS_Store
+*.DS_Store
 
 # Custom
 .DS_Store
