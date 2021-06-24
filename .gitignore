@@ -57,3 +57,4 @@ compile_commands.json
 # Custom
 .DS_Store
 assets/.DS_Store
+assets/icon/.DS_Store
