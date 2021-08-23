@@ -49,7 +49,7 @@
 > Run Command (Upgrade):
 * rm -f upgrade.sh ; wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/upgrade.sh && sudo /bin/sh upgrade.sh
 
-> Contact Email: developer01@biqu3d.com
+<!-- > Contact Email: developer01@biqu3d.com -->
 
 ![InstallOctoBTT.png](IMG/2_InstallOctoBTT.png "InstallOctoBTT")
 
