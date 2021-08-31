@@ -31,7 +31,7 @@ ExecStart=-/sbin/agetty --autologin pi --noclear %I \$TERM
 EOF
 
 sudo cat >> /etc/profile << EOF
-export QT_QPA_EGLFS_ALWAYS_SET_MODE="1"
+export QT_QPA_EGLFS_ALWAYS_SET_MODE=1
 EOF
 echo "Done."
 
