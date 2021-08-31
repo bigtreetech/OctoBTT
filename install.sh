@@ -70,7 +70,7 @@ EOF
 echo "Setting up Autostart ..."
 sudo sed -i 's/sudo \/bin\/sh \/home\/pi\/install.sh/su -l pi -c \"cd \/home\/pi\/OctoBTT \&\& .\/OctoBTT -platform eglfs\"/g' /etc/rc.local
 #sudo sed -i '/\[pi4\]/ i \[pi3\]\ndtoverlay=vc4-fkms-v3d' /boot/config.txt
-sudo sed '/\[all\]/adtoverlay=vc4-fkms-v3d' /boot/config.txt
+sudo sed '/\[all\]/adtoverlay=vc4-fkms-v3d\ngpu_mem=256' /boot/config.txt
 echo "Done."
 
 sudo reboot
