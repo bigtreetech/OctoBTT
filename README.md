@@ -47,8 +47,8 @@
 > Run Command (Installation):
 * rm -f startup.sh ; wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/startup.sh && sudo /bin/sh startup.sh
 
-> Run Command (Upgrade):
-* rm -f upgrade.sh ; wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/upgrade.sh && sudo /bin/sh upgrade.sh
+<!-- > Run Command (Upgrade):
+* rm -f upgrade.sh ; wget --no-check-certificate https://raw.githubusercontent.com/bigtreetech/OctoBTT/master/upgrade.sh && sudo /bin/sh upgrade.sh -->
 
 <!-- > Contact Email: developer01@biqu3d.com -->
 
