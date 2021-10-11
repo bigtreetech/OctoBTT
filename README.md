@@ -14,6 +14,7 @@
 ### One-click installation based on image mode
 ### [OctoPi-0.17.0 with OctoBTT](https://drive.google.com/file/d/1xJbyTlIwHJQhjAioWYevCcBL8SPZCP-H/view?usp=sharing)
 
+### Manual installation based on source code
 > (The update and upgrade operations are not redundant)
 ### 1.  Install OctoPrint(direct use of OctoPi is recommended , Up to [Octopi 0.17](https://drive.google.com/file/d/1F3xRiC6GXkHNvPAKEho4P9ylevF9G_HR/view?usp=sharing) is supported, and you need to go to OctoprInt's Web page to complete the initialization, need to be disable access control)-- (install under directory)
 ### [OctoPi-0.17.0](https://drive.google.com/file/d/1F3xRiC6GXkHNvPAKEho4P9ylevF9G_HR/view?usp=sharing)
