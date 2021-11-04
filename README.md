@@ -12,7 +12,7 @@
 ## Install the tutorial
 
 ### One-click installation based on image mode
-### [OctoPi-0.17.0 with OctoBTT](https://drive.google.com/file/d/1xJbyTlIwHJQhjAioWYevCcBL8SPZCP-H/view?usp=sharing)
+### [OctoPi-0.17.0 with OctoBTT](https://drive.google.com/file/d/1pR2fpxu22XdM08EMIsEXZj7D5zPRO70z/view?usp=sharing)
 
 ### Manual installation based on source code
 > (The update and upgrade operations are not redundant)
