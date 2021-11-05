@@ -127,5 +127,6 @@
         <file>StyleSheet/globalStyleSheet.qss</file>
         <file>assets/kongge.svg</file>
         <file>assets/deleteBtn.svg</file>
+        <file>assets/icon/BingoTouch_Logo_H.svg</file>
     </qresource>
 </RCC>
